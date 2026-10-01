@@ -19,11 +19,16 @@
  *        rendered page by a named output filter, modelled on the reviewer
  *        interests field the theme itself wrote, and the page shows it only to
  *        those who tick the reviewer box.
+ *
+ *        The same is done on the second step of a registration through ORCID
+ *        (or another provider) of the OpenID plugin of PKP, where a journal that
+ *        turns its own registration form off sends every new account.
  */
 
 namespace APP\plugins\generic\reviewerLattes;
 
 use APP\core\Application;
+use APP\facades\Repo;
 use DOMDocument;
 use DOMElement;
 use PKP\core\JSONMessage;
@@ -56,6 +61,15 @@ class ReviewerLattesPlugin extends GenericPlugin
     public const LATTES_K_ID = 'K\d{7}[A-Z]\d';
 
     /**
+     * Where the registration forms post to, as they appear in the action of the
+     * form on the page: the registration form of the core, and the second step
+     * of a registration through the OpenID plugin of PKP (ORCID and the other
+     * providers), which serves both creating an account and linking the
+     * identity to an account that already exists.
+     */
+    public const REGISTRATION_ACTIONS = ['/user/register', '/openid/registerOrConnect'];
+
+    /**
      * Register the plugin and its hooks.
      *
      * The plugin acts only on a web page of a journal (the registration form),
@@ -81,6 +95,27 @@ class ReviewerLattesPlugin extends GenericPlugin
         Hook::add('registrationform::readuservars', $this->readRegistrationField(...));
         Hook::add('registrationform::display', $this->addRegistrationField(...));
         Hook::add('registrationform::execute', $this->saveRegistrationField(...));
+
+        // The second step of a registration through the OpenID plugin of PKP
+        // (generic/openid: ORCID, Google, Microsoft…), where a journal that keeps
+        // only that way in sends every new account. Its form, OpenIDStep2Form,
+        // is an old Form as well, so its hooks are named the same way, after its
+        // class. Nothing of that plugin is imported: where it is not installed
+        // these hooks are simply never fired.
+        //  - ::display is fired by Form::fetch(), which OpenIDStep2Form::fetch()
+        //    calls (parent::fetch()) after assigning its own variables, both
+        //    when the handler fetches the page for display and through
+        //    Form::display() after a failed validation.
+        //  - ::execute is fired at the very end of OpenIDStep2Form::execute(),
+        //    after the account was created and saved, so the link goes in
+        //    through the repository rather than onto an unsaved user.
+        // The same page links an ORCID iD to an account that already exists;
+        // the link is asked for, checked and saved only when an account is
+        // created (see createsAccount()).
+        Hook::add('openidstep2form::Constructor', $this->addOpenIdRegistrationChecks(...));
+        Hook::add('openidstep2form::readuservars', $this->readRegistrationField(...));
+        Hook::add('openidstep2form::display', $this->addRegistrationField(...));
+        Hook::add('openidstep2form::execute', $this->saveOpenIdRegistrationField(...));
 
         return $success;
     }
@@ -265,9 +300,58 @@ class ReviewerLattesPlugin extends GenericPlugin
     public function addRegistrationChecks($hookName, $args): bool
     {
         $form = $args[0];
+        if ($form instanceof Form) {
+            $this->addLattesChecks($form, fn (): bool => true);
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook: openidstep2form::Constructor — the same checks on the second step
+     * of a registration through the OpenID plugin, applied only when the page
+     * is sent to create an account: a person who links the identity to an
+     * account they already have is not registering, and the field, left on the
+     * part of the page they did not use, is not looked at.
+     *
+     * The mode is known only once the post is read, so it is asked when the
+     * form is validated, not here.
+     *
+     * @param array $args [$form, &$template]
+     */
+    public function addOpenIdRegistrationChecks($hookName, $args): bool
+    {
+        $form = $args[0];
+        if ($form instanceof Form) {
+            $this->addLattesChecks($form, fn (): bool => self::createsAccount($form));
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Whether the second step of the OpenID plugin was sent to create an
+     * account. The page has two submit buttons, "register" and "connect", and
+     * only the one that was pressed is posted; the OpenID plugin tells the two
+     * apart the same way (is_string() of the posted value).
+     */
+    public static function createsAccount(Form $form): bool
+    {
+        return is_string($form->getData('register'));
+    }
+
+    /**
+     * The two checks of the field, on a form of the journal where the plugin
+     * is enabled: the link, when given, must be a Lattes CV; and it must be
+     * given when the journal requires it from this person.
+     *
+     * @param callable(): bool $applies whether the post is a registration, asked at validation
+     */
+    public function addLattesChecks(Form $form, callable $applies): void
+    {
         $contextId = $this->currentContextId();
-        if (!$form instanceof Form || $contextId === null) {
-            return Hook::CONTINUE;
+        if ($contextId === null) {
+            return;
         }
 
         $form->addCheck(new FormValidatorCustom(
@@ -275,7 +359,7 @@ class ReviewerLattesPlugin extends GenericPlugin
             self::FIELD,
             'optional',
             'plugins.generic.reviewerLattes.field.invalid',
-            fn ($value) => self::normalizeLattesUrl($value) !== null
+            fn ($value) => !$applies() || self::normalizeLattesUrl($value) !== null
         ));
 
         // "required" so the check also runs on an empty field; whether it is
@@ -286,15 +370,15 @@ class ReviewerLattesPlugin extends GenericPlugin
             self::FIELD,
             'required',
             'plugins.generic.reviewerLattes.field.required',
-            fn ($value) => trim((string) $value) !== ''
+            fn ($value) => !$applies()
+                || trim((string) $value) !== ''
                 || !self::isRequiredFor($requiredForBrazil, $form->getData('country'), $form->getData('reviewerGroup'))
         ));
-
-        return Hook::CONTINUE;
     }
 
     /**
-     * Hook: registrationform::readuservars (the core lowercases the whole name)
+     * Hook: registrationform::readuservars and openidstep2form::readuservars
+     * (the core lowercases the whole name)
      *
      * @param array $args [$form, &$vars]
      */
@@ -309,9 +393,9 @@ class ReviewerLattesPlugin extends GenericPlugin
     }
 
     /**
-     * Hook: registrationform::display — add the script that shows the field to
-     * reviewers and marks it when required, its small stylesheet, and the
-     * output filter that puts the field on the page.
+     * Hook: registrationform::display and openidstep2form::display — add the
+     * script that shows the field to reviewers and marks it when required, its
+     * small stylesheet, and the output filter that puts the field on the page.
      *
      * @param array $args [$form, &$output]
      */
@@ -388,13 +472,23 @@ class ReviewerLattesPlugin extends GenericPlugin
      * label — and put right after it, inside the part of the page that belongs
      * to reviewers. Where the theme has no interests field, the markup of the
      * core is used and the field goes before the control that sends the form.
+     *
+     * The second step of the OpenID plugin is found the same way, by its
+     * action (…/openid/registerOrConnect). Its interests field sits in the part
+     * of the page that creates an account, so the field lands there too, and
+     * takes the class the OpenID plugin gives the reviewer inputs
+     * (reviewerGroupInput), which its script leaves optional when it shows that
+     * part. Without an interests field, the field goes before the button that
+     * creates the account (name="register") rather than before the last button
+     * of the form, which there links an existing account.
      */
     public static function insertRegistrationField(string $output, array $parts): string
     {
         if (preg_match('/<input\b[^>]*\bname="' . self::FIELD . '"/', $output)) {
             return $output;
         }
-        if (!preg_match('~<form\b[^>]*\baction="[^"]*/user/register[^"]*"[^>]*>~i', $output, $match, PREG_OFFSET_CAPTURE)) {
+        $actions = implode('|', array_map(fn (string $action): string => preg_quote($action, '~'), self::REGISTRATION_ACTIONS));
+        if (!preg_match('~<form\b[^>]*\baction="[^"]*(?:' . $actions . ')[^"]*"[^>]*>~i', $output, $match, PREG_OFFSET_CAPTURE)) {
             return $output;
         }
         $formStart = $match[0][1];
@@ -415,12 +509,19 @@ class ReviewerLattesPlugin extends GenericPlugin
             }
         }
 
-        // Nothing to model it on: before the control that sends the form.
+        // Nothing to model it on: before the control that sends the form — the
+        // one that creates the account where the form has more than one.
         $field = self::renderRegistrationField($parts);
-        if (preg_match_all('~<(?:button|input)\b[^>]*\btype="submit"~i', $inForm, $submits, PREG_OFFSET_CAPTURE)) {
-            $last = end($submits[0]);
+        if (preg_match_all('~<(?:button|input)\b[^>]*\btype="submit"[^>]*>~i', $inForm, $submits, PREG_OFFSET_CAPTURE)) {
+            $at = end($submits[0])[1];
+            foreach ($submits[0] as [$tag, $offset]) {
+                if (preg_match('/\bname="register"/i', $tag)) {
+                    $at = $offset;
+                    break;
+                }
+            }
 
-            return substr_replace($output, $field, $formStart + $last[1], 0);
+            return substr_replace($output, $field, $formStart + $at, 0);
         }
 
         return substr_replace($output, $field, $formEnd, 0);
@@ -689,6 +790,45 @@ class ReviewerLattesPlugin extends GenericPlugin
         if ($url !== null) {
             $form->user->setUrl($url);
         }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook: openidstep2form::execute — store the link, in its standard form, as
+     * the URL of the account the second step of the OpenID plugin has just
+     * created.
+     *
+     * Unlike the registration form of the core, this form keeps no user: it
+     * creates and saves the account inside execute() and fires the hook only
+     * at the end. The account is found by the e-mail of the post, which the
+     * form's own validation refused if any account already had it, and the
+     * username is compared too, so no other account is ever touched. A URL the
+     * account already has is left alone; nothing is done when the page was
+     * sent to link an existing account.
+     *
+     * @param array $args [$form, ...$functionArgs, &$returner]
+     */
+    public function saveOpenIdRegistrationField($hookName, $args): bool
+    {
+        $form = $args[0];
+        if (!$form instanceof Form || !self::createsAccount($form) || $this->currentContextId() === null) {
+            return Hook::CONTINUE;
+        }
+
+        $url = self::normalizeLattesUrl($form->getData(self::FIELD));
+        $email = trim((string) $form->getData('email'));
+        if ($url === null || $email === '') {
+            return Hook::CONTINUE;
+        }
+
+        $user = Repo::user()->getByEmail($email, true);
+        if (!$user
+            || strcasecmp(trim((string) $user->getUsername()), trim((string) $form->getData('username'))) !== 0
+            || trim((string) $user->getUrl()) !== '') {
+            return Hook::CONTINUE;
+        }
+        Repo::user()->edit($user, ['url' => $url]);
 
         return Hook::CONTINUE;
     }

@@ -16,6 +16,12 @@
  *        The captcha of the installation, when it is on, is left as it is: its
  *        error is the only one not looked at, and the account is saved through
  *        the form's own execute(), as the handler does after validating.
+ *
+ *        The second step of a registration through the OpenID plugin (ORCID)
+ *        is posted the same way, through a stand-in with the name of its form
+ *        (OpenIDStep2Form here): the OpenID plugin is not part of OJS, so the
+ *        source of the real form is checked against the stand-in wherever the
+ *        plugin is installed.
  */
 
 namespace APP\plugins\generic\reviewerLattes\tests;
@@ -30,6 +36,7 @@ use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PKP\context\Context;
 use PKP\core\PKPRequest;
+use PKP\form\Form;
 use PKP\plugins\Hook;
 use PKP\plugins\PluginSettingsDAO;
 use PKP\security\Role;
@@ -133,7 +140,13 @@ class RegistrationTest extends PKPTestCase
         $this->assertStringContainsString("strtolower(end(\$classNameParts)) . '::display'", $source, 'display keeps its case');
         $this->assertStringContainsString("strtolower(end(\$classNameParts) . '::readUserVars')", $source, 'readUserVars is fired lowercased');
         $this->assertStringContainsString("strtolower(end(\$classNameParts) . '::execute')", $source, 'execute is fired lowercased');
-        foreach (['registrationform::Constructor', 'registrationform::readuservars', 'registrationform::display', 'registrationform::execute'] as $hook) {
+        $hooks = [];
+        foreach (['registrationform', 'openidstep2form'] as $form) {
+            foreach (['Constructor', 'readuservars', 'display', 'execute'] as $name) {
+                $hooks[] = "{$form}::{$name}";
+            }
+        }
+        foreach ($hooks as $hook) {
             $this->assertNotEmpty(Hook::getHooks($hook), "{$hook} has no listener");
         }
     }
@@ -206,6 +219,145 @@ class RegistrationTest extends PKPTestCase
         $this->createdUserIds[] = $userId;
 
         $this->assertSame('https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4723925J6', DB::table('users')->where('user_id', $userId)->value('url'));
+    }
+
+    /**
+     * What the plugin takes for granted about the second step of the OpenID
+     * plugin, read from its source wherever it is installed: the hooks of the
+     * core fire for it (fetch() and execute() of Form are reached), the two
+     * buttons are told apart by the value posted, the account exists before
+     * the hook of execute() fires, and the page is the one the field is put on.
+     */
+    public function testTheOpenIdFormIsTheOneThePluginExpects(): void
+    {
+        $root = dirname(__DIR__, 2) . '/openid';
+        $formFile = $root . '/forms/OpenIDStep2Form.php';
+        if (!is_file($formFile)) {
+            $this->markTestSkipped('the OpenID plugin is not installed here');
+        }
+        $form = (string) file_get_contents($formFile);
+        $template = (string) file_get_contents($root . '/templates/authStep2.tpl');
+        $script = (string) file_get_contents($root . '/js/scripts.js');
+
+        $this->assertMatchesRegularExpression('/class\s+OpenIDStep2Form\s+extends\s+Form\b/', $form);
+        $this->assertStringContainsString('parent::__construct(', $form, 'the Constructor hook is fired by Form');
+        $this->assertStringContainsString('parent::fetch(', $form, 'the display hook is fired by Form::fetch()');
+        $this->assertMatchesRegularExpression("/readUserVars\([^;]*'register'[^;]*'connect'[^;]*'reviewerGroup'/s", $form);
+        $this->assertStringContainsString("is_string(\$this->getData('register'))", $form);
+        // The account is created before parent::execute(), which fires the hook.
+        $execute = substr($form, (int) strpos($form, 'function execute('));
+        $this->assertNotFalse(strpos($execute, '_registerUser()'));
+        $this->assertGreaterThan(strpos($execute, '_registerUser()'), strpos($execute, 'parent::execute('));
+
+        $this->assertMatchesRegularExpression('/action="\{url page="openid" op="registerOrConnect"\}"/', $template);
+        $this->assertMatchesRegularExpression('/name="interests"[^>]*class="reviewerGroupInput"/', $template);
+        $this->assertStringContainsString('name="register"', $template);
+        $this->assertStringContainsString('name="reviewerGroup[', $template);
+        // Its script makes every input of the part required, except the reviewer ones.
+        $this->assertStringContainsString(':not(#emailConsent, .reviewerGroupInput)', $script);
+    }
+
+    public function testToCreateAnAccountThroughOrcidABrazilianReviewerMustGiveTheLink(): void
+    {
+        $this->requireForBrazil(true);
+        $form = $this->openIdForm($this->openIdPost('register', ['country' => 'BR', 'lattesUrl' => '']));
+        $this->assertTrue(ReviewerLattesPlugin::createsAccount($form));
+        $this->assertSame([__('plugins.generic.reviewerLattes.field.required')], $this->errorsOf($form));
+
+        // The rule of the registration form of the core, and no other.
+        $this->assertSame([], $this->errorsOf($this->openIdForm($this->openIdPost('register', ['country' => 'PT', 'lattesUrl' => '']))));
+        $vars = $this->openIdPost('register', ['country' => 'BR', 'lattesUrl' => '']);
+        unset($vars['reviewerGroup']);
+        $this->assertSame([], $this->errorsOf($this->openIdForm($vars)));
+        $this->requireForBrazil(false);
+        $this->assertSame([], $this->errorsOf($this->openIdForm($this->openIdPost('register', ['country' => 'BR', 'lattesUrl' => '']))));
+    }
+
+    public function testToCreateAnAccountThroughOrcidALinkThatIsNotLattesIsRefused(): void
+    {
+        $this->requireForBrazil(false);
+        $form = $this->openIdForm($this->openIdPost('register', ['country' => 'PT', 'lattesUrl' => 'https://orcid.org/0000-0002-1825-0097']));
+        $this->assertSame([__('plugins.generic.reviewerLattes.field.invalid')], $this->errorsOf($form));
+    }
+
+    public function testLinkingAnExistingAccountNeverLooksAtTheField(): void
+    {
+        $this->requireForBrazil(true);
+        foreach (['', 'https://orcid.org/0000-0002-1825-0097'] as $value) {
+            $form = $this->openIdForm($this->openIdPost('connect', ['country' => 'BR', 'lattesUrl' => $value]));
+            $this->assertFalse(ReviewerLattesPlugin::createsAccount($form));
+            $this->assertSame([], $this->errorsOf($form), "connect with '{$value}'");
+        }
+    }
+
+    /**
+     * The point of the change: the link typed on the second step of a
+     * registration through ORCID ends up on the account that step created.
+     */
+    public function testTheLinkIsSavedAsTheUrlOfTheAccountCreatedThroughOrcid(): void
+    {
+        $this->requireForBrazil(true);
+        $vars = $this->openIdPost('register', ['country' => 'BR', 'lattesUrl' => 'http://lattes.cnpq.br/1234567890123456/']);
+        $form = $this->openIdForm($vars);
+        $this->assertSame([], $this->errorsOf($form));
+
+        $userId = $form->execute();
+        $this->assertIsInt($userId);
+        $this->createdUserIds[] = $userId;
+        $this->assertSame('https://lattes.cnpq.br/1234567890123456', DB::table('users')->where('user_id', $userId)->value('url'));
+
+        // A URL the account already has is never replaced.
+        $again = $this->openIdForm(array_merge($vars, ['lattesUrl' => '6543210987654321']));
+        Hook::call('openidstep2form::execute', [$again]);
+        $this->assertSame('https://lattes.cnpq.br/1234567890123456', DB::table('users')->where('user_id', $userId)->value('url'));
+    }
+
+    public function testLinkingAnExistingAccountLeavesItsUrlAlone(): void
+    {
+        $this->requireForBrazil(false);
+        $vars = $this->openIdPost('register', ['country' => 'BR', 'lattesUrl' => '']);
+        $userId = $this->openIdForm($vars)->execute();
+        $this->assertIsInt($userId);
+        $this->createdUserIds[] = $userId;
+        $this->assertEmpty(DB::table('users')->where('user_id', $userId)->value('url'));
+
+        // The same person, the same e-mail and username, now linking the account.
+        $connect = $this->openIdPost('connect', [
+            'username' => $vars['username'], 'email' => $vars['email'], 'usernameLogin' => $vars['username'],
+            'lattesUrl' => 'lattes.cnpq.br/1234567890123456',
+        ]);
+        $this->assertNull($this->openIdForm($connect)->execute());
+        $this->assertEmpty(DB::table('users')->where('user_id', $userId)->value('url'));
+    }
+
+    /**
+     * The second step of the OpenID plugin as posted by one of its two buttons
+     * ("register" or "connect"): the fields of the person, with no password.
+     */
+    private function openIdPost(string $button, array $overrides): array
+    {
+        $vars = $this->post([]);
+        unset($vars['password'], $vars['password2']);
+
+        return array_merge($vars, ['selectedProvider' => 'orcid', $button => ''], $overrides);
+    }
+
+    private function openIdForm(array $vars): OpenIDStep2Form
+    {
+        Application::get()->getRequest()->_requestVars = $vars;
+        $form = new OpenIDStep2Form();
+        $form->readInputData();
+
+        return $form;
+    }
+
+    /** The errors of a form on the Lattes field only, after validating it. */
+    private function errorsOf(Form $form): array
+    {
+        $form->validate();
+        $errors = $form->getErrorsArray()[ReviewerLattesPlugin::FIELD] ?? null;
+
+        return $errors === null ? [] : (array) $errors;
     }
 
     /**

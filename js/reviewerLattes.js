@@ -11,6 +11,12 @@
  * The server checks the same rule; this only tells the person before sending.
  * Visibility is set on the style, not with the "hidden" attribute, because a
  * theme rule such as "label {display: block}" wins over the attribute.
+ *
+ * The same script serves the second step of a registration through the OpenID
+ * plugin (ORCID), whose page holds two forms in one: creating an account and
+ * linking an existing one, each shown in turn by the OpenID plugin's script.
+ * The field is required only while it can be seen: a required field in the
+ * hidden part would stop the browser from sending the part in use.
  */
 (function () {
 	'use strict';
@@ -40,6 +46,8 @@
 			var required = visible && requiredForBrazil && !!country && country.value === BRAZIL;
 
 			field.style.display = visible ? '' : 'none';
+			// Seen at all only when no part of the page around it is hidden either.
+			required = required && field.getClientRects().length > 0;
 			input.required = required;
 			input.setAttribute('aria-required', required ? 'true' : 'false');
 			if (marker) {
@@ -47,8 +55,18 @@
 			}
 		}
 
-		form.addEventListener('change', update);
-		form.addEventListener('click', update);
+		// Whether the field can be seen depends on the scripts of the page too:
+		// the OpenID plugin switches the parts of its page, and a theme may hide
+		// the reviewer block, on clicks inside the form. Handlers on the element
+		// clicked have run when the event reaches the form; those further up
+		// (on the document) have run by the next turn, so it is looked at again.
+		function onEvent() {
+			update();
+			window.setTimeout(update, 0);
+		}
+
+		form.addEventListener('change', onEvent);
+		form.addEventListener('click', onEvent);
 		update();
 	}
 
