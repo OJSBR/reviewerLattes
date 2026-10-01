@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ka\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes რეცენზენტებისთვის"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "რეცენზენტად რეგისტრირებულებს სთხოვს მათი Lattes CV-ის (CNPq, ბრაზილია) ბმულს და ინახავს მას ანგარიშის URL-ად. თითოეულ ჟურნალს შეუძლია გახადოს ის სავალდებულო ბრაზილიელი რეცენზენტებისთვის."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes CV (ბმული)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "თქვენი Lattes CV-ის მისამართი CNPq-ზე, მაგალითად {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "სავალდებულოა ბრაზილიელი რეცენზენტებისთვის."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "შეიყვანეთ Lattes CV-ის მისამართი: lattes.cnpq.br/ და შემდეგ თქვენი Lattes ID-ის 16 ციფრი."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Lattes CV-ის ბმული სავალდებულოა ბრაზილიელი რეცენზენტებისთვის."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "როცა ვინმე რეგისტრირდება და ითხოვს ამ ჟურნალისთვის რეცენზირებას, სარეგისტრაციო ფორმა სთხოვს მისი Lattes CV-ის ბმულს და ამოწმებს, რომ ეს Lattes-ის მისამართია. ბმული ინახება ანგარიშის URL-ად."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "ბრაზილიელი რეცენზენტები"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "ეხება მას, ვინც ქვეყნად ირჩევს ბრაზილიას და მონიშნავს რეცენზენტის ვარიანტს."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes-ის ბმული არასავალდებულოა"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes-ის ბმული სავალდებულოა (ფორმაში მონიშნულია სავალდებულოდ)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "სხვა ქვეყნების რეცენზენტებსაც შეუძლიათ მიუთითონ Lattes-ის ბმული, მაგრამ მათთვის ის არასოდეს არის სავალდებულო."

@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: mk\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes за рецензенти"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Од оние што се регистрираат како рецензенти бара врска до нивното CV во Lattes (CNPq, Бразил), зачувана како URL на профилот. Секое списание може да ја направи задолжителна за рецензенти во Бразил."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV во Lattes (врска)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Адресата на вашето CV во Lattes на CNPq, на пример {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Задолжително за рецензенти во Бразил."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Внесете адреса на CV во Lattes: lattes.cnpq.br/ по што следат 16-те цифри на вашиот Lattes ID."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Врската до CV во Lattes е задолжителна за рецензенти во Бразил."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Кога некој се регистрира и бара да рецензира за ова списание, формуларот за регистрација бара врска до неговото CV во Lattes и проверува дали е адреса во Lattes. Врската се зачувува како URL на профилот."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Рецензенти во Бразил"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Важи за секој што ќе избере Бразил за земја и ќе ја означи опцијата за рецензент."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Врската до Lattes е по избор"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Врската до Lattes е задолжителна (означена како задолжителна во формуларот)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Рецензентите од други земји исто така можат да ја внесат својата врска до Lattes, но таа никогаш не е задолжителна за нив."

@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ro\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes pentru evaluatori"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Le cere celor care se înregistrează ca evaluatori linkul către CV-ul lor Lattes (CNPq, Brazilia), salvat ca URL al contului. Fiecare revistă îl poate face obligatoriu pentru evaluatorii din Brazilia."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (link)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Adresa CV-ului dvs. Lattes la CNPq, de exemplu {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Obligatoriu pentru evaluatorii din Brazilia."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Introduceți adresa unui CV Lattes: lattes.cnpq.br/ urmat de cele 16 cifre ale ID-ului dvs. Lattes."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Linkul către CV-ul Lattes este obligatoriu pentru evaluatorii din Brazilia."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Când cineva se înregistrează și cere să evalueze pentru această revistă, formularul de înregistrare cere linkul către CV-ul său Lattes și verifică dacă este o adresă Lattes. Linkul este salvat ca URL al contului."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Evaluatori din Brazilia"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Se aplică celor care aleg Brazilia ca țară și bifează opțiunea de evaluator."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Linkul Lattes este opțional"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Linkul Lattes este obligatoriu (marcat ca obligatoriu în formular)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Evaluatorii din alte țări își pot indica și ei linkul Lattes, dar acesta nu le este niciodată obligatoriu."

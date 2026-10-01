@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: sr_Latn\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes za recenzente"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Od onih koji se registruju kao recenzenti traži vezu ka njihovom CV-ju u Lattes-u (CNPq, Brazil), sačuvanu kao URL naloga. Svaki časopis može da je učini obaveznom za recenzente u Brazilu."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV u Lattes-u (veza)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Adresa vašeg CV-ja u Lattes-u pri CNPq, na primer {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Obavezno za recenzente u Brazilu."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Unesite adresu CV-ja u Lattes-u: lattes.cnpq.br/ praćeno sa 16 cifara vašeg Lattes ID-ja."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Veza ka CV-ju u Lattes-u je obavezna za recenzente u Brazilu."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Kada se neko registruje i zatraži da recenzira za ovaj časopis, formular za registraciju traži vezu ka njegovom CV-ju u Lattes-u i proverava da li je to Lattes adresa. Veza se čuva kao URL naloga."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Recenzenti u Brazilu"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Važi za svakoga ko izabere Brazil kao zemlju i označi opciju recenzenta."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Veza ka Lattes-u nije obavezna"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Veza ka Lattes-u je obavezna (označena kao obavezna u formularu)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Recenzenti iz drugih zemalja takođe mogu da navedu svoju vezu ka Lattes-u, ali za njih nikada nije obavezna."

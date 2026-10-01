@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: en\n"
+
+
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes for Reviewers"
+
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Asks people who register as reviewers for the link to their Lattes CV (CNPq, Brazil), stored as the URL of their account. Each journal may require it from reviewers in Brazil."
+
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes CV (link)"
+
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "The address of your Lattes CV at CNPq, for example {$example}."
+
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Required for reviewers in Brazil."
+
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Enter the address of a Lattes CV: lattes.cnpq.br/ followed by the 16 digits of your Lattes ID."
+
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "The Lattes CV link is required for reviewers in Brazil."
+
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "When someone registers and asks to review for this journal, the registration form asks for the link to their Lattes CV and checks that it is a Lattes address. The link is saved as the URL of the account."
+
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Reviewers in Brazil"
+
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Applies to whoever chooses Brazil as their country and ticks the reviewer box."
+
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "The Lattes link is optional"
+
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "The Lattes link is required (marked as required on the form)"
+
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Reviewers in other countries may also give their Lattes link, but it is never required from them."

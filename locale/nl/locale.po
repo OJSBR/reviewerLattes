@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: nl\n"
+
+
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes voor reviewers"
+
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Vraagt wie zich als reviewer registreert om de link naar het Lattes-cv (CNPq, Brazilië), opgeslagen als URL van het account. Elk tijdschrift kan hem verplicht maken voor reviewers in Brazilië."
+
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes-cv (link)"
+
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Het adres van uw Lattes-cv bij het CNPq, bijvoorbeeld {$example}."
+
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Verplicht voor reviewers in Brazilië."
+
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Voer het adres van een Lattes-cv in: lattes.cnpq.br/ gevolgd door de 16 cijfers van uw Lattes-ID."
+
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "De link naar het Lattes-cv is verplicht voor reviewers in Brazilië."
+
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Wanneer iemand zich registreert en wil reviewen voor dit tijdschrift, vraagt het registratieformulier om de link naar het Lattes-cv en controleert of het een Lattes-adres is. De link wordt opgeslagen als URL van het account."
+
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Reviewers in Brazilië"
+
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Geldt voor wie Brazilië als land kiest en de reviewer-optie aanvinkt."
+
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "De Lattes-link is optioneel"
+
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "De Lattes-link is verplicht (op het formulier als verplicht gemarkeerd)"
+
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Reviewers uit andere landen kunnen hun Lattes-link ook opgeven, maar hij is voor hen nooit verplicht."

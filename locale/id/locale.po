@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: id\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes untuk Penelaah"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Meminta orang yang mendaftar sebagai penelaah untuk memberikan tautan CV Lattes mereka (CNPq, Brasil), disimpan sebagai URL akun. Setiap jurnal dapat mewajibkannya bagi penelaah di Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (tautan)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Alamat CV Lattes Anda di CNPq, misalnya {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Wajib bagi penelaah di Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Masukkan alamat CV Lattes: lattes.cnpq.br/ diikuti 16 digit ID Lattes Anda."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Tautan CV Lattes wajib bagi penelaah di Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Saat seseorang mendaftar dan meminta menjadi penelaah untuk jurnal ini, formulir pendaftaran meminta tautan CV Lattes-nya dan memeriksa bahwa itu alamat Lattes. Tautan disimpan sebagai URL akun."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Penelaah di Brasil"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Berlaku bagi siapa pun yang memilih Brasil sebagai negara dan mencentang opsi penelaah."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Tautan Lattes bersifat opsional"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Tautan Lattes wajib (ditandai wajib pada formulir)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Penelaah dari negara lain juga dapat memberikan tautan Lattes mereka, tetapi tidak pernah diwajibkan bagi mereka."

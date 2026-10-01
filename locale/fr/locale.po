@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fr\n"
+
+
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes des évaluateurs"
+
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Demande aux personnes qui s'inscrivent comme évaluateurs le lien vers leur CV Lattes (CNPq, Brésil), enregistré comme URL du compte. Chaque revue peut l'exiger des évaluateurs du Brésil."
+
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (lien)"
+
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "L'adresse de votre CV Lattes au CNPq, par exemple {$example}."
+
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Obligatoire pour les évaluateurs du Brésil."
+
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Saisissez l'adresse d'un CV Lattes : lattes.cnpq.br/ suivi des 16 chiffres de votre identifiant Lattes."
+
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Le lien vers le CV Lattes est obligatoire pour les évaluateurs du Brésil."
+
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Quand une personne s'inscrit et demande à évaluer pour cette revue, le formulaire d'inscription demande le lien vers son CV Lattes et vérifie qu'il s'agit d'une adresse Lattes. Le lien est enregistré comme URL du compte."
+
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Évaluateurs du Brésil"
+
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "S'applique à qui choisit le Brésil comme pays et coche l'option d'évaluateur."
+
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Le lien Lattes est facultatif"
+
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Le lien Lattes est obligatoire (signalé comme obligatoire sur le formulaire)"
+
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Les évaluateurs d'autres pays peuvent aussi indiquer leur lien Lattes, mais il n'est jamais exigé d'eux."

@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: hy\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes գրախոսների համար"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Գրախոս գրանցվողներից խնդրում է իրենց Lattes ինքնակենսագրության (CNPq, Բրազիլիա) հղումը և այն պահում է որպես հաշվի URL։ Յուրաքանչյուր ամսագիր կարող է այն պարտադիր դարձնել Բրազիլիայի գրախոսների համար։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes ինքնակենսագրություն (հղում)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Ձեր Lattes ինքնակենսագրության հասցեն CNPq-ում, օրինակ՝ {$example}։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Պարտադիր է Բրազիլիայի գրախոսների համար։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Մուտքագրեք Lattes ինքնակենսագրության հասցե՝ lattes.cnpq.br/, որին հաջորդում են ձեր Lattes ID-ի 16 թվանշանները։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Lattes ինքնակենսագրության հղումը պարտադիր է Բրազիլիայի գրախոսների համար։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Երբ որևէ մեկը գրանցվում է և խնդրում գրախոսել այս ամսագրի համար, գրանցման ձևը խնդրում է նրա Lattes ինքնակենսագրության հղումը և ստուգում, որ այն Lattes հասցե է։ Հղումը պահվում է որպես հաշվի URL։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Բրազիլիայի գրախոսներ"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Վերաբերում է նրան, ով որպես երկիր ընտրում է Բրազիլիան և նշում գրախոսի տարբերակը։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes հղումը կամընտիր է"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes հղումը պարտադիր է (ձևում նշված է որպես պարտադիր)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Այլ երկրների գրախոսները նույնպես կարող են նշել իրենց Lattes հղումը, բայց այն երբեք պարտադիր չէ նրանց համար։"

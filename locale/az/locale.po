@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: az\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Rəyçilər üçün Lattes"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Rəyçi kimi qeydiyyatdan keçənlərdən Lattes CV-lərinin (CNPq, Braziliya) linkini istəyir və onu hesabın URL-i kimi saxlayır. Hər jurnal onu Braziliyadakı rəyçilər üçün məcburi edə bilər."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes CV (link)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "CNPq-dakı Lattes CV-nizin ünvanı, məsələn {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Braziliyadakı rəyçilər üçün məcburidir."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Lattes CV ünvanını daxil edin: lattes.cnpq.br/ və ardınca Lattes ID-nizin 16 rəqəmi."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Lattes CV linki Braziliyadakı rəyçilər üçün məcburidir."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Kimsə qeydiyyatdan keçib bu jurnal üçün rəy vermək istədikdə, qeydiyyat forması Lattes CV linkini istəyir və onun Lattes ünvanı olduğunu yoxlayır. Link hesabın URL-i kimi saxlanılır."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Braziliyadakı rəyçilər"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Ölkə kimi Braziliyanı seçən və rəyçi seçimini işarələyənlərə aiddir."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes linki könüllüdür"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes linki məcburidir (formada məcburi kimi işarələnir)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Digər ölkələrdən olan rəyçilər də Lattes linkini göstərə bilər, lakin onlar üçün heç vaxt məcburi deyil."

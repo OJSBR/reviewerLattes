@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: el\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes για αξιολογητές"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Ζητά από όσους εγγράφονται ως αξιολογητές τον σύνδεσμο προς το βιογραφικό τους στο Lattes (CNPq, Βραζιλία), που αποθηκεύεται ως URL του λογαριασμού. Κάθε περιοδικό μπορεί να τον κάνει υποχρεωτικό για αξιολογητές στη Βραζιλία."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Βιογραφικό Lattes (σύνδεσμος)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Η διεύθυνση του βιογραφικού σας στο Lattes του CNPq, για παράδειγμα {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Υποχρεωτικό για αξιολογητές στη Βραζιλία."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Εισαγάγετε τη διεύθυνση ενός βιογραφικού Lattes: lattes.cnpq.br/ ακολουθούμενο από τα 16 ψηφία του Lattes ID σας."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Ο σύνδεσμος προς το βιογραφικό Lattes είναι υποχρεωτικός για αξιολογητές στη Βραζιλία."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Όταν κάποιος εγγράφεται και ζητά να αξιολογεί για αυτό το περιοδικό, η φόρμα εγγραφής ζητά τον σύνδεσμο προς το βιογραφικό του στο Lattes και ελέγχει ότι είναι διεύθυνση Lattes. Ο σύνδεσμος αποθηκεύεται ως URL του λογαριασμού."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Αξιολογητές στη Βραζιλία"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Ισχύει για όποιον επιλέγει τη Βραζιλία ως χώρα και τσεκάρει την επιλογή αξιολογητή."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Ο σύνδεσμος Lattes είναι προαιρετικός"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Ο σύνδεσμος Lattes είναι υποχρεωτικός (σημειωμένος ως υποχρεωτικός στη φόρμα)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Αξιολογητές από άλλες χώρες μπορούν επίσης να δώσουν τον σύνδεσμο Lattes, αλλά δεν είναι ποτέ υποχρεωτικός για αυτούς."

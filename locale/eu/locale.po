@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: eu\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Ebaluatzaileentzako Lattes"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Ebaluatzaile gisa erregistratzen direnei beren Lattes CVaren esteka eskatzen die (CNPq, Brasil), kontuaren URL gisa gordeta. Aldizkari bakoitzak Brasilgo ebaluatzaileentzat derrigorrezko egin dezake."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes CVa (esteka)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Zure Lattes CVaren helbidea CNPq-n, adibidez {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Derrigorrezkoa Brasilgo ebaluatzaileentzat."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Idatzi Lattes CV baten helbidea: lattes.cnpq.br/ eta ondoren zure Lattes IDaren 16 digituak."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Lattes CVaren esteka derrigorrezkoa da Brasilgo ebaluatzaileentzat."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Norbait erregistratu eta aldizkari honetan ebaluatu nahi duenean, erregistro-inprimakiak bere Lattes CVaren esteka eskatzen du eta Lattes helbide bat dela egiaztatzen du. Esteka kontuaren URL gisa gordetzen da."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Brasilgo ebaluatzaileak"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Herrialde gisa Brasil aukeratu eta ebaluatzaile aukera markatzen duenari aplikatzen zaio."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes esteka aukerakoa da"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes esteka derrigorrezkoa da (inprimakian derrigorrezko gisa markatuta)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Beste herrialdeetako ebaluatzaileek ere eman dezakete beren Lattes esteka, baina ez zaie inoiz eskatzen."

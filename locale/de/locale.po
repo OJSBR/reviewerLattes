@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: de\n"
+
+
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes für Gutachter"
+
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Fragt Personen, die sich als Gutachter registrieren, nach dem Link zu ihrem Lattes-Lebenslauf (CNPq, Brasilien), gespeichert als URL des Kontos. Jede Zeitschrift kann ihn für Gutachter in Brasilien verpflichtend machen."
+
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes-Lebenslauf (Link)"
+
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Die Adresse Ihres Lattes-Lebenslaufs beim CNPq, zum Beispiel {$example}."
+
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Pflicht für Gutachter in Brasilien."
+
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Geben Sie die Adresse eines Lattes-Lebenslaufs ein: lattes.cnpq.br/ gefolgt von den 16 Ziffern Ihrer Lattes-ID."
+
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Der Link zum Lattes-Lebenslauf ist für Gutachter in Brasilien Pflicht."
+
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Wenn sich jemand registriert und für diese Zeitschrift begutachten möchte, fragt das Registrierungsformular nach dem Link zum Lattes-Lebenslauf und prüft, ob es eine Lattes-Adresse ist. Der Link wird als URL des Kontos gespeichert."
+
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Gutachter in Brasilien"
+
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Gilt für alle, die Brasilien als Land wählen und die Gutachter-Option ankreuzen."
+
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Der Lattes-Link ist freiwillig"
+
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Der Lattes-Link ist Pflicht (im Formular als Pflichtfeld markiert)"
+
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Gutachter aus anderen Ländern können ihren Lattes-Link ebenfalls angeben, er ist für sie aber nie Pflicht."

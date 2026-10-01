@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: zh_Hans\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "审稿人 Lattes"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "向注册为审稿人的用户索取其 Lattes 简历（CNPq，巴西）的链接，并保存为账户的 URL。每个期刊都可以要求巴西的审稿人必须填写。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes 简历（链接）"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "您在 CNPq 的 Lattes 简历地址，例如 {$example}。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "巴西的审稿人必须填写。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "请输入 Lattes 简历的地址：lattes.cnpq.br/ 后接您的 Lattes ID 的 16 位数字。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "巴西的审稿人必须填写 Lattes 简历链接。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "当有人注册并申请为本刊审稿时，注册表单会索取其 Lattes 简历的链接，并检查它是否为 Lattes 地址。该链接会保存为账户的 URL。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "巴西的审稿人"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "适用于选择巴西作为国家并勾选审稿人选项的人。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes 链接为选填"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes 链接为必填（在表单上标记为必填）"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "其他国家的审稿人也可以填写其 Lattes 链接，但对他们永远不是必填。"

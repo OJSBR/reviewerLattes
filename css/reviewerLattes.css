@@ -1,0 +1,20 @@
+/**
+ * @file plugins/generic/reviewerLattes/css/reviewerLattes.css
+ *
+ * Copyright (c) 2026 OJSBR (https://ojsbr.com)
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+ *
+ * The field takes the markup of the interests field the theme wrote; only two
+ * things are added. The description goes under the input (a small element is
+ * inline, and on the page of the core it ran on beside a short input), and on
+ * pages where the field is a label inside the reviewer block it gets the room
+ * the theme gives between fields.
+ */
+[data-reviewer-lattes] .description {
+	display: block;
+}
+
+label[data-reviewer-lattes] {
+	display: block;
+	margin-top: 1em;
+}

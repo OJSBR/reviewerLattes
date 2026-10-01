@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: it\n"
+
+
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes dei revisori"
+
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Chiede a chi si registra come revisore il link al proprio CV Lattes (CNPq, Brasile), salvato come URL dell'account. Ogni rivista può renderlo obbligatorio per i revisori del Brasile."
+
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (link)"
+
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "L'indirizzo del tuo CV Lattes presso il CNPq, per esempio {$example}."
+
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Obbligatorio per i revisori del Brasile."
+
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Inserisci l'indirizzo di un CV Lattes: lattes.cnpq.br/ seguito dalle 16 cifre del tuo ID Lattes."
+
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Il link al CV Lattes è obbligatorio per i revisori del Brasile."
+
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Quando qualcuno si registra e chiede di fare il revisore per questa rivista, il modulo di registrazione chiede il link al suo CV Lattes e verifica che sia un indirizzo Lattes. Il link viene salvato come URL dell'account."
+
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Revisori del Brasile"
+
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Vale per chi sceglie il Brasile come paese e spunta l'opzione di revisore."
+
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Il link Lattes è facoltativo"
+
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Il link Lattes è obbligatorio (segnato come obbligatorio nel modulo)"
+
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Anche i revisori di altri paesi possono indicare il proprio link Lattes, ma non è mai obbligatorio per loro."

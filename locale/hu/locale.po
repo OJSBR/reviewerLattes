@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: hu\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes bírálóknak"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "A bírálóként regisztrálóktól elkéri a Lattes-önéletrajzuk (CNPq, Brazília) linkjét, és a fiók URL-jeként menti. Minden folyóirat kötelezővé teheti a brazíliai bírálók számára."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes-önéletrajz (link)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Lattes-önéletrajzának címe a CNPq-nál, például {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Kötelező a brazíliai bírálóknak."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Adja meg egy Lattes-önéletrajz címét: lattes.cnpq.br/, majd Lattes-azonosítójának 16 számjegye."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "A Lattes-önéletrajz linkje kötelező a brazíliai bírálóknak."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Amikor valaki regisztrál és bírálni szeretne ennek a folyóiratnak, a regisztrációs űrlap elkéri a Lattes-önéletrajza linkjét, és ellenőrzi, hogy Lattes-cím-e. A linket a fiók URL-jeként menti."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Brazíliai bírálók"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Arra vonatkozik, aki Brazíliát választja országként és bejelöli a bírálói lehetőséget."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "A Lattes-link nem kötelező"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "A Lattes-link kötelező (az űrlapon kötelezőként jelölve)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Más országok bírálói is megadhatják Lattes-linkjüket, de számukra soha nem kötelező."

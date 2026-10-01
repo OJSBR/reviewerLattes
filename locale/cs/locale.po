@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: cs\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes pro recenzenty"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Žádá ty, kdo se registrují jako recenzenti, o odkaz na jejich životopis Lattes (CNPq, Brazílie), uložený jako URL účtu. Každý časopis jej může vyžadovat od recenzentů v Brazílii."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Životopis Lattes (odkaz)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Adresa vašeho životopisu Lattes u CNPq, například {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Povinné pro recenzenty v Brazílii."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Zadejte adresu životopisu Lattes: lattes.cnpq.br/ následované 16 číslicemi vašeho Lattes ID."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Odkaz na životopis Lattes je pro recenzenty v Brazílii povinný."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Když se někdo registruje a chce recenzovat pro tento časopis, registrační formulář žádá odkaz na jeho životopis Lattes a ověří, že jde o adresu Lattes. Odkaz se uloží jako URL účtu."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Recenzenti v Brazílii"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Platí pro každého, kdo zvolí Brazílii jako zemi a zaškrtne možnost recenzenta."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Odkaz na Lattes je nepovinný"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Odkaz na Lattes je povinný (ve formuláři označený jako povinný)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Recenzenti z jiných zemí mohou také uvést svůj odkaz na Lattes, ale nikdy pro ně není povinný."

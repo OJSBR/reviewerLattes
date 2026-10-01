@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fi\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes arvioijille"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Pyytää arvioijiksi rekisteröityviltä linkin heidän Lattes-ansioluetteloonsa (CNPq, Brasilia), joka tallennetaan tilin URL-osoitteeksi. Kukin lehti voi tehdä siitä pakollisen Brasilian arvioijille."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes-ansioluettelo (linkki)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Lattes-ansioluettelosi osoite CNPq:ssa, esimerkiksi {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Pakollinen Brasilian arvioijille."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Anna Lattes-ansioluettelon osoite: lattes.cnpq.br/ ja sen perään Lattes-tunnuksesi 16 numeroa."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Linkki Lattes-ansioluetteloon on pakollinen Brasilian arvioijille."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Kun joku rekisteröityy ja pyytää päästä arvioimaan tähän lehteen, rekisteröitymislomake pyytää linkin hänen Lattes-ansioluetteloonsa ja tarkistaa, että se on Lattes-osoite. Linkki tallennetaan tilin URL-osoitteeksi."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Brasilian arvioijat"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Koskee jokaista, joka valitsee maaksi Brasilian ja rastittaa arvioijavalinnan."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes-linkki on vapaaehtoinen"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes-linkki on pakollinen (merkitty lomakkeessa pakolliseksi)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Muiden maiden arvioijat voivat myös antaa Lattes-linkkinsä, mutta se ei ole heille koskaan pakollinen."

@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: vi\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes cho người phản biện"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Yêu cầu những người đăng ký làm phản biện cung cấp liên kết đến CV Lattes của họ (CNPq, Brazil), được lưu làm URL của tài khoản. Mỗi tạp chí có thể bắt buộc điều này với người phản biện ở Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (liên kết)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Địa chỉ CV Lattes của bạn tại CNPq, ví dụ {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Bắt buộc với người phản biện ở Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Nhập địa chỉ của một CV Lattes: lattes.cnpq.br/ theo sau là 16 chữ số ID Lattes của bạn."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Liên kết CV Lattes là bắt buộc với người phản biện ở Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Khi ai đó đăng ký và xin phản biện cho tạp chí này, biểu mẫu đăng ký yêu cầu liên kết CV Lattes của họ và kiểm tra đó có phải địa chỉ Lattes không. Liên kết được lưu làm URL của tài khoản."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Người phản biện ở Brazil"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Áp dụng cho người chọn Brazil làm quốc gia và đánh dấu tùy chọn phản biện."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Liên kết Lattes là tùy chọn"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Liên kết Lattes là bắt buộc (được đánh dấu bắt buộc trên biểu mẫu)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Người phản biện ở các nước khác cũng có thể cung cấp liên kết Lattes, nhưng không bao giờ bắt buộc với họ."

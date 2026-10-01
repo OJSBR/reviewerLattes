@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: nb_NO\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes for fagfellevurderere"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Ber dem som registrerer seg som fagfellevurderere om lenken til Lattes-CV-en sin (CNPq, Brasil), lagret som kontoens URL. Hvert tidsskrift kan gjøre den obligatorisk for vurderere i Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes-CV (lenke)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Adressen til Lattes-CV-en din hos CNPq, for eksempel {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Obligatorisk for vurderere i Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Skriv inn adressen til en Lattes-CV: lattes.cnpq.br/ etterfulgt av de 16 sifrene i Lattes-ID-en din."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Lenken til Lattes-CV-en er obligatorisk for vurderere i Brasil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Når noen registrerer seg og ber om å vurdere for dette tidsskriftet, ber registreringsskjemaet om lenken til Lattes-CV-en og kontrollerer at det er en Lattes-adresse. Lenken lagres som kontoens URL."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Vurderere i Brasil"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Gjelder alle som velger Brasil som land og krysser av for vurderer-valget."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes-lenken er valgfri"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes-lenken er obligatorisk (merket som obligatorisk i skjemaet)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Vurderere fra andre land kan også oppgi Lattes-lenken sin, men den er aldri obligatorisk for dem."

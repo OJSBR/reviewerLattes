@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ja\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "査読者のLattes"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "査読者として登録する人に Lattes 履歴書（CNPq、ブラジル）のリンクを求め、アカウントの URL として保存します。各ジャーナルはブラジルの査読者に必須にできます。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "Lattes 履歴書（リンク）"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "CNPq にある Lattes 履歴書のアドレス。例：{$example}"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "ブラジルの査読者は必須です。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Lattes 履歴書のアドレスを入力してください：lattes.cnpq.br/ に続けて Lattes ID の 16 桁。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "ブラジルの査読者は Lattes 履歴書のリンクが必須です。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "誰かが登録してこのジャーナルの査読を希望すると、登録フォームが Lattes 履歴書のリンクを求め、Lattes のアドレスであることを確認します。リンクはアカウントの URL として保存されます。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "ブラジルの査読者"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "国としてブラジルを選び、査読者のオプションにチェックを入れた人に適用されます。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Lattes のリンクは任意"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Lattes のリンクは必須（フォームで必須と表示）"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "他の国の査読者も Lattes のリンクを入力できますが、必須になることはありません。"

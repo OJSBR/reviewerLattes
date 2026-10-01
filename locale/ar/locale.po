@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ar\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "لاتس للمحكّمين"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "يطلب ممن يسجّلون كمحكّمين رابط سيرتهم الذاتية في لاتس (CNPq، البرازيل)، ويُحفظ كعنوان URL للحساب. يمكن لكل مجلة جعله إلزاميًا للمحكّمين في البرازيل."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "سيرة لاتس الذاتية (رابط)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "عنوان سيرتك الذاتية في لاتس لدى CNPq، مثلًا {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "إلزامي للمحكّمين في البرازيل."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "أدخل عنوان سيرة ذاتية في لاتس: lattes.cnpq.br/ متبوعًا بالأرقام الستة عشر لمعرّف لاتس الخاص بك."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "رابط سيرة لاتس الذاتية إلزامي للمحكّمين في البرازيل."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "عندما يسجّل شخص ويطلب التحكيم في هذه المجلة، يطلب نموذج التسجيل رابط سيرته الذاتية في لاتس ويتحقق من أنه عنوان لاتس. يُحفظ الرابط كعنوان URL للحساب."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "المحكّمون في البرازيل"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "ينطبق على من يختار البرازيل بلدًا ويحدد خيار المحكّم."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "رابط لاتس اختياري"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "رابط لاتس إلزامي (مُعلَّم كإلزامي في النموذج)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "يمكن للمحكّمين من بلدان أخرى أيضًا إدخال رابط لاتس، لكنه لا يكون إلزاميًا لهم أبدًا."

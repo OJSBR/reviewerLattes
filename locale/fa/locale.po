@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: fa\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "لاتس برای داوران"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "از کسانی که به‌عنوان داور ثبت‌نام می‌کنند پیوند رزومهٔ لاتس آنها (CNPq، برزیل) را می‌خواهد و آن را به‌عنوان URL حساب ذخیره می‌کند. هر مجله می‌تواند آن را برای داوران برزیلی الزامی کند."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "رزومهٔ لاتس (پیوند)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "نشانی رزومهٔ لاتس شما در CNPq، برای نمونه {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "برای داوران برزیل الزامی است."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "نشانی یک رزومهٔ لاتس را وارد کنید: lattes.cnpq.br/ و پس از آن ۱۶ رقم شناسهٔ لاتس شما."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "پیوند رزومهٔ لاتس برای داوران برزیل الزامی است."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "وقتی کسی ثبت‌نام می‌کند و می‌خواهد برای این مجله داوری کند، فرم ثبت‌نام پیوند رزومهٔ لاتس او را می‌خواهد و بررسی می‌کند که نشانی لاتس باشد. پیوند به‌عنوان URL حساب ذخیره می‌شود."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "داوران برزیل"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "برای کسی است که برزیل را به‌عنوان کشور انتخاب و گزینهٔ داور را علامت می‌زند."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "پیوند لاتس اختیاری است"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "پیوند لاتس الزامی است (در فرم به‌عنوان الزامی علامت‌گذاری می‌شود)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "داوران کشورهای دیگر هم می‌توانند پیوند لاتس خود را وارد کنند، اما هرگز برای آنها الزامی نیست."

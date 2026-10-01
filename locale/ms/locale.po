@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: OJSBR\n"
+"Language-Team: OJSBR\n"
+"Language: ms\n"
+
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.displayName"
+msgstr "Lattes untuk Penilai"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.description"
+msgstr "Meminta mereka yang mendaftar sebagai penilai untuk memberikan pautan CV Lattes mereka (CNPq, Brazil), disimpan sebagai URL akaun. Setiap jurnal boleh mewajibkannya bagi penilai di Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.label"
+msgstr "CV Lattes (pautan)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.example"
+msgstr "https://lattes.cnpq.br/1234567890123456"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.description"
+msgstr "Alamat CV Lattes anda di CNPq, contohnya {$example}."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
+msgstr "Wajib bagi penilai di Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.invalid"
+msgstr "Masukkan alamat CV Lattes: lattes.cnpq.br/ diikuti 16 digit ID Lattes anda."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.field.required"
+msgstr "Pautan CV Lattes wajib bagi penilai di Brazil."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.intro"
+msgstr "Apabila seseorang mendaftar dan meminta untuk menilai bagi jurnal ini, borang pendaftaran meminta pautan CV Lattes mereka dan memeriksa bahawa ia alamat Lattes. Pautan disimpan sebagai URL akaun."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil"
+msgstr "Penilai di Brazil"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.brazil.description"
+msgstr "Terpakai kepada sesiapa yang memilih Brazil sebagai negara dan menanda pilihan penilai."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.optional"
+msgstr "Pautan Lattes adalah pilihan"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.required"
+msgstr "Pautan Lattes adalah wajib (ditanda wajib pada borang)"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.otherCountries"
+msgstr "Penilai dari negara lain juga boleh memberikan pautan Lattes mereka, tetapi ia tidak pernah diwajibkan bagi mereka."
