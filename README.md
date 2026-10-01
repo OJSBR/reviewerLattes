@@ -1,10 +1,10 @@
 # Lattes for Reviewers — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.0.0.0-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-1.0.1.0-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.0.0.0/reviewerLattes-1.0.0.0.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.0.1.0/reviewerLattes-1.0.1.0.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that asks people who register as
 **reviewers** for the link to their **Lattes CV** — the CV platform of CNPq, used by every
@@ -19,7 +19,7 @@ it, but it is never required from them.
 
 | OJS version | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.0.0 |
+| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.0.1.0 |
 
 38 languages, in the locale codes of OJS 3.5.
 
@@ -33,6 +33,12 @@ link by e-mail after the fact, or look the person up by name and hope it is the 
 
 - On the **registration form**, when the person ticks **"I would like to review"**, a
   **Lattes CV (link)** field appears next to the reviewing interests.
+- The same field, with the same rule, appears on the **second step of a registration through
+  ORCID** (or another provider) of PKP's **OpenID plugin** — the page that asks for the details
+  of the new account. A journal that turns its own registration form off and lets people in only
+  through ORCID sends every new account there. The field is asked for, checked and saved only
+  when that page **creates an account**; when the person uses it to **link ORCID to an account
+  they already have**, it is left alone.
 - If the journal **requires** it and the person chose **Brazil** as their country, the field is
   marked **required** (the mark of the theme, and the browser's own check) and the server
   refuses the registration without it.
@@ -85,16 +91,32 @@ Reviewers in other countries may always give the link; it is never required from
   right after it. Tested with the page of the core and with a theme that writes its own form
   (Bootstrap groups, labels beside the fields, a `textarea` for the interests, no ids). Where a
   theme has no interests field, the field goes before the button that sends the form.
+- **The second step of the OpenID plugin** (`generic/openid`, ORCID and the other providers)
+  is another legacy `Form`, `OpenIDStep2Form`, and gets the same treatment through its own hooks:
+  `openidstep2form::Constructor`, `::readuservars`, `::display` (fired by `Form::fetch()`, which
+  `OpenIDStep2Form::fetch()` calls after assigning its variables, both when the page is first
+  shown and after a failed validation) and `::execute`. Nothing of the OpenID plugin is imported;
+  where it is not installed those hooks never fire. Its page is found by its action
+  (`…/openid/registerOrConnect`), and the field goes beside its reviewing interests, inside the
+  part that creates an account. That page also links ORCID to an existing account: the two
+  buttons are told apart by the one posted (`register` / `connect`), as the OpenID plugin does,
+  and the checks apply only to `register`. The OpenID form creates and saves the account inside
+  `execute()` and fires the hook at the end, so the link is written through the user repository
+  to the account just created (found by the e-mail of the post, which the form refuses if it is
+  already in use, and the username), and only when the account has no URL yet.
 - **The rule is the server's.** A small script shows the field to reviewers and keeps the
   required mark in step with the country; the same rule is checked by the form on the server,
-  so the page without JavaScript still enforces it.
+  so the page without JavaScript still enforces it. The field is marked required only while it
+  can be seen: on the OpenID page, where the part that creates an account and the part that links
+  one are shown in turn, a required field in the hidden part would stop the browser from sending
+  the other.
 - The script and the stylesheet carry the plugin version in their address, so an update reaches
   readers' browsers at once.
 - No database table, no core template replaced, no core class swapped.
 
 ## Tests
 
-- **PHPUnit** (`tests/*Test.php`, on `PKP\tests\PKPTestCase`, 78 tests):
+- **PHPUnit** (`tests/*Test.php`, on `PKP\tests\PKPTestCase`, 88 tests):
   - what counts as a Lattes link (15 accepted shapes, 19 refused ones, including look-alike
     hosts and markup) and who must give one (9 combinations of setting, country and reviewer box);
   - the field on registration pages written by different themes, escaped, added once, and living
@@ -102,6 +124,14 @@ Reviewers in other countries may always give the link; it is never required from
   - **the registration form of the core, posted and saved**: the rule applied by the core's own
     validation in each case, and the link read back from `users.url` of the account the core
     created (then deleted); the hooks checked against the names `Form.php` fires;
+  - **the second step of a registration through ORCID**: the field on the OpenID page (in the
+    part that creates an account, before its own button when there is no interests field), and
+    the form posted with each of its two buttons — the same rule when it creates an account, no
+    check at all when it links one, the link read back from `users.url` of the account created,
+    a URL already there never replaced. The OpenID plugin is not part of OJS, so these run on a
+    stand-in with the name of its form (`tests/OpenIDStep2Form.php`, for which the core fires the
+    same hooks); wherever the OpenID plugin is installed, its source is checked against what the
+    stand-in assumes;
   - the plugin classes against the installed PKP, the 38 translations and the templates.
 
   ```bash
@@ -115,12 +145,22 @@ Reviewers in other countries may always give the link; it is never required from
   registration **sent through the page**, with the link read back from the account where an
   editor reads it, plus a link that is not Lattes refused with its message. The suite never
   solves a captcha: where the registration page has one, pass `--env captchaOnRegister=1` and
-  the two tests that send the form are left to PHPUnit, which covers the same path.
+  the two tests that send the form are left to PHPUnit, which covers the same path. The second
+  step of a registration through ORCID is not in the Cypress suite: reaching it takes a sign-in at
+  ORCID, which the suite does not do; PHPUnit covers it as above.
 
 - Counterproof: with the link not saved, with the requirement never applied, or with a hook name
   in the wrong case, the registration tests fail.
 
 Tests are kept in the repository and are not part of the release package.
+
+## Changelog
+
+- **1.0.1.0** (2026-10-01) — the field also appears, with the same rule, on the second step of a
+  registration through ORCID (PKP's OpenID plugin), and the link is saved on the account created
+  there; nothing changes when that page links an existing account. The field is required in the
+  browser only while it can be seen.
+- **1.0.0.0** (2026-09-30) — first release.
 
 ## Credits & authorship
 
@@ -151,18 +191,23 @@ Plugin genérico para o **Open Journal Systems (OJS)** que pede a quem se cadast
 decide se o link é **obrigatório para avaliadores do Brasil**; avaliadores de outros países
 podem informá-lo, mas ele nunca é obrigatório para eles.
 
-**⬇️ Pacote de instalação:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.0.0.0/reviewerLattes-1.0.0.0.tar.gz)
+**⬇️ Pacote de instalação:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.0.1.0/reviewerLattes-1.0.1.0.tar.gz)
 
 ### Compatibilidade e branches
 
 | Versão do OJS | Branch | Release do plugin |
 |---------------|--------|-------------------|
-| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.0.0 |
+| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.0.1.0 |
 
 ### O que faz
 
 - No **formulário de cadastro**, quando a pessoa marca **"gostaria de avaliar"**, aparece o
   campo **Currículo Lattes (link)** junto às áreas de interesse.
+- O mesmo campo, com a mesma regra, aparece no **2º passo do cadastro via ORCID** (ou outro
+  provedor) do **plugin OpenID** da PKP — a página que pede os dados da conta nova. A revista que
+  desliga o próprio formulário de cadastro e só aceita entrada via ORCID manda todo cadastro novo
+  para lá. O campo é pedido, conferido e gravado só quando essa página **cria uma conta**; quando
+  a pessoa a usa para **vincular o ORCID a uma conta que já tem**, ele é ignorado.
 - Se a revista **exige** e a pessoa escolheu **Brasil** como país, o campo fica marcado como
   **obrigatório** (a marca do próprio tema e a checagem do navegador) e o servidor recusa o
   cadastro sem ele.
@@ -205,26 +250,46 @@ núcleo gravar o usuário, para o link ir para `users.url`). O template de cadas
 então o campo entra na página por um filtro de saída **com nome**, que acha o formulário pelo
 endereço para onde ele envia e copia a marcação do campo de áreas de interesse escrita pelo
 próprio tema — mesma estrutura, mesmas classes, mesmo rótulo —, colocando o campo logo depois
-dele. Testado com a página do núcleo e com um tema que escreve o próprio formulário. Um script
+dele. Testado com a página do núcleo e com um tema que escreve o próprio formulário. O 2º passo
+do cadastro via ORCID (plugin OpenID, `OpenIDStep2Form`) recebe o mesmo tratamento pelos hooks
+dele (`openidstep2form::Constructor`, `::readuservars`, `::display` e `::execute`), sem importar
+nada do plugin OpenID: a página é achada pelo endereço `…/openid/registerOrConnect`, as
+checagens valem só para o botão que cria a conta (`register`, não `connect`) e o link é gravado
+pelo repositório de usuários na conta recém-criada, só se ela ainda não tiver URL. Um script
 pequeno mostra o campo a avaliadores e acompanha o país para a marca de obrigatório; a mesma
-regra é conferida no servidor. Script e folha de estilo levam a versão do plugin no endereço.
+regra é conferida no servidor; o campo só fica obrigatório no navegador enquanto está visível,
+para não travar o envio da parte da página do OpenID que estiver em uso. Script e folha de
+estilo levam a versão do plugin no endereço.
 Nenhuma tabela, nenhum template do núcleo substituído.
 
 ### Testes
 
-PHPUnit em `tests/` (sobre `PKP\tests\PKPTestCase`, 78 testes) e Cypress em
+PHPUnit em `tests/` (sobre `PKP\tests\PKPTestCase`, 88 testes) e Cypress em
 `cypress/tests/functional/` (rodado pelo [pkp-github-actions](https://github.com/pkp/pkp-github-actions)
 a cada push), com os comandos da seção em inglês. A suíte cobre o que conta como link Lattes (15
 formatos aceitos e 19 recusados), quem tem de informá-lo (9 combinações), o campo em páginas de
 temas diferentes e convivendo com o do **whatsAppContributor**, e o **formulário de cadastro do
-núcleo enviado e gravado**, com o link lido de volta de `users.url` da conta criada. O Cypress
+núcleo enviado e gravado**, com o link lido de volta de `users.url` da conta criada, e o **2º
+passo do cadastro via ORCID** enviado com cada um dos dois botões (mesma regra ao criar conta,
+nenhuma checagem ao vincular, link lido de volta da conta criada), sobre um substituto com o
+nome do formulário do OpenID (`tests/OpenIDStep2Form.php`), conferido contra o código do plugin
+OpenID onde ele estiver instalado. O Cypress
 confere a página real (campo só para avaliadores, obrigatório só para o Brasil) e envia um
 cadastro pela página lendo o link de volta na conta. A suíte nunca resolve captcha: onde o
 cadastro tem captcha, `--env captchaOnRegister=1` deixa os dois testes que enviam o formulário
-para o PHPUnit, que cobre o mesmo caminho. Contraprova: sem gravar o link, sem aplicar a
+para o PHPUnit, que cobre o mesmo caminho; o cadastro via ORCID fica fora do Cypress (exige login
+no ORCID) e é coberto pelo PHPUnit. Contraprova: sem gravar o link, sem aplicar a
 exigência ou com um nome de hook no case errado, os testes de cadastro falham.
 
 Os testes ficam no repositório e não fazem parte do pacote da release.
+
+### Histórico de versões
+
+- **1.0.1.0** (2026-10-01) — o campo também aparece, com a mesma regra, no 2º passo do cadastro
+  via ORCID (plugin OpenID da PKP), e o link é gravado na conta criada ali; nada muda quando a
+  página é usada para vincular uma conta existente. No navegador, o campo só fica obrigatório
+  enquanto está visível.
+- **1.0.0.0** (2026-09-30) — primeira versão.
 
 ### Créditos e autoria
 

@@ -10,7 +10,9 @@
  *
  * @brief The field on registration pages written by different themes: the
  *        page of the core, a theme with its own form (no id, no fieldsets,
- *        a textarea for the interests), and a page with no interests field.
+ *        a textarea for the interests), and a page with no interests field;
+ *        and on the second step of a registration through the OpenID plugin
+ *        (ORCID), which creates an account or links an existing one.
  */
 
 namespace APP\plugins\generic\reviewerLattes\tests;
@@ -64,6 +66,47 @@ HTML;
 <input type="checkbox" name="reviewerGroup[16]" value="1">
 <input type="submit" value="Register">
 </form>
+HTML;
+
+    /**
+     * The second step of a registration through the OpenID plugin (authStep2.tpl
+     * of generic/openid for OJS 3.5), as rendered: the part that creates an
+     * account, with the reviewer box and the interests, and the part that links
+     * an existing account, each with its own submit button.
+     */
+    private const OPENID_PAGE = <<<'HTML'
+<div class="page page_oauth">
+<form class="cmp_form cmp_form oauth" id="oauth" method="post" action="https://example.org/index.php/j/openid/registerOrConnect">
+<input type="hidden" name="csrfToken" value="x">
+<input type="hidden" name="oauthId" id="oauthId" value="abc">
+<input type="hidden" name="selectedProvider" id="selectedProvider" value="orcid">
+<input type="hidden" name="returnTo" id="returnTo" value="">
+<ul id="openid-choice-select"><li><span id='showLoginForm' class='step2-choice-links'>Yes</span></li><li><span id='showRegisterForm' class='step2-choice-links'>No</span></li></ul>
+<div id="register-form" class="page_register">
+<fieldset class="register"><div class="fields">
+<div class="given_name"><label><span class="label">Given Name</span><input type="text" name="givenName" id="givenName" value="Ana" maxlength="255" required aria-required="true"></label></div>
+<div class="country"><label><span class="label">Country</span><select name="country" id="country" required aria-required="true"><option></option><option value="BR">Brazil</option></select></label></div>
+</div></fieldset>
+<fieldset class="reviewer"><div class="fields">
+<div id="reviewerOptinGroup" class="optin"><label><input type="checkbox" name="reviewerGroup[16]" class="reviewerGroupInput" value="1"> Yes, I would like to be contacted with requests to review.</label></div>
+<div id="reviewerInterests" class="reviewer_interests">
+<label>
+<span class="label">Reviewing interests</span>
+<input type="text" name="interests" id="interests" value="" class="reviewerGroupInput">
+</label>
+</div>
+</div></fieldset>
+<div class="buttons"><button class="submit" type="submit" name="register">Complete registration</button></div>
+</div>
+<div id="login-form">
+<fieldset class="login">
+<div class="username"><label><span class="label">Username or email</span><input type="text" name="usernameLogin" id="usernameLogin" value="" maxlength="32" required aria-required="true"></label></div>
+<div class="password"><label><span class="label">Password</span><input type="password" name="passwordLogin" id="passwordLogin" value="" maxlength="32" required aria-required="true"></label></div>
+</fieldset>
+<div class="buttons"><button class="submit" type="submit" name="connect">Connect</button></div>
+</div>
+</form>
+</div>
 HTML;
 
     private function parts(array $overrides = []): array
@@ -211,6 +254,63 @@ HTML;
                 // Ours stays with the reviewer part, after the interests.
                 $this->assertGreaterThan(strpos($html, 'name="interests"'), strpos($html, 'name="lattesUrl"'));
             }
+        }
+    }
+
+    public function testOnTheOpenIdPageTheFieldStandsWithTheInterestsInThePartThatCreatesTheAccount(): void
+    {
+        $html = ReviewerLattesPlugin::insertRegistrationField(self::OPENID_PAGE, $this->parts());
+        $x = $this->xpath($html);
+
+        $this->assertSame(1, $x->query('//input[@name="lattesUrl"]')->length);
+        // In the reviewer block of the part that creates an account, right after the interests.
+        $this->assertSame(1, $x->query('//div[@id="register-form"]//div[@id="reviewerInterests"]//input[@name="lattesUrl"]')->length);
+        $this->assertSame(1, $x->query('//label[.//input[@name="interests"]]/following-sibling::label[.//input[@name="lattesUrl"]]')->length);
+        $this->assertSame(0, $x->query('//div[@id="login-form"]//input[@name="lattesUrl"]')->length, 'Not in the part that links an existing account.');
+        // The class of the interests input, which the OpenID plugin's script leaves
+        // optional when it shows the part: "required" is the plugin's to decide.
+        $input = $x->query('//input[@name="lattesUrl"]')->item(0);
+        $this->assertSame('reviewerGroupInput', $input->getAttribute('class'));
+        $this->assertFalse($input->hasAttribute('required'));
+        $this->assertSame('1', $x->query('//*[@data-reviewer-lattes]')->item(0)->getAttribute('data-required-for-brazil'));
+        // Both buttons and everything else are where they were.
+        $this->assertSame(1, $x->query('//button[@name="register"]')->length);
+        $this->assertSame(1, $x->query('//button[@name="connect"]')->length);
+        $this->assertSame(1, $x->query('//*[@id="reviewerInterests"]')->length);
+    }
+
+    public function testOnTheOpenIdPageTheRequiredMarkFollowsTheStateOfTheForm(): void
+    {
+        $x = $this->xpath(ReviewerLattesPlugin::insertRegistrationField(self::OPENID_PAGE, $this->parts(['required' => true, 'error' => 'Required.'])));
+        $input = $x->query('//input[@name="lattesUrl"]')->item(0);
+        $this->assertTrue($input->hasAttribute('required'));
+        $this->assertSame(1, $x->query('//div[@id="register-form"]//*[contains(@class,"error")][contains(.,"Required.")]')->length);
+    }
+
+    public function testOnTheOpenIdPageWithoutInterestsTheFieldGoesBeforeTheButtonThatCreatesTheAccount(): void
+    {
+        // A journal with no reviewer group open to registration: no reviewer block at all.
+        $page = preg_replace('~<fieldset class="reviewer">.*?</fieldset>~s', '', self::OPENID_PAGE);
+        $this->assertStringNotContainsString('name="interests"', $page);
+
+        $html = ReviewerLattesPlugin::insertRegistrationField($page, $this->parts());
+        $this->assertSame(1, substr_count($html, 'name="lattesUrl"'));
+        $field = strpos($html, 'name="lattesUrl"');
+        // Before "register", not before "connect", the last button of the form.
+        $this->assertLessThan(strpos($html, 'name="register"'), $field);
+        $this->assertGreaterThan(strpos($html, 'id="register-form"'), $field);
+        $this->assertLessThan(strpos($html, 'id="login-form"'), $field);
+    }
+
+    public function testTheOpenIdPageGetsTheFieldOnceAndNoOtherOpenIdPageGetsIt(): void
+    {
+        $once = ReviewerLattesPlugin::insertRegistrationField(self::OPENID_PAGE, $this->parts());
+        $this->assertSame($once, ReviewerLattesPlugin::insertRegistrationField($once, $this->parts()));
+
+        // Another page of the OpenID plugin, and the sign-in page of the core.
+        foreach (['/openid/doAuthentication', '/login/signIn'] as $action) {
+            $other = str_replace('/openid/registerOrConnect', $action, self::OPENID_PAGE);
+            $this->assertSame($other, ReviewerLattesPlugin::insertRegistrationField($other, $this->parts()), $action);
         }
     }
 
