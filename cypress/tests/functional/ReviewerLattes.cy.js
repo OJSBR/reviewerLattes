@@ -144,15 +144,6 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 		login(adminUser, adminPassword);
 		openPluginsTab();
 		enablePlugin();
-		// The setting as found, read from the form the modal would load.
-		request(pageUrl('$$$call$$$/grid/settings/plugins/settings-plugin-grid/manage') + '?verb=settings&plugin=' + rowName + '&category=generic').then((response) => {
-			const answer = typeof response.body === 'string' ? JSON.parse(response.body) : response.body;
-			const checked = /<input[^>]*name="lattesForBrazil"[^>]*>/g;
-			const found = (String(answer.content).match(checked) || []).find((tag) => /\bchecked\b/.test(tag));
-			if (original === null) {
-				original = found && /value="required"/.test(found) ? 'required' : 'optional';
-			}
-		});
 	});
 
 	after(function() {
@@ -180,6 +171,19 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 	});
 
 	it('Saves the requirement for Brazil and reads it back', function() {
+		// The setting as found, put back in after(). Read in the modal, on the page
+		// already open: PKP's CI serves one request at a time, and a request of the
+		// suite would wait behind the plugin gallery the Plugins tab is still loading.
+		openSettings();
+		cy.get(settingsForm + ' input[name="lattesForBrazil"]:checked').invoke('val').then((value) => {
+			if (original === null) {
+				original = value;
+			}
+		});
+		cy.get(settingsForm + ' button[id^="submitFormButton-"]').click({force: true});
+		waitJQuery();
+		cy.get(settingsForm).should('not.exist');
+
 		saveSetting('required');
 		openSettings();
 		cy.get(settingsForm + ' input[name="lattesForBrazil"][value="required"]').should('be.checked');
