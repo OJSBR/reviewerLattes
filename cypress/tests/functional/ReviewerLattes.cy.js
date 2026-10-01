@@ -49,7 +49,9 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 	// falls back to the form when the session did not stick.
 	const login = (username, password) => {
 		cy.clearCookies();
-		request(pageUrl('login')).then((response) => {
+		// The first request of a run can find PHP's server still cold on PKP's CI:
+		// cy.request gives up at 30 s, a page load waits for pageLoadTimeout.
+		request({url: pageUrl('login'), timeout: 120000}).then((response) => {
 			const token = /name="csrfToken" value="([^"]+)"/.exec(response.body)[1];
 			const action = /<form[^>]*id="login"[^>]*action="([^"]+)"/.exec(response.body)[1];
 			request({method: 'POST', url: action, form: true, body: {csrfToken: token, username: username, password: password}, log: false});
@@ -141,6 +143,7 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 	const reviewerBox = () => cy.get(form + ' input[type="checkbox"][name^="reviewerGroup["]').first();
 
 	before(function() {
+		cy.visit(pageUrl('login'));
 		login(adminUser, adminPassword);
 		openPluginsTab();
 		enablePlugin();
