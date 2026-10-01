@@ -14,7 +14,7 @@ msgstr "Lattes bírálóknak"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "A bírálóként regisztrálóktól elkéri a Lattes-önéletrajzuk (CNPq, Brazília) linkjét, és a fiók URL-jeként menti. Minden folyóirat kötelezővé teheti a brazíliai bírálók számára."
+msgstr "A bírálónak jelentkezőktől — a regisztrációs űrlapon vagy a profiljuk szerepeinél — elkéri a Lattes-önéletrajzuk (CNPq, Brazília) linkjét, és a fiók URL-jeként menti. Minden folyóirat eldönti, kitől kötelező, és megakadályozhatja, hogy hallgatók bírálónak jelentkezzenek."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Kötelező a brazíliai bírálóknak."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Kötelező a bírálóknak."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Adja meg egy Lattes-önéletrajz címét: lattes.cnpq.br/, majd Lattes-azonosítójának 16 számjegye."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "A Lattes-önéletrajz linkje kötelező a brazíliai bírálóknak."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "A Lattes-önéletrajz linkje kötelező a bírálóknak."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Amikor valaki regisztrál és bírálni szeretne ennek a folyóiratnak, a regisztrációs űrlap elkéri a Lattes-önéletrajza linkjét, és ellenőrzi, hogy Lattes-cím-e. A linket a fiók URL-jeként menti."
+msgstr "Amikor valaki bírálónak jelentkezik ennél a folyóiratnál — a regisztrációs űrlapon vagy a bírálói szerep bejelölésével a profiljában —, elkérik tőle a Lattes-önéletrajza linkjét, amelynek Lattes-címnek kell lennie. A link a fiók URL-jeként mentődik; a már meglévő Lattes-linket sosem cseréli le."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Brazíliai bírálók"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Kinek kell megadnia a Lattes-linket"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Arra vonatkozik, aki Brazíliát választja országként és bejelöli a bírálói lehetőséget."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Arra vonatkozik, aki bírálónak jelentkezik. A mezőbe írt értéknek mindig érvényes Lattes-címnek kell lennie."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "A Lattes-link nem kötelező"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Senkinek: a link mindig nem kötelező"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "A Lattes-link kötelező (az űrlapon kötelezőként jelölve)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Brazíliai bírálók (más országoknak nem kötelező)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Más országok bírálói is megadhatják Lattes-linkjüket, de számukra soha nem kötelező."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Minden bíráló, bármely országból"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Hallgatók"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Egyes folyóiratok csak befejezett végzettségű bírálókat fogadnak el. Soronként adjon meg egy e-mail-cím-részletet — például @student. —, és az a cím, amely bármelyiket tartalmazza, nem jelentkezhet bírálónak. A kis- és nagybetű nem számít. Hagyja üresen, ha mindenkit enged."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Hallgatók e-mail-címei"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Legfeljebb 50 részletet adjon meg, soronként egyet, mindegyik legfeljebb 100 karakter."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Ez a folyóirat nem fogad el hallgatókat bírálónak: hallgatói e-mail-címmel rendelkező fiók nem jelentkezhet bírálatra."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Ez a folyóirat nem fogad el hallgatókat bírálónak, ezért ez az e-mail-cím nem jelentkezhet bírálatra."

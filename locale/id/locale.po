@@ -14,7 +14,7 @@ msgstr "Lattes untuk Penelaah"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Meminta orang yang mendaftar sebagai penelaah untuk memberikan tautan CV Lattes mereka (CNPq, Brasil), disimpan sebagai URL akun. Setiap jurnal dapat mewajibkannya bagi penelaah di Brasil."
+msgstr "Meminta orang yang mendaftar sebagai penelaah — di formulir pendaftaran atau di peran profilnya — tautan CV Lattes mereka (CNPq, Brasil), disimpan sebagai URL akun. Setiap jurnal menentukan siapa yang wajib memberikannya dan dapat mencegah mahasiswa mendaftar sebagai penelaah."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Wajib bagi penelaah di Brasil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Wajib bagi penelaah."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Masukkan alamat CV Lattes: lattes.cnpq.br/ diikuti 16 digit ID Lattes Anda."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Tautan CV Lattes wajib bagi penelaah di Brasil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Tautan CV Lattes wajib bagi penelaah."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Saat seseorang mendaftar dan meminta menjadi penelaah untuk jurnal ini, formulir pendaftaran meminta tautan CV Lattes-nya dan memeriksa bahwa itu alamat Lattes. Tautan disimpan sebagai URL akun."
+msgstr "Saat seseorang mendaftar untuk menelaah di jurnal ini — di formulir pendaftaran atau dengan mencentang peran penelaah di profilnya — ia diminta tautan CV Lattes-nya, yang harus berupa alamat Lattes. Tautan disimpan sebagai URL akun; tautan Lattes yang sudah ada tidak pernah diganti."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Penelaah di Brasil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Siapa yang wajib memberikan tautan Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Berlaku bagi siapa pun yang memilih Brasil sebagai negara dan mencentang opsi penelaah."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Berlaku bagi siapa pun yang mendaftar sebagai penelaah. Apa pun yang diketik di kolom ini harus selalu berupa alamat Lattes yang valid."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Tautan Lattes bersifat opsional"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Tidak ada: tautan selalu opsional"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Tautan Lattes wajib (ditandai wajib pada formulir)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Penelaah di Brasil (opsional untuk negara lain)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Penelaah dari negara lain juga dapat memberikan tautan Lattes mereka, tetapi tidak pernah diwajibkan bagi mereka."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Semua penelaah, dari negara mana pun"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Mahasiswa"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Beberapa jurnal hanya menerima penelaah yang telah menyelesaikan studinya. Masukkan satu potongan alamat surel per baris — misalnya @student. — dan alamat yang memuat salah satunya tidak dapat mendaftar sebagai penelaah. Huruf besar dan kecil tidak berpengaruh. Biarkan kosong untuk mengizinkan semua orang."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Alamat surel mahasiswa"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Masukkan hingga 50 potongan, satu per baris, masing-masing paling banyak 100 karakter."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Jurnal ini tidak menerima mahasiswa sebagai penelaah: akun dengan alamat surel mahasiswa tidak dapat mendaftar untuk menelaah."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Jurnal ini tidak menerima mahasiswa sebagai penelaah, sehingga alamat surel ini tidak dapat mendaftar untuk menelaah."

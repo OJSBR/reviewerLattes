@@ -14,7 +14,7 @@ msgstr "Lattes for bedømmere"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Beder dem, der registrerer sig som bedømmere, om linket til deres Lattes-CV (CNPq, Brasilien), gemt som kontoens URL. Hvert tidsskrift kan gøre det obligatorisk for bedømmere i Brasilien."
+msgstr "Beder dem, der melder sig som bedømmere — på registreringsformularen eller under rollerne i deres profil — om linket til deres Lattes-CV (CNPq, Brasilien), gemt som kontoens URL. Hvert tidsskrift bestemmer, hvem der skal angive det, og kan udelukke studerende fra at melde sig som bedømmere."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obligatorisk for bedømmere i Brasilien."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obligatorisk for bedømmere."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Angiv adressen på et Lattes-CV: lattes.cnpq.br/ efterfulgt af de 16 cifre i dit Lattes-ID."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Linket til Lattes-CV'et er obligatorisk for bedømmere i Brasilien."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Linket til Lattes-CV'et er obligatorisk for bedømmere."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Når nogen registrerer sig og vil bedømme for dette tidsskrift, beder registreringsformularen om linket til deres Lattes-CV og kontrollerer, at det er en Lattes-adresse. Linket gemmes som kontoens URL."
+msgstr "Når nogen melder sig til at bedømme for dette tidsskrift — på registreringsformularen eller ved at markere bedømmerrollen i profilen — bedes de om linket til deres Lattes-CV, som skal være en Lattes-adresse. Linket gemmes som kontoens URL; et Lattes-link, der allerede er der, erstattes aldrig."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Bedømmere i Brasilien"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Hvem der skal angive Lattes-linket"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Gælder for alle, der vælger Brasilien som land og markerer bedømmer-muligheden."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Gælder for alle, der melder sig som bedømmere. Det, der skrives i feltet, skal altid være en gyldig Lattes-adresse."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes-linket er valgfrit"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ingen: linket er altid valgfrit"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes-linket er obligatorisk (markeret som obligatorisk i formularen)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Bedømmere i Brasilien (valgfrit for andre lande)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Bedømmere fra andre lande kan også angive deres Lattes-link, men det er aldrig obligatorisk for dem."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Alle bedømmere, fra ethvert land"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studerende"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Nogle tidsskrifter accepterer kun bedømmere med afsluttet uddannelse. Angiv et stykke e-mailadresse pr. linje — for eksempel @student. — og en adresse, der indeholder et af dem, kan ikke melde sig som bedømmer. Store og små bogstaver er ligegyldige. Lad feltet stå tomt for at tillade alle."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-mailadresser for studerende"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Angiv op til 50 stykker, ét pr. linje, hver på højst 100 tegn."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Dette tidsskrift accepterer ikke studerende som bedømmere: en konto med en studerende-e-mailadresse kan ikke melde sig til at bedømme."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Dette tidsskrift accepterer ikke studerende som bedømmere, derfor kan denne e-mailadresse ikke melde sig til at bedømme."

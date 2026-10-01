@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes do Revisor"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Pide a quen se rexistra como revisor a ligazón ao seu Currículo Lattes (CNPq, Brasil), gardada como URL da conta. Cada revista pode esixila aos revisores do Brasil."
+msgstr "Pide a quen se inscribe como revisor — no formulario de rexistro ou nos roles do perfil — a ligazón ao seu Currículo Lattes (CNPq, Brasil), gardada como URL da conta. Cada revista decide a quen se esixe e pode impedir que estudantes se inscriban como revisores."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "Currículo Lattes (ligazón)"
@@ -26,26 +26,50 @@ msgstr "O enderezo do seu Currículo Lattes no CNPq, por exemplo {$example}."
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obrigatorio para revisores do Brasil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obrigatorio para revisores."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Introduza o enderezo dun Currículo Lattes: lattes.cnpq.br/ seguido dos 16 díxitos do seu ID Lattes."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "A ligazón ao Currículo Lattes é obrigatoria para revisores do Brasil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "A ligazón ao Currículo Lattes é obrigatoria para revisores."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Cando alguén se rexistra e pide revisar para esta revista, o formulario de rexistro pide a ligazón ao seu Currículo Lattes e comproba que sexa un enderezo do Lattes. A ligazón gárdase como URL da conta."
+msgstr "Cando alguén se inscribe para revisar nesta revista — no formulario de rexistro ou marcando o rol de revisor no perfil — pídeselle a ligazón ao seu Currículo Lattes, que debe ser un enderezo do Lattes. A ligazón gárdase como URL da conta; unha ligazón do Lattes que xa estea alí nunca se substitúe."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Revisores do Brasil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Quen debe indicar a ligazón ao Lattes"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Aplícase a quen escolle Brasil como país e marca a opción de revisor."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Aplícase a quen se inscribe como revisor. O que se escriba no campo sempre debe ser un enderezo válido do Lattes."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "A ligazón ao Lattes é opcional"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ninguén: a ligazón é sempre opcional"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "A ligazón ao Lattes é obrigatoria (marcada como obrigatoria no formulario)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Revisores do Brasil (opcional para outros países)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Os revisores doutros países tamén poden indicar a súa ligazón ao Lattes, pero nunca se lles esixe."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Todos os revisores, de calquera país"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Estudantes"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Algunhas revistas só aceptan revisores co grao rematado. Indique un fragmento de enderezo de correo por liña — por exemplo @student. — e un enderezo que conteña calquera deles non poderá inscribirse como revisor. Maiúsculas e minúsculas non importan. Déixeo baleiro para permitir a todos."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Correos de estudantes"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Indique ata 50 fragmentos, un por liña, cada un cun máximo de 100 caracteres."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Esta revista non acepta estudantes como revisores: unha conta con correo de estudante non pode inscribirse para revisar."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Esta revista non acepta estudantes como revisores, por iso este correo non pode inscribirse para revisar."

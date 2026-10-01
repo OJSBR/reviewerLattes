@@ -14,7 +14,7 @@ msgstr "Lattes for fagfellevurderere"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Ber dem som registrerer seg som fagfellevurderere om lenken til Lattes-CV-en sin (CNPq, Brasil), lagret som kontoens URL. Hvert tidsskrift kan gjøre den obligatorisk for vurderere i Brasil."
+msgstr "Ber dem som melder seg som fagfellevurderere — i registreringsskjemaet eller under rollene i profilen — om lenken til Lattes-CV-en sin (CNPq, Brasil), lagret som kontoens URL. Hvert tidsskrift bestemmer hvem som må oppgi den, og kan hindre studenter i å melde seg som vurderere."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obligatorisk for vurderere i Brasil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obligatorisk for vurderere."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Skriv inn adressen til en Lattes-CV: lattes.cnpq.br/ etterfulgt av de 16 sifrene i Lattes-ID-en din."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lenken til Lattes-CV-en er obligatorisk for vurderere i Brasil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lenken til Lattes-CV-en er obligatorisk for vurderere."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Når noen registrerer seg og ber om å vurdere for dette tidsskriftet, ber registreringsskjemaet om lenken til Lattes-CV-en og kontrollerer at det er en Lattes-adresse. Lenken lagres som kontoens URL."
+msgstr "Når noen melder seg til å vurdere for dette tidsskriftet — i registreringsskjemaet eller ved å krysse av for vurdererrollen i profilen — blir de bedt om lenken til Lattes-CV-en, som må være en Lattes-adresse. Lenken lagres som kontoens URL; en Lattes-lenke som allerede finnes, erstattes aldri."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Vurderere i Brasil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Hvem som må oppgi Lattes-lenken"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Gjelder alle som velger Brasil som land og krysser av for vurderer-valget."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Gjelder alle som melder seg som vurderere. Det som skrives i feltet, må alltid være en gyldig Lattes-adresse."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes-lenken er valgfri"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ingen: lenken er alltid valgfri"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes-lenken er obligatorisk (merket som obligatorisk i skjemaet)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Vurderere i Brasil (valgfri for andre land)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Vurderere fra andre land kan også oppgi Lattes-lenken sin, men den er aldri obligatorisk for dem."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Alle vurderere, fra hvilket som helst land"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studenter"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Noen tidsskrifter godtar bare vurderere med fullført utdanning. Skriv inn én del av en e-postadresse per linje — for eksempel @student. — og en adresse som inneholder en av dem, kan ikke melde seg som vurderer. Store og små bokstaver spiller ingen rolle. La feltet stå tomt for å tillate alle."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-postadresser til studenter"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Skriv inn opptil 50 deler, én per linje, hver på høyst 100 tegn."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Dette tidsskriftet godtar ikke studenter som vurderere: en konto med studentadresse kan ikke melde seg til å vurdere."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Dette tidsskriftet godtar ikke studenter som vurderere, derfor kan denne e-postadressen ikke melde seg til å vurdere."

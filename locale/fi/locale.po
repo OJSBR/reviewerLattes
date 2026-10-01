@@ -14,7 +14,7 @@ msgstr "Lattes arvioijille"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Pyytää arvioijiksi rekisteröityviltä linkin heidän Lattes-ansioluetteloonsa (CNPq, Brasilia), joka tallennetaan tilin URL-osoitteeksi. Kukin lehti voi tehdä siitä pakollisen Brasilian arvioijille."
+msgstr "Pyytää arvioijiksi ilmoittautuvilta — rekisteröitymislomakkeella tai profiilin rooleissa — linkin heidän Lattes-ansioluetteloonsa (CNPq, Brasilia), joka tallennetaan tilin URL-osoitteeksi. Kukin lehti päättää, keneltä sitä vaaditaan, ja voi estää opiskelijoita ilmoittautumasta arvioijiksi."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Pakollinen Brasilian arvioijille."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Pakollinen arvioijille."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Anna Lattes-ansioluettelon osoite: lattes.cnpq.br/ ja sen perään Lattes-tunnuksesi 16 numeroa."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Linkki Lattes-ansioluetteloon on pakollinen Brasilian arvioijille."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Linkki Lattes-ansioluetteloon on pakollinen arvioijille."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Kun joku rekisteröityy ja pyytää päästä arvioimaan tähän lehteen, rekisteröitymislomake pyytää linkin hänen Lattes-ansioluetteloonsa ja tarkistaa, että se on Lattes-osoite. Linkki tallennetaan tilin URL-osoitteeksi."
+msgstr "Kun joku ilmoittautuu arvioimaan tähän lehteen — rekisteröitymislomakkeella tai rastittamalla arvioijan roolin profiilissaan — häneltä pyydetään linkki Lattes-ansioluetteloon, jonka on oltava Lattes-osoite. Linkki tallennetaan tilin URL-osoitteeksi; jo olemassa olevaa Lattes-linkkiä ei koskaan korvata."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Brasilian arvioijat"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Kenen on annettava Lattes-linkki"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Koskee jokaista, joka valitsee maaksi Brasilian ja rastittaa arvioijavalinnan."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Koskee jokaista, joka ilmoittautuu arvioijaksi. Kenttään kirjoitetun on aina oltava kelvollinen Lattes-osoite."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes-linkki on vapaaehtoinen"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ei kenenkään: linkki on aina vapaaehtoinen"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes-linkki on pakollinen (merkitty lomakkeessa pakolliseksi)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Brasilian arvioijat (vapaaehtoinen muille maille)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Muiden maiden arvioijat voivat myös antaa Lattes-linkkinsä, mutta se ei ole heille koskaan pakollinen."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Kaikki arvioijat, mistä maasta tahansa"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Opiskelijat"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Jotkin lehdet hyväksyvät vain tutkintonsa suorittaneita arvioijia. Kirjoita yksi sähköpostiosoitteen osa riviä kohden — esimerkiksi @student. — eikä osoite, joka sisältää jonkin niistä, voi ilmoittautua arvioijaksi. Isoilla ja pienillä kirjaimilla ei ole väliä. Jätä tyhjäksi, jos kaikki saavat arvioida."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Opiskelijoiden sähköpostiosoitteet"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Kirjoita enintään 50 osaa, yksi riville, kukin enintään 100 merkkiä."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Tämä lehti ei hyväksy opiskelijoita arvioijiksi: tili, jolla on opiskelijan sähköpostiosoite, ei voi ilmoittautua arvioimaan."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Tämä lehti ei hyväksy opiskelijoita arvioijiksi, joten tällä sähköpostiosoitteella ei voi ilmoittautua arvioimaan."

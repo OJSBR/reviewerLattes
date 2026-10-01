@@ -14,7 +14,7 @@ msgstr "Lattes რეცენზენტებისთვის"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "რეცენზენტად რეგისტრირებულებს სთხოვს მათი Lattes CV-ის (CNPq, ბრაზილია) ბმულს და ინახავს მას ანგარიშის URL-ად. თითოეულ ჟურნალს შეუძლია გახადოს ის სავალდებულო ბრაზილიელი რეცენზენტებისთვის."
+msgstr "რეცენზენტად დარეგისტრირებულებს — სარეგისტრაციო ფორმაში ან პროფილის როლებში — სთხოვს მათი Lattes CV-ის (CNPq, ბრაზილია) ბმულს და ინახავს ანგარიშის URL-ად. თითოეული ჟურნალი წყვეტს, ვისთვის არის ის სავალდებულო, და შეუძლია სტუდენტებს არ მისცეს რეცენზენტად რეგისტრაციის საშუალება."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "სავალდებულოა ბრაზილიელი რეცენზენტებისთვის."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "სავალდებულოა რეცენზენტებისთვის."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "შეიყვანეთ Lattes CV-ის მისამართი: lattes.cnpq.br/ და შემდეგ თქვენი Lattes ID-ის 16 ციფრი."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lattes CV-ის ბმული სავალდებულოა ბრაზილიელი რეცენზენტებისთვის."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lattes CV-ის ბმული სავალდებულოა რეცენზენტებისთვის."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "როცა ვინმე რეგისტრირდება და ითხოვს ამ ჟურნალისთვის რეცენზირებას, სარეგისტრაციო ფორმა სთხოვს მისი Lattes CV-ის ბმულს და ამოწმებს, რომ ეს Lattes-ის მისამართია. ბმული ინახება ანგარიშის URL-ად."
+msgstr "როცა ვინმე რეგისტრირდება ამ ჟურნალში რეცენზირებისთვის — სარეგისტრაციო ფორმაში ან პროფილში რეცენზენტის როლის მონიშვნით — მას სთხოვენ Lattes CV-ის ბმულს, რომელიც Lattes-ის მისამართი უნდა იყოს. ბმული ინახება ანგარიშის URL-ად; უკვე არსებული Lattes-ის ბმული არასოდეს იცვლება."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "ბრაზილიელი რეცენზენტები"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "ვინ უნდა მიუთითოს Lattes-ის ბმული"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "ეხება მას, ვინც ქვეყნად ირჩევს ბრაზილიას და მონიშნავს რეცენზენტის ვარიანტს."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "ეხება მას, ვინც რეცენზენტად რეგისტრირდება. ველში ჩაწერილი ყოველთვის უნდა იყოს Lattes-ის მართებული მისამართი."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes-ის ბმული არასავალდებულოა"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "არავინ: ბმული ყოველთვის არასავალდებულოა"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes-ის ბმული სავალდებულოა (ფორმაში მონიშნულია სავალდებულოდ)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "ბრაზილიელი რეცენზენტები (სხვა ქვეყნებისთვის არასავალდებულო)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "სხვა ქვეყნების რეცენზენტებსაც შეუძლიათ მიუთითონ Lattes-ის ბმული, მაგრამ მათთვის ის არასოდეს არის სავალდებულო."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "ყველა რეცენზენტი, ნებისმიერი ქვეყნიდან"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "სტუდენტები"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "ზოგი ჟურნალი მხოლოდ დასრულებული განათლების მქონე რეცენზენტებს იღებს. თითო სტრიქონზე შეიყვანეთ ელფოსტის მისამართის ერთი ნაწილი — მაგალითად @student. — და მისამართი, რომელიც რომელიმე მათგანს შეიცავს, ვერ დარეგისტრირდება რეცენზენტად. დიდ და პატარა ასოებს მნიშვნელობა არ აქვს. დატოვეთ ცარიელი, რომ ყველას მიეცეს ნება."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "სტუდენტების ელფოსტის მისამართები"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "შეიყვანეთ 50-მდე ნაწილი, თითო სტრიქონზე, თითოეული მაქსიმუმ 100 სიმბოლო."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "ეს ჟურნალი სტუდენტებს რეცენზენტებად არ იღებს: სტუდენტური ელფოსტის მქონე ანგარიში ვერ დარეგისტრირდება რეცენზირებისთვის."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "ეს ჟურნალი სტუდენტებს რეცენზენტებად არ იღებს, ამიტომ ამ ელფოსტით რეცენზირებისთვის რეგისტრაცია შეუძლებელია."

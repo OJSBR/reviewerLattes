@@ -19,14 +19,19 @@
 
 	<p>{translate key="plugins.generic.reviewerLattes.settings.intro"}</p>
 
-	{fbvFormArea id="reviewerLattesRequirement" title="plugins.generic.reviewerLattes.settings.brazil"}
-		{fbvFormSection list=true description="plugins.generic.reviewerLattes.settings.brazil.description"}
-			{foreach from=$lattesForBrazilOptions key=value item=labelKey}
-				{if $lattesForBrazil == $value}{assign var=isChecked value=true}{else}{assign var=isChecked value=false}{/if}
-				{fbvElement type="radio" id="lattesForBrazil-$value" name="lattesForBrazil" value=$value checked=$isChecked label=$labelKey}
+	{fbvFormArea id="reviewerLattesScope" title="plugins.generic.reviewerLattes.settings.scope"}
+		{fbvFormSection list=true description="plugins.generic.reviewerLattes.settings.scope.description"}
+			{foreach from=$requiredScopeOptions key=value item=labelKey}
+				{if $requiredScope == $value}{assign var=isChecked value=true}{else}{assign var=isChecked value=false}{/if}
+				{fbvElement type="radio" id="requiredScope-$value" name="requiredScope" value=$value checked=$isChecked label=$labelKey}
 			{/foreach}
 		{/fbvFormSection}
-		<p>{translate key="plugins.generic.reviewerLattes.settings.otherCountries"}</p>
+	{/fbvFormArea}
+
+	{fbvFormArea id="reviewerLattesStudents" title="plugins.generic.reviewerLattes.settings.student"}
+		{fbvFormSection for="studentEmailPatterns" description="plugins.generic.reviewerLattes.settings.student.description"}
+			{fbvElement type="textarea" id="studentEmailPatterns" value=$studentEmailPatterns label="plugins.generic.reviewerLattes.settings.studentEmailPatterns" rows=6}
+		{/fbvFormSection}
 	{/fbvFormArea}
 
 	{fbvFormButtons}

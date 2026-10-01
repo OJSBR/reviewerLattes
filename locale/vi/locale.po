@@ -14,7 +14,7 @@ msgstr "Lattes cho người phản biện"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Yêu cầu những người đăng ký làm phản biện cung cấp liên kết đến CV Lattes của họ (CNPq, Brazil), được lưu làm URL của tài khoản. Mỗi tạp chí có thể bắt buộc điều này với người phản biện ở Brazil."
+msgstr "Yêu cầu những người đăng ký làm phản biện — trong biểu mẫu đăng ký hoặc trong vai trò của hồ sơ — cung cấp liên kết CV Lattes (CNPq, Brazil), được lưu làm URL của tài khoản. Mỗi tạp chí quyết định ai bắt buộc phải cung cấp và có thể ngăn sinh viên đăng ký làm phản biện."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Bắt buộc với người phản biện ở Brazil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Bắt buộc với người phản biện."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Nhập địa chỉ của một CV Lattes: lattes.cnpq.br/ theo sau là 16 chữ số ID Lattes của bạn."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Liên kết CV Lattes là bắt buộc với người phản biện ở Brazil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Liên kết CV Lattes là bắt buộc với người phản biện."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Khi ai đó đăng ký và xin phản biện cho tạp chí này, biểu mẫu đăng ký yêu cầu liên kết CV Lattes của họ và kiểm tra đó có phải địa chỉ Lattes không. Liên kết được lưu làm URL của tài khoản."
+msgstr "Khi ai đó đăng ký phản biện cho tạp chí này — trong biểu mẫu đăng ký hoặc bằng cách đánh dấu vai trò phản biện trong hồ sơ — họ được yêu cầu liên kết CV Lattes, phải là địa chỉ Lattes. Liên kết được lưu làm URL của tài khoản; liên kết Lattes đã có sẵn không bao giờ bị thay thế."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Người phản biện ở Brazil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Ai phải cung cấp liên kết Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Áp dụng cho người chọn Brazil làm quốc gia và đánh dấu tùy chọn phản biện."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Áp dụng cho người đăng ký làm phản biện. Nội dung nhập vào ô luôn phải là địa chỉ Lattes hợp lệ."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Liên kết Lattes là tùy chọn"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Không ai: liên kết luôn là tùy chọn"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Liên kết Lattes là bắt buộc (được đánh dấu bắt buộc trên biểu mẫu)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Người phản biện ở Brazil (tùy chọn với các nước khác)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Người phản biện ở các nước khác cũng có thể cung cấp liên kết Lattes, nhưng không bao giờ bắt buộc với họ."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Tất cả người phản biện, từ bất kỳ quốc gia nào"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Sinh viên"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Một số tạp chí chỉ chấp nhận người phản biện đã tốt nghiệp. Nhập mỗi dòng một phần của địa chỉ email — ví dụ @student. — và địa chỉ chứa bất kỳ phần nào trong số đó sẽ không thể đăng ký làm phản biện. Chữ hoa và chữ thường không phân biệt. Để trống để cho phép mọi người."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Địa chỉ email của sinh viên"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Nhập tối đa 50 phần, mỗi dòng một phần, mỗi phần tối đa 100 ký tự."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Tạp chí này không nhận sinh viên làm phản biện: tài khoản có email sinh viên không thể đăng ký phản biện."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Tạp chí này không nhận sinh viên làm phản biện, vì vậy email này không thể đăng ký phản biện."

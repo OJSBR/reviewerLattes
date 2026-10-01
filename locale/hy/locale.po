@@ -14,7 +14,7 @@ msgstr "Lattes գրախոսների համար"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Գրախոս գրանցվողներից խնդրում է իրենց Lattes ինքնակենսագրության (CNPq, Բրազիլիա) հղումը և այն պահում է որպես հաշվի URL։ Յուրաքանչյուր ամսագիր կարող է այն պարտադիր դարձնել Բրազիլիայի գրախոսների համար։"
+msgstr "Գրախոս գրանցվողներից — գրանցման ձևում կամ իրենց պրոֆիլի դերերում — խնդրում է իրենց Lattes ինքնակենսագրության (CNPq, Բրազիլիա) հղումը և այն պահում որպես հաշվի URL։ Յուրաքանչյուր ամսագիր որոշում է, ումից է այն պարտադիր, և կարող է ուսանողներին թույլ չտալ գրանցվել որպես գրախոս։"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Պարտադիր է Բրազիլիայի գրախոսների համար։"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Պարտադիր է գրախոսների համար։"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Մուտքագրեք Lattes ինքնակենսագրության հասցե՝ lattes.cnpq.br/, որին հաջորդում են ձեր Lattes ID-ի 16 թվանշանները։"
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lattes ինքնակենսագրության հղումը պարտադիր է Բրազիլիայի գրախոսների համար։"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lattes ինքնակենսագրության հղումը պարտադիր է գրախոսների համար։"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Երբ որևէ մեկը գրանցվում է և խնդրում գրախոսել այս ամսագրի համար, գրանցման ձևը խնդրում է նրա Lattes ինքնակենսագրության հղումը և ստուգում, որ այն Lattes հասցե է։ Հղումը պահվում է որպես հաշվի URL։"
+msgstr "Երբ որևէ մեկը գրանցվում է այս ամսագրում գրախոսելու համար — գրանցման ձևում կամ պրոֆիլում նշելով գրախոսի դերը — նրանից խնդրվում է Lattes ինքնակենսագրության հղումը, որը պետք է լինի Lattes հասցե։ Հղումը պահվում է որպես հաշվի URL. արդեն առկա Lattes հղումը երբեք չի փոխարինվում։"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Բրազիլիայի գրախոսներ"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Ով պետք է նշի Lattes հղումը"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Վերաբերում է նրան, ով որպես երկիր ընտրում է Բրազիլիան և նշում գրախոսի տարբերակը։"
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Վերաբերում է նրան, ով գրանցվում է որպես գրախոս։ Դաշտում գրվածը միշտ պետք է լինի վավեր Lattes հասցե։"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes հղումը կամընտիր է"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ոչ ոք. հղումը միշտ կամընտիր է"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes հղումը պարտադիր է (ձևում նշված է որպես պարտադիր)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Բրազիլիայի գրախոսներ (կամընտիր այլ երկրների համար)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Այլ երկրների գրախոսները նույնպես կարող են նշել իրենց Lattes հղումը, բայց այն երբեք պարտադիր չէ նրանց համար։"
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Բոլոր գրախոսները, ցանկացած երկրից"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Ուսանողներ"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Որոշ ամսագրեր ընդունում են միայն կրթությունն ավարտած գրախոսների։ Յուրաքանչյուր տողում մուտքագրեք էլ. հասցեի մեկ հատված — օրինակ՝ @student. — և դրանցից որևէ մեկը պարունակող հասցեն չի կարողանա գրանցվել որպես գրախոս։ Մեծատառ և փոքրատառ տարբերություն չկա։ Թողեք դատարկ՝ բոլորին թույլատրելու համար։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Ուսանողների էլ. հասցեներ"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Մուտքագրեք մինչև 50 հատված, մեկական տողում, յուրաքանչյուրը առավելագույնը 100 նիշ։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Այս ամսագիրը ուսանողներին չի ընդունում որպես գրախոս. ուսանողական էլ. հասցեով հաշիվը չի կարող գրանցվել գրախոսելու համար։"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Այս ամսագիրը ուսանողներին չի ընդունում որպես գրախոս, ուստի այս էլ. հասցեն չի կարող գրանցվել գրախոսելու համար։"

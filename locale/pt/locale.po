@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes do Avaliador"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Pede a quem se regista como avaliador a ligação para o Currículo Lattes (CNPq, Brasil), guardada como URL da conta. Cada revista pode torná-la obrigatória para avaliadores do Brasil."
+msgstr "Pede a quem se inscreve como avaliador — no formulário de registo ou nos papéis do perfil — a ligação para o Currículo Lattes (CNPq, Brasil), guardada como URL da conta. Cada revista decide a quem a ligação é exigida e pode impedir estudantes de se inscreverem como avaliadores."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "Currículo Lattes (ligação)"
@@ -26,26 +26,50 @@ msgstr "O endereço do seu Currículo Lattes no CNPq, por exemplo {$example}."
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obrigatório para avaliadores do Brasil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obrigatório para avaliadores."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Indique o endereço de um Currículo Lattes: lattes.cnpq.br/ seguido dos 16 dígitos do seu ID Lattes."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "A ligação para o Currículo Lattes é obrigatória para avaliadores do Brasil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "A ligação para o Currículo Lattes é obrigatória para avaliadores."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Quando alguém se regista e pede para avaliar nesta revista, o formulário de registo pede a ligação para o Currículo Lattes e verifica se é um endereço do Lattes. A ligação é guardada como URL da conta."
+msgstr "Quando alguém se inscreve para avaliar nesta revista — no formulário de registo ou assinalando o papel de avaliador no perfil — é pedida a ligação para o Currículo Lattes, que tem de ser um endereço do Lattes. A ligação é guardada como URL da conta; uma ligação do Lattes que já lá esteja nunca é substituída."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Avaliadores do Brasil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Quem tem de indicar a ligação para o Lattes"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Aplica-se a quem escolhe Brasil como país e assinala a opção de avaliador."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Aplica-se a quem se inscreve como avaliador. O que for escrito no campo tem sempre de ser um endereço válido do Lattes."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "A ligação para o Lattes é opcional"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ninguém: a ligação é sempre opcional"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "A ligação para o Lattes é obrigatória (assinalada como obrigatória no formulário)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Avaliadores do Brasil (opcional para outros países)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Avaliadores de outros países também podem indicar a ligação para o Lattes, mas ela nunca lhes é exigida."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Todos os avaliadores, de qualquer país"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Estudantes"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Algumas revistas aceitam apenas avaliadores com licenciatura concluída. Indique um trecho de endereço de e-mail por linha — por exemplo @aluno. — e um endereço que contenha qualquer um deles não poderá inscrever-se como avaliador. Maiúsculas e minúsculas não fazem diferença. Deixe vazio para permitir todos."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-mails de estudantes"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Indique até 50 trechos, um por linha, cada um com no máximo 100 caracteres."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Esta revista não aceita estudantes como avaliadores: uma conta com e-mail de estudante não pode inscrever-se para avaliar."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Esta revista não aceita estudantes como avaliadores, por isso este e-mail não pode inscrever-se para avaliar."

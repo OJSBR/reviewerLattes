@@ -14,7 +14,7 @@ msgstr "Lattes untuk Penilai"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Meminta mereka yang mendaftar sebagai penilai untuk memberikan pautan CV Lattes mereka (CNPq, Brazil), disimpan sebagai URL akaun. Setiap jurnal boleh mewajibkannya bagi penilai di Brazil."
+msgstr "Meminta mereka yang mendaftar sebagai penilai — dalam borang pendaftaran atau dalam peranan profil — untuk memberikan pautan CV Lattes mereka (CNPq, Brazil), disimpan sebagai URL akaun. Setiap jurnal menentukan siapa yang wajib memberikannya dan boleh menghalang pelajar daripada mendaftar sebagai penilai."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Wajib bagi penilai di Brazil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Wajib bagi penilai."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Masukkan alamat CV Lattes: lattes.cnpq.br/ diikuti 16 digit ID Lattes anda."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Pautan CV Lattes wajib bagi penilai di Brazil."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Pautan CV Lattes wajib bagi penilai."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Apabila seseorang mendaftar dan meminta untuk menilai bagi jurnal ini, borang pendaftaran meminta pautan CV Lattes mereka dan memeriksa bahawa ia alamat Lattes. Pautan disimpan sebagai URL akaun."
+msgstr "Apabila seseorang mendaftar untuk menilai bagi jurnal ini — dalam borang pendaftaran atau dengan menanda peranan penilai dalam profil — mereka diminta pautan CV Lattes, yang mesti alamat Lattes. Pautan disimpan sebagai URL akaun; pautan Lattes yang sedia ada tidak pernah diganti."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Penilai di Brazil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Siapa yang mesti memberikan pautan Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Terpakai kepada sesiapa yang memilih Brazil sebagai negara dan menanda pilihan penilai."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Terpakai kepada sesiapa yang mendaftar sebagai penilai. Apa sahaja yang ditaip dalam medan mesti sentiasa alamat Lattes yang sah."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Pautan Lattes adalah pilihan"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Tiada sesiapa: pautan sentiasa pilihan"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Pautan Lattes adalah wajib (ditanda wajib pada borang)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Penilai di Brazil (pilihan bagi negara lain)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Penilai dari negara lain juga boleh memberikan pautan Lattes mereka, tetapi ia tidak pernah diwajibkan bagi mereka."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Semua penilai, dari mana-mana negara"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Pelajar"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Sesetengah jurnal hanya menerima penilai yang telah menamatkan pengajian. Masukkan satu bahagian alamat e-mel bagi setiap baris — contohnya @student. — dan alamat yang mengandungi mana-mana daripadanya tidak boleh mendaftar sebagai penilai. Huruf besar dan kecil tidak penting. Biarkan kosong untuk membenarkan semua."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Alamat e-mel pelajar"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Masukkan sehingga 50 bahagian, satu bagi setiap baris, setiap satu paling banyak 100 aksara."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Jurnal ini tidak menerima pelajar sebagai penilai: akaun dengan alamat e-mel pelajar tidak boleh mendaftar untuk menilai."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Jurnal ini tidak menerima pelajar sebagai penilai, oleh itu alamat e-mel ini tidak boleh mendaftar untuk menilai."

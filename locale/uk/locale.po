@@ -14,7 +14,7 @@ msgstr "Lattes для рецензентів"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Просить тих, хто реєструється як рецензент, вказати посилання на їхнє резюме в Lattes (CNPq, Бразилія) і зберігає його як URL облікового запису. Кожен журнал може зробити його обов'язковим для рецензентів із Бразилії."
+msgstr "Просить тих, хто записується в рецензенти — у формі реєстрації або в ролях свого профілю, — вказати посилання на їхнє резюме в Lattes (CNPq, Бразилія) і зберігає його як URL облікового запису. Кожен журнал вирішує, для кого воно обов'язкове, і може не допускати студентів до рецензування."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Обов'язково для рецензентів із Бразилії."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Обов'язково для рецензентів."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Введіть адресу резюме в Lattes: lattes.cnpq.br/ і далі 16 цифр вашого Lattes ID."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Посилання на резюме в Lattes обов'язкове для рецензентів із Бразилії."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Посилання на резюме в Lattes обов'язкове для рецензентів."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Коли хтось реєструється і просить рецензувати для цього журналу, форма реєстрації запитує посилання на його резюме в Lattes і перевіряє, що це адреса Lattes. Посилання зберігається як URL облікового запису."
+msgstr "Коли хтось записується рецензувати для цього журналу — у формі реєстрації або позначивши роль рецензента в профілі, — у нього запитують посилання на резюме в Lattes, яке має бути адресою Lattes. Посилання зберігається як URL облікового запису; наявне посилання на Lattes ніколи не замінюється."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Рецензенти з Бразилії"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Хто має вказати посилання на Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Стосується тих, хто обирає Бразилію як країну й позначає варіант рецензента."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Стосується тих, хто записується в рецензенти. Те, що введено в поле, завжди має бути дійсною адресою Lattes."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Посилання на Lattes необов'язкове"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ніхто: посилання завжди необов'язкове"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Посилання на Lattes обов'язкове (позначене у формі як обов'язкове)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Рецензенти з Бразилії (необов'язкове для інших країн)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Рецензенти з інших країн також можуть вказати посилання на Lattes, але для них воно ніколи не є обов'язковим."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Усі рецензенти, з будь-якої країни"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Студенти"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Деякі журнали приймають лише рецензентів із завершеною освітою. Введіть по одному фрагменту адреси електронної пошти в рядку — наприклад, @student. — і адреса, що містить будь-який із них, не зможе записатися в рецензенти. Регістр літер не має значення. Залиште порожнім, щоб дозволити всім."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Адреси електронної пошти студентів"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Введіть до 50 фрагментів, по одному в рядку, кожен не довший за 100 символів."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Цей журнал не приймає студентів у рецензенти: обліковий запис зі студентською адресою не може записатися на рецензування."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Цей журнал не приймає студентів у рецензенти, тому з цією адресою не можна записатися на рецензування."

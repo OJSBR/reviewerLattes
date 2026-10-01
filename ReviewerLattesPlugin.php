@@ -10,10 +10,13 @@
  *
  * @ingroup plugins_generic_reviewerLattes
  *
- * @brief Asks people who register as reviewers for the link to their Lattes CV
+ * @brief Asks people who sign up as reviewers for the link to their Lattes CV
  *        (the CV platform of CNPq, Brazil), and stores it as the URL of the
- *        account. A journal may require it from reviewers in Brazil; anyone
- *        else may give it, but it is never required from them.
+ *        account: on the registration form, on the registration through the
+ *        OpenID plugin (ORCID and others) and when an existing account picks
+ *        its roles in the profile. Each journal decides who must give it —
+ *        nobody, reviewers in Brazil, or every reviewer — and may keep
+ *        students (by the e-mail address they use) from signing up to review.
  *
  *        The registration template has no hook, so the field is added to the
  *        rendered page by a named output filter, modelled on the reviewer
@@ -24,6 +27,7 @@
 namespace APP\plugins\generic\reviewerLattes;
 
 use APP\core\Application;
+use APP\facades\Repo;
 use DOMDocument;
 use DOMElement;
 use PKP\core\JSONMessage;
@@ -33,15 +37,46 @@ use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
+use PKP\security\Role;
 use PKP\template\PKPTemplateManager;
+use PKP\user\User;
 
 class ReviewerLattesPlugin extends GenericPlugin
 {
     /** The name of the field on the registration form. */
     public const FIELD = 'lattesUrl';
 
-    /** Whether reviewers in Brazil must give the link (off where never saved). */
+    /** Where the registration form of the core posts to. */
+    public const REGISTER_ACTION = '/user/register';
+
+    /** Where the second step of the OpenID plugin (registration through ORCID and others) posts to. */
+    public const OPENID_ACTION = '/openid/registerOrConnect';
+
+    /** Who must give the link: one of the SCOPE_ values. */
+    public const SETTING_SCOPE = 'requiredScope';
+
+    /** The link is always optional. */
+    public const SCOPE_NONE = 'none';
+
+    /** Required from reviewers in Brazil, optional for everyone else. */
+    public const SCOPE_BRAZIL = 'brazil';
+
+    /** Required from every reviewer, from any country. */
+    public const SCOPE_ALL = 'all';
+
+    public const SCOPES = [self::SCOPE_NONE, self::SCOPE_BRAZIL, self::SCOPE_ALL];
+
+    /**
+     * The setting of 1.0.x: whether reviewers in Brazil must give the link. Read
+     * where the journal never saved a scope, as SCOPE_BRAZIL when on.
+     */
     public const SETTING_REQUIRED = 'requiredForBrazil';
+
+    /**
+     * Pieces of e-mail address that mark a student, one per line ("@aluno.").
+     * Empty — the default — lets everyone sign up to review.
+     */
+    public const SETTING_STUDENT_PATTERNS = 'studentEmailPatterns';
 
     /** The country, as the registration form posts it, the requirement applies to. */
     public const BRAZIL = 'BR';
@@ -81,6 +116,19 @@ class ReviewerLattesPlugin extends GenericPlugin
         Hook::add('registrationform::readuservars', $this->readRegistrationField(...));
         Hook::add('registrationform::display', $this->addRegistrationField(...));
         Hook::add('registrationform::execute', $this->saveRegistrationField(...));
+
+        // Registration through the OpenID plugin (ORCID and other providers): its
+        // second step, in "register" mode. "connect" links an existing account.
+        Hook::add('openidstep2form::Constructor', $this->addOpenIdChecks(...));
+        Hook::add('openidstep2form::readuservars', $this->readRegistrationField(...));
+        Hook::add('openidstep2form::display', $this->addOpenIdField(...));
+        Hook::add('openidstep2form::execute', $this->saveOpenIdField(...));
+
+        // Profile → Roles: an existing account that becomes a reviewer.
+        Hook::add('rolesform::Constructor', $this->addRolesChecks(...));
+        Hook::add('rolesform::readuservars', $this->readRegistrationField(...));
+        Hook::add('rolesform::display', $this->addRolesField(...));
+        Hook::add('rolesform::execute', $this->saveRolesField(...));
 
         return $success;
     }
@@ -217,18 +265,89 @@ class ReviewerLattesPlugin extends GenericPlugin
     }
 
     /**
-     * Whether the link is required from this person: the journal requires it,
-     * the person is in Brazil and asked to review.
+     * Whether the link is required from this person: the person asks to review,
+     * and the scope of the journal covers them — every reviewer, or reviewers
+     * in Brazil when Brazil is their country.
      *
-     * @param mixed $country the country posted by the form
-     * @param mixed $reviewerGroups the reviewer boxes posted by the form ([userGroupId => 1])
+     * @param string $scope one of the SCOPE_ values
+     * @param mixed $country the country of the person (posted, or of the account)
+     * @param mixed $reviewerGroups the reviewer boxes ticked ([userGroupId => 1])
      */
-    public static function isRequiredFor(bool $requiredForBrazil, $country, $reviewerGroups): bool
+    public static function isRequiredFor(string $scope, $country, $reviewerGroups): bool
     {
-        return $requiredForBrazil
-            && strtoupper(trim((string) $country)) === self::BRAZIL
-            && is_array($reviewerGroups)
-            && count(array_filter($reviewerGroups)) > 0;
+        if (!is_array($reviewerGroups) || count(array_filter($reviewerGroups)) === 0) {
+            return false;
+        }
+
+        return match ($scope) {
+            self::SCOPE_ALL => true,
+            self::SCOPE_BRAZIL => strtoupper(trim((string) $country)) === self::BRAZIL,
+            default => false,
+        };
+    }
+
+    /**
+     * The scope a journal has: what it saved, or — where it never saved one —
+     * what the setting of 1.0.x meant (on: reviewers in Brazil; off or never
+     * saved: nobody).
+     *
+     * @param mixed $saved the saved scope, if any
+     * @param mixed $legacy the saved requiredForBrazil of 1.0.x, if any
+     */
+    public static function scopeFrom($saved, $legacy): string
+    {
+        if (in_array($saved, self::SCOPES, true)) {
+            return $saved;
+        }
+
+        return $legacy ? self::SCOPE_BRAZIL : self::SCOPE_NONE;
+    }
+
+    /**
+     * The pieces of e-mail address of a setting: one per line, trimmed, without
+     * empty lines and repeats.
+     *
+     * @return string[]
+     */
+    public static function parsePatterns($text): array
+    {
+        $patterns = [];
+        foreach (preg_split('/\R/u', (string) $text) ?: [] as $line) {
+            $line = trim($line);
+            if ($line !== '' && !in_array(mb_strtolower($line), array_map('mb_strtolower', $patterns), true)) {
+                $patterns[] = $line;
+            }
+        }
+
+        return $patterns;
+    }
+
+    /**
+     * Whether an e-mail address contains one of the pieces, regardless of case.
+     * Each piece is matched as written: it is escaped, never read as a regular
+     * expression.
+     *
+     * @param string[] $patterns
+     */
+    public static function isStudentEmail($email, array $patterns): bool
+    {
+        $email = trim((string) $email);
+        if ($email === '' || !$patterns) {
+            return false;
+        }
+        $pieces = array_map(fn (string $pattern) => preg_quote($pattern, '/'), $patterns);
+
+        return preg_match('/' . implode('|', $pieces) . '/iu', $email) === 1;
+    }
+
+    /**
+     * The reviewer boxes of a post that are ticked.
+     *
+     * @return array<int, string> [userGroupId => value]
+     */
+    public static function tickedGroups($reviewerGroups): array
+    {
+        return is_array($reviewerGroups) ? array_filter($reviewerGroups) : [];
     }
 
     //
@@ -246,13 +365,22 @@ class ReviewerLattesPlugin extends GenericPlugin
     }
 
     /**
-     * Whether the journal requires the link from reviewers in Brazil. Off where
-     * the setting was never saved; whatever was saved counts, and off stays off
-     * whether the database gives back '' or '0'.
+     * Who the journal requires the link from (see scopeFrom()).
      */
-    public function requiresForBrazil(int $contextId): bool
+    public function requiredScope(int $contextId): string
     {
-        return (bool) $this->getSetting($contextId, self::SETTING_REQUIRED);
+        return self::scopeFrom($this->getSetting($contextId, self::SETTING_SCOPE), $this->getSetting($contextId, self::SETTING_REQUIRED));
+    }
+
+    /**
+     * The pieces of e-mail address that keep students from reviewing in the
+     * journal; empty where it lets everyone review.
+     *
+     * @return string[]
+     */
+    public function studentPatterns(int $contextId): array
+    {
+        return self::parsePatterns($this->getSetting($contextId, self::SETTING_STUDENT_PATTERNS));
     }
 
     /**
@@ -280,21 +408,44 @@ class ReviewerLattesPlugin extends GenericPlugin
 
         // "required" so the check also runs on an empty field; whether it is
         // required depends on the country and the reviewer boxes of the post.
-        $requiredForBrazil = $this->requiresForBrazil($contextId);
+        $scope = $this->requiredScope($contextId);
         $form->addCheck(new FormValidatorCustom(
             $form,
             self::FIELD,
             'required',
-            'plugins.generic.reviewerLattes.field.required',
+            self::requiredMessageKey($scope),
             fn ($value) => trim((string) $value) !== ''
-                || !self::isRequiredFor($requiredForBrazil, $form->getData('country'), $form->getData('reviewerGroup'))
+                || !self::isRequiredFor($scope, $form->getData('country'), $form->getData('reviewerGroup'))
         ));
+
+        // A student, by the e-mail address typed, may not ask to review.
+        $patterns = $this->studentPatterns($contextId);
+        if ($patterns) {
+            $form->addCheck(new FormValidatorCustom(
+                $form,
+                'reviewerGroup',
+                'required',
+                'plugins.generic.reviewerLattes.student.error',
+                fn ($groups) => !self::tickedGroups($groups) || !self::isStudentEmail($form->getData('email'), $patterns)
+            ));
+        }
 
         return Hook::CONTINUE;
     }
 
     /**
-     * Hook: registrationform::readuservars (the core lowercases the whole name)
+     * The message for an empty field, by who it is required from.
+     */
+    public static function requiredMessageKey(string $scope): string
+    {
+        return $scope === self::SCOPE_ALL
+            ? 'plugins.generic.reviewerLattes.field.requiredAll'
+            : 'plugins.generic.reviewerLattes.field.required';
+    }
+
+    /**
+     * Hook: registrationform::readuservars and rolesform::readuservars (the
+     * core lowercases the whole name)
      *
      * @param array $args [$form, &$vars]
      */
@@ -330,7 +481,7 @@ class ReviewerLattesPlugin extends GenericPlugin
         $templateMgr->addJavaScript('reviewerLattes', $base . '/js/reviewerLattes.js' . $stamp, ['contexts' => ['frontend']]);
         $templateMgr->addStyleSheet('reviewerLattes', $base . '/css/reviewerLattes.css' . $stamp, ['contexts' => ['frontend']]);
 
-        $parts = self::registrationFieldParts($form, $this->requiresForBrazil($contextId));
+        $parts = self::registrationFieldParts($form, $this->requiredScope($contextId), $this->studentPatterns($contextId));
         // Named: Smarty calls every closure filter "closure", so an unnamed one would replace, or be
         // replaced by, the output filter of another plugin in the same request.
         $templateMgr->registerFilter('output', fn (string $output): string => self::insertRegistrationField($output, $parts), 'reviewerLattesRegistrationField');
@@ -354,28 +505,80 @@ class ReviewerLattesPlugin extends GenericPlugin
      * The pieces of the registration field, which are then dressed with the
      * markup of the theme.
      *
-     * @return array{label: string, description: string, example: string, value: string, requiredForBrazil: bool, required: bool, error: ?string, requiredLabel: string}
+     * @param string[] $studentPatterns
+     *
+     * @return array{label: string, description: string, example: string, value: string, scope: string, required: bool, error: ?string, requiredLabel: string, studentPatterns: string[], studentNotice: string, userCountry: string}
      */
-    public static function registrationFieldParts(Form $form, bool $requiredForBrazil): array
+    public static function registrationFieldParts(Form $form, string $scope, array $studentPatterns = []): array
     {
         $errors = $form->getErrorsArray();
+
+        return self::fieldParts(
+            $scope,
+            (string) $form->getData(self::FIELD),
+            // As the page is first drawn; the script keeps it in step with the form.
+            self::isRequiredFor($scope, $form->getData('country'), $form->getData('reviewerGroup')),
+            $errors[self::FIELD] ?? null,
+            $studentPatterns
+        );
+    }
+
+    /**
+     * The pieces of the field, wherever it is shown.
+     *
+     * @param string[] $studentPatterns
+     */
+    public static function fieldParts(string $scope, string $value, bool $required, ?string $error, array $studentPatterns = [], string $userCountry = '', array $currentReviewerGroups = []): array
+    {
         $example = __('plugins.generic.reviewerLattes.field.example');
         $description = __('plugins.generic.reviewerLattes.field.description', ['example' => $example]);
-        if ($requiredForBrazil) {
+        if ($scope === self::SCOPE_BRAZIL) {
             $description .= ' ' . __('plugins.generic.reviewerLattes.field.requiredForBrazil');
+        } elseif ($scope === self::SCOPE_ALL) {
+            $description .= ' ' . __('plugins.generic.reviewerLattes.field.requiredForAll');
         }
 
         return [
             'label' => __('plugins.generic.reviewerLattes.field.label'),
             'description' => $description,
             'example' => $example,
-            'value' => (string) $form->getData(self::FIELD),
-            'requiredForBrazil' => $requiredForBrazil,
-            // As the page is first drawn; the script keeps it in step with the form.
-            'required' => self::isRequiredFor($requiredForBrazil, $form->getData('country'), $form->getData('reviewerGroup')),
-            'error' => $errors[self::FIELD] ?? null,
+            'value' => $value,
+            'scope' => $scope,
+            'required' => $required,
+            'error' => $error,
             'requiredLabel' => __('common.required'),
+            'studentPatterns' => array_values($studentPatterns),
+            'studentNotice' => __('plugins.generic.reviewerLattes.student.notice'),
+            'userCountry' => $userCountry,
+            'currentReviewerGroups' => array_values(array_map('intval', $currentReviewerGroups)),
         ];
+    }
+
+    /**
+     * The attributes that hand the rule to the script.
+     *
+     * @return array<string, string>
+     */
+    public static function scriptAttributes(array $parts): array
+    {
+        $attributes = [
+            'data-reviewer-lattes' => '1',
+            'data-required-scope' => $parts['scope'],
+        ];
+        if ($parts['userCountry'] !== '') {
+            $attributes['data-user-country'] = $parts['userCountry'];
+        }
+        if (!empty($parts['currentReviewerGroups'])) {
+            // In the profile: the reviewer groups the account is already in, whose
+            // boxes do not make the link required (the rule is for those joining).
+            $attributes['data-current-reviewer-groups'] = json_encode($parts['currentReviewerGroups']);
+        }
+        if ($parts['studentPatterns']) {
+            $attributes['data-student-patterns'] = json_encode($parts['studentPatterns'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $attributes['data-student-notice'] = $parts['studentNotice'];
+        }
+
+        return $attributes;
     }
 
     /**
@@ -389,12 +592,12 @@ class ReviewerLattesPlugin extends GenericPlugin
      * to reviewers. Where the theme has no interests field, the markup of the
      * core is used and the field goes before the control that sends the form.
      */
-    public static function insertRegistrationField(string $output, array $parts): string
+    public static function insertRegistrationField(string $output, array $parts, string $action = self::REGISTER_ACTION): string
     {
         if (preg_match('/<input\b[^>]*\bname="' . self::FIELD . '"/', $output)) {
             return $output;
         }
-        if (!preg_match('~<form\b[^>]*\baction="[^"]*/user/register[^"]*"[^>]*>~i', $output, $match, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match('~<form\b[^>]*\baction="[^"]*' . preg_quote($action, '~') . '[^"]*"[^>]*>~i', $output, $match, PREG_OFFSET_CAPTURE)) {
             return $output;
         }
         $formStart = $match[0][1];
@@ -415,8 +618,12 @@ class ReviewerLattesPlugin extends GenericPlugin
             }
         }
 
-        // Nothing to model it on: before the control that sends the form.
+        // Nothing to model it on: before the control that sends the form — the
+        // "register" one where the form has two (the OpenID step also connects).
         $field = self::renderRegistrationField($parts);
+        if (preg_match('~<(?:button|input)\b[^>]*\bname="register"~i', $inForm, $register, PREG_OFFSET_CAPTURE)) {
+            return substr_replace($output, $field, $formStart + $register[0][1], 0);
+        }
         if (preg_match_all('~<(?:button|input)\b[^>]*\btype="submit"~i', $inForm, $submits, PREG_OFFSET_CAPTURE)) {
             $last = end($submits[0]);
 
@@ -552,8 +759,9 @@ class ReviewerLattesPlugin extends GenericPlugin
         }
         $classes[] = 'reviewerLattes';
         $wrapper->setAttribute('class', implode(' ', $classes));
-        $wrapper->setAttribute('data-reviewer-lattes', '1');
-        $wrapper->setAttribute('data-required-for-brazil', $parts['requiredForBrazil'] ? '1' : '0');
+        foreach (self::scriptAttributes($parts) as $name => $value) {
+            $wrapper->setAttribute($name, $value);
+        }
 
         // The label: ours, pointing at our input, with the mark the script shows when required.
         $label = $wrapper->getElementsByTagName('label')->item(0) ?? ($wrapper->tagName === 'label' ? $wrapper : null);
@@ -607,7 +815,12 @@ class ReviewerLattesPlugin extends GenericPlugin
         $marker = '<span class="required reviewerLattes__required"' . ($parts['required'] ? '' : ' style="display:none"') . '>'
             . '<span aria-hidden="true">*</span><span class="pkp_screen_reader">' . $e($parts['requiredLabel']) . '</span></span>';
 
-        return '<div class="reviewerLattes" data-reviewer-lattes="1" data-required-for-brazil="' . ($parts['requiredForBrazil'] ? '1' : '0') . '">'
+        $attributes = '';
+        foreach (self::scriptAttributes($parts) as $name => $value) {
+            $attributes .= ' ' . $name . '="' . $e($value) . '"';
+        }
+
+        return '<div class="reviewerLattes"' . $attributes . '>'
             . '<label><span class="label">' . $e($parts['label']) . ' ' . $marker . '</span>'
             . '<input type="text" inputmode="url" name="' . self::FIELD . '" id="' . self::FIELD . '" value="' . $e($parts['value']) . '" maxlength="255" autocomplete="url" spellcheck="false"'
             . ' placeholder="' . $e($parts['example']) . '" aria-describedby="' . self::FIELD . 'Description"' . ($parts['required'] ? ' required aria-required="true"' : '') . '></label>'
@@ -688,6 +901,394 @@ class ReviewerLattesPlugin extends GenericPlugin
         $url = self::normalizeLattesUrl($form->getData(self::FIELD));
         if ($url !== null) {
             $form->user->setUrl($url);
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    //
+    // Registration through the OpenID plugin
+    //
+
+    /**
+     * Whether the second step of the OpenID plugin is creating an account: its
+     * "register" button was pressed. The "connect" button links an account that
+     * already exists, which is left alone.
+     */
+    public static function isOpenIdRegistration(Form $form): bool
+    {
+        return is_string($form->getData('register'));
+    }
+
+    /**
+     * Hook: openidstep2form::Constructor — the rules of the registration form,
+     * for an account created through the OpenID plugin.
+     *
+     * @param array $args [$form, &$template]
+     */
+    public function addOpenIdChecks($hookName, $args): bool
+    {
+        $form = $args[0];
+        $contextId = $this->currentContextId();
+        if (!$form instanceof Form || $contextId === null) {
+            return Hook::CONTINUE;
+        }
+
+        $form->addCheck(new FormValidatorCustom(
+            $form,
+            self::FIELD,
+            'optional',
+            'plugins.generic.reviewerLattes.field.invalid',
+            fn ($value) => !self::isOpenIdRegistration($form) || self::normalizeLattesUrl($value) !== null
+        ));
+
+        $scope = $this->requiredScope($contextId);
+        $form->addCheck(new FormValidatorCustom(
+            $form,
+            self::FIELD,
+            'required',
+            self::requiredMessageKey($scope),
+            fn ($value) => !self::isOpenIdRegistration($form)
+                || trim((string) $value) !== ''
+                || !self::isRequiredFor($scope, $form->getData('country'), $form->getData('reviewerGroup'))
+        ));
+
+        $patterns = $this->studentPatterns($contextId);
+        if ($patterns) {
+            $form->addCheck(new FormValidatorCustom(
+                $form,
+                'reviewerGroup',
+                'required',
+                'plugins.generic.reviewerLattes.student.error',
+                fn ($groups) => !self::isOpenIdRegistration($form)
+                    || !self::tickedGroups($groups)
+                    || !self::isStudentEmail($form->getData('email'), $patterns)
+            ));
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook: openidstep2form::display — the field, modelled on the interests
+     * field of the page as on the registration form; the form is found by
+     * where it posts to (…/openid/registerOrConnect).
+     *
+     * @param array $args [$form, &$output]
+     */
+    public function addOpenIdField($hookName, $args): bool
+    {
+        $form = $args[0];
+        $contextId = $this->currentContextId();
+        if (!$form instanceof Form || $contextId === null) {
+            return Hook::CONTINUE;
+        }
+
+        $request = Application::get()->getRequest();
+        $templateMgr = PKPTemplateManager::getManager($request);
+        $base = $request->getBaseUrl() . '/' . $this->getPluginPath();
+        $stamp = '?v=' . urlencode($this->assetVersion());
+        $templateMgr->addJavaScript('reviewerLattes', $base . '/js/reviewerLattes.js' . $stamp, ['contexts' => ['frontend']]);
+        $templateMgr->addStyleSheet('reviewerLattes', $base . '/css/reviewerLattes.css' . $stamp, ['contexts' => ['frontend']]);
+
+        $parts = self::registrationFieldParts($form, $this->requiredScope($contextId), $this->studentPatterns($contextId));
+        $templateMgr->registerFilter('output', fn (string $output): string => self::insertRegistrationField($output, $parts, self::OPENID_ACTION), 'reviewerLattesOpenIdField');
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook: openidstep2form::execute — the OpenID plugin has created and saved
+     * the account by then; it is found by the username of the form and the link
+     * becomes its URL, unless it already has a Lattes link.
+     *
+     * @param array $args [$form, ...]
+     */
+    public function saveOpenIdField($hookName, $args): bool
+    {
+        $form = $args[0];
+        if (!$form instanceof Form || !self::isOpenIdRegistration($form) || $this->currentContextId() === null) {
+            return Hook::CONTINUE;
+        }
+        $url = self::normalizeLattesUrl($form->getData(self::FIELD));
+        $username = trim((string) $form->getData('username'));
+        if ($url === null || $username === '') {
+            return Hook::CONTINUE;
+        }
+        $user = Repo::user()->getByUsername($username, true);
+        if (!$user instanceof User || self::hasLattes($user)) {
+            return Hook::CONTINUE;
+        }
+
+        Repo::user()->edit($user, ['url' => $url]);
+
+        return Hook::CONTINUE;
+    }
+
+    //
+    // Profile → Roles
+    //
+
+    /**
+     * The reviewer groups of the journal an account is joining with this post:
+     * ticked, open to self-registration, of the journal of the request, and
+     * not yet the account's. Someone who already reviews and saves the tab for
+     * another reason is not stopped by a rule meant for those who sign up now.
+     *
+     * @return array<int, string> [userGroupId => value]
+     */
+    public function newReviewerGroups(User $user, int $contextId, $reviewerGroups): array
+    {
+        $ticked = self::tickedGroups($reviewerGroups);
+        if (!$ticked) {
+            return [];
+        }
+        $new = [];
+        foreach (Repo::userGroup()->getByRoleIds([Role::ROLE_ID_REVIEWER], $contextId) as $userGroup) {
+            $groupId = (int) $userGroup->id;
+            if ($userGroup->permitSelfRegistration && isset($ticked[$groupId]) && !Repo::userGroup()->userInGroup((int) $user->getId(), $groupId)) {
+                $new[$groupId] = $ticked[$groupId];
+            }
+        }
+
+        return $new;
+    }
+
+    /**
+     * Whether an account already has a Lattes link as its URL.
+     */
+    public static function hasLattes(?User $user): bool
+    {
+        return $user !== null && self::normalizeLattesUrl($user->getUrl()) !== null;
+    }
+
+    /**
+     * Hook: rolesform::Constructor — the same rule as on the registration form,
+     * for an account that becomes a reviewer: the country and the e-mail are
+     * those of the account, and an account that already has a Lattes link is
+     * not asked again.
+     *
+     * @param array $args [$form, &$template]
+     */
+    public function addRolesChecks($hookName, $args): bool
+    {
+        $form = $args[0];
+        $contextId = $this->currentContextId();
+        if (!$form instanceof Form || !method_exists($form, 'getUser') || $contextId === null) {
+            return Hook::CONTINUE;
+        }
+        // The account is read when the form is checked: BaseProfileForm keeps it
+        // only after Form::__construct(), where this hook is fired.
+        $account = fn (): ?User => ($user = $form->getUser()) instanceof User ? $user : null;
+
+        $form->addCheck(new FormValidatorCustom(
+            $form,
+            self::FIELD,
+            'optional',
+            'plugins.generic.reviewerLattes.field.invalid',
+            fn ($value) => self::normalizeLattesUrl($value) !== null
+        ));
+
+        $scope = $this->requiredScope($contextId);
+        $form->addCheck(new FormValidatorCustom(
+            $form,
+            self::FIELD,
+            'required',
+            self::requiredMessageKey($scope),
+            fn ($value) => trim((string) $value) !== ''
+                || !($user = $account())
+                || self::hasLattes($user)
+                || !self::isRequiredFor($scope, $user->getCountry(), $this->newReviewerGroups($user, $contextId, $form->getData('reviewerGroup')))
+        ));
+
+        $patterns = $this->studentPatterns($contextId);
+        if ($patterns) {
+            $form->addCheck(new FormValidatorCustom(
+                $form,
+                'reviewerGroup',
+                'required',
+                'plugins.generic.reviewerLattes.student.error',
+                fn ($groups) => !($user = $account())
+                    || !self::isStudentEmail($user->getEmail(), $patterns)
+                    || !$this->newReviewerGroups($user, $contextId, $groups)
+            ));
+        }
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Hook: rolesform::display — fired by fetch(), which builds the Roles tab of
+     * the profile. The tab arrives in an AJAX response, where the assets of the
+     * page are not loaded again, so the script goes inside the form.
+     *
+     * @param array $args [$form, &$output]
+     */
+    public function addRolesField($hookName, $args): bool
+    {
+        $form = $args[0];
+        $contextId = $this->currentContextId();
+        if (!$form instanceof Form || !method_exists($form, 'getUser') || $contextId === null) {
+            return Hook::CONTINUE;
+        }
+        $user = $form->getUser();
+        if (!$user instanceof User) {
+            return Hook::CONTINUE;
+        }
+
+        $patterns = $this->studentPatterns($contextId);
+        $isStudent = self::isStudentEmail($user->getEmail(), $patterns);
+        $errors = $form->getErrorsArray();
+        $reviewerGroupIds = $currentGroupIds = [];
+        foreach (Repo::userGroup()->getByRoleIds([Role::ROLE_ID_REVIEWER], $contextId) as $userGroup) {
+            $reviewerGroupIds[] = (int) $userGroup->id;
+            if (Repo::userGroup()->userInGroup((int) $user->getId(), (int) $userGroup->id)) {
+                $currentGroupIds[] = (int) $userGroup->id;
+            }
+        }
+        // An account with a Lattes link is not asked again.
+        $parts = self::hasLattes($user) ? null : self::fieldParts(
+            $this->requiredScope($contextId),
+            (string) $form->getData(self::FIELD),
+            false,
+            $errors[self::FIELD] ?? null,
+            [],
+            strtoupper((string) $user->getCountry()),
+            $currentGroupIds
+        );
+        $request = Application::get()->getRequest();
+        $script = $request->getBaseUrl() . '/' . $this->getPluginPath() . '/js/reviewerLattes.js?v=' . urlencode($this->assetVersion());
+        $notice = $isStudent ? __('plugins.generic.reviewerLattes.student.notice') : null;
+
+        $templateMgr = PKPTemplateManager::getManager($request);
+        $templateMgr->registerFilter(
+            'output',
+            fn (string $output): string => self::insertRolesField($output, $parts, $script, $notice, $reviewerGroupIds),
+            'reviewerLattesRolesField'
+        );
+
+        return Hook::CONTINUE;
+    }
+
+    /**
+     * Put the field, the student notice and the script in the Roles tab.
+     *
+     * The tab is a form of the back end, which themes do not rewrite, so the
+     * markup of the core is a firm anchor: the field goes at the end of the
+     * "userGroups" fieldset, right after the reviewing interests, in the shape
+     * of the fields of the core forms. The form is found by its id and by where
+     * it posts to (…/save-roles); without the fieldset the field goes before
+     * the required-fields note, then before the buttons, then at the end.
+     *
+     * A student's reviewer boxes that are not ticked are disabled: a disabled
+     * box is not sent, and the core takes a role away when its box is not
+     * sent, so a box already ticked is left alone and the server decides.
+     *
+     * @param ?array $parts the field, or null when the account already has a Lattes link
+     * @param ?string $studentNotice the notice, when the account is a student's
+     * @param int[] $reviewerGroupIds the reviewer groups of the journal
+     */
+    public static function insertRolesField(string $output, ?array $parts, string $scriptUrl, ?string $studentNotice, array $reviewerGroupIds = []): string
+    {
+        if (!preg_match('~<form\b[^>]*\bid="rolesForm"[^>]*>|<form\b[^>]*\baction="[^"]*/save-roles[^"]*"[^>]*>~i', $output, $match, PREG_OFFSET_CAPTURE)) {
+            return $output;
+        }
+        if (str_contains($output, 'data-reviewer-lattes-roles')) {
+            return $output;
+        }
+        $formStart = $match[0][1];
+        $formEnd = strpos($output, '</form>', $formStart);
+        if ($formEnd === false) {
+            return $output;
+        }
+        $e = fn ($text) => htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
+
+        // The student: unticked reviewer boxes of the journal disabled, with the notice.
+        if ($studentNotice !== null) {
+            $form = substr($output, $formStart, $formEnd - $formStart);
+            $form = preg_replace_callback('~<input\b[^>]*\bname="reviewerGroup\[(\d+)\]"[^>]*>~i', function (array $box) use ($reviewerGroupIds) {
+                if (($reviewerGroupIds && !in_array((int) $box[1], $reviewerGroupIds, true)) || preg_match('/\bchecked\b/i', $box[0]) || preg_match('/\bdisabled\b/i', $box[0])) {
+                    return $box[0];
+                }
+
+                return preg_replace('~\s*/?>$~', ' disabled="disabled" data-reviewer-lattes-student="1"$0', $box[0]);
+            }, $form) ?? $form;
+            $form = preg_replace(
+                '~(<input\b[^>]*data-reviewer-lattes-student="1"[^>]*>.*?</li>)~is',
+                '$1<li class="reviewerLattes__studentNotice" role="note">' . $e($studentNotice) . '</li>',
+                $form,
+                1
+            ) ?? $form;
+            $output = substr_replace($output, $form, $formStart, $formEnd - $formStart);
+            $formEnd = strpos($output, '</form>', $formStart);
+        }
+
+        $field = ($parts ? self::renderRolesField($parts) : '')
+            . '<script src="' . $e($scriptUrl) . '" data-reviewer-lattes-roles="1"></script>';
+
+        $inForm = substr($output, $formStart, $formEnd - $formStart);
+        foreach ([
+            '~<fieldset\b[^>]*\bid="userGroups"[^>]*>.*?(</fieldset>)~is',
+            '~(<p>\s*<span class="formRequired">)~i',
+            '~(<div\b[^>]*class="[^"]*formButtons[^"]*")~i',
+        ] as $pattern) {
+            if (preg_match($pattern, $inForm, $found, PREG_OFFSET_CAPTURE)) {
+                return substr_replace($output, $field, $formStart + $found[1][1], 0);
+            }
+        }
+
+        return substr_replace($output, $field, $formEnd, 0);
+    }
+
+    /**
+     * The field in the shape of the fields of the core forms of the back end.
+     */
+    public static function renderRolesField(array $parts): string
+    {
+        $e = fn ($text) => htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
+        $attributes = '';
+        foreach (self::scriptAttributes($parts) as $name => $value) {
+            $attributes .= ' ' . $name . '="' . $e($value) . '"';
+        }
+        $marker = '<span class="req reviewerLattes__required" style="display:none">*</span>';
+
+        return '<div class="section reviewerLattes"' . $attributes . '>'
+            . '<input type="text" class="field text" inputmode="url" name="' . self::FIELD . '" id="' . self::FIELD . '" value="' . $e($parts['value']) . '"'
+            . ' maxlength="255" autocomplete="url" spellcheck="false" placeholder="' . $e($parts['example']) . '" aria-describedby="' . self::FIELD . 'Description">'
+            . '<span><label class="sub_label" for="' . self::FIELD . '">' . $e($parts['label']) . ' ' . $marker . '</label></span>'
+            . '<div class="description" id="' . self::FIELD . 'Description">' . $e($parts['description']) . '</div>'
+            . ($parts['error'] ? '<span class="error">' . $e($parts['error']) . '</span>' : '')
+            . '</div>';
+    }
+
+    /**
+     * Hook: rolesform::execute — after the core saved the roles, store the
+     * link as the URL of the account, unless the account already has a Lattes
+     * link there: an existing one is never overwritten. Any other URL (a
+     * personal page) gives way to the Lattes link, as the field asks for.
+     *
+     * @param array $args [$form, ...]
+     */
+    public function saveRolesField($hookName, $args): bool
+    {
+        $form = $args[0];
+        if (!$form instanceof Form || !method_exists($form, 'getUser') || $this->currentContextId() === null) {
+            return Hook::CONTINUE;
+        }
+        $user = $form->getUser();
+        $url = self::normalizeLattesUrl($form->getData(self::FIELD));
+        if (!$user instanceof User || $url === null || self::hasLattes($user)) {
+            return Hook::CONTINUE;
+        }
+
+        Repo::user()->edit($user, ['url' => $url]);
+        // Right after this hook BaseProfileForm::execute() saves the user of the
+        // request as it is in memory, which would put the old URL back: the
+        // link goes on that object too (in a real request it is the same one).
+        $user->setUrl($url);
+        $requestUser = Application::get()->getRequest()->getUser();
+        if ($requestUser instanceof User && $requestUser !== $user && (int) $requestUser->getId() === (int) $user->getId()) {
+            $requestUser->setUrl($url);
         }
 
         return Hook::CONTINUE;
