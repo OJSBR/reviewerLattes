@@ -14,7 +14,7 @@ msgstr "Lattes för granskare"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Ber den som registrerar sig som granskare om länken till sitt Lattes-CV (CNPq, Brasilien), sparad som kontots URL. Varje tidskrift kan göra den obligatorisk för granskare i Brasilien."
+msgstr "Ber den som anmäler sig som granskare — i registreringsformuläret eller under rollerna i sin profil — om länken till sitt Lattes-CV (CNPq, Brasilien), sparad som kontots URL. Varje tidskrift bestämmer vem som måste ange den och kan hindra studenter från att anmäla sig som granskare."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obligatoriskt för granskare i Brasilien."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obligatoriskt för granskare."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Ange adressen till ett Lattes-CV: lattes.cnpq.br/ följt av de 16 siffrorna i ditt Lattes-ID."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Länken till Lattes-CV:t är obligatorisk för granskare i Brasilien."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Länken till Lattes-CV:t är obligatorisk för granskare."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "När någon registrerar sig och vill granska för denna tidskrift ber registreringsformuläret om länken till personens Lattes-CV och kontrollerar att det är en Lattes-adress. Länken sparas som kontots URL."
+msgstr "När någon anmäler sig för att granska för denna tidskrift — i registreringsformuläret eller genom att kryssa i granskarrollen i sin profil — ombeds personen om länken till sitt Lattes-CV, som måste vara en Lattes-adress. Länken sparas som kontots URL; en Lattes-länk som redan finns ersätts aldrig."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Granskare i Brasilien"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Vem som måste ange Lattes-länken"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Gäller den som väljer Brasilien som land och kryssar i granskaralternativet."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Gäller den som anmäler sig som granskare. Det som skrivs i fältet måste alltid vara en giltig Lattes-adress."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes-länken är frivillig"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Ingen: länken är alltid frivillig"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes-länken är obligatorisk (markerad som obligatorisk i formuläret)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Granskare i Brasilien (frivillig för andra länder)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Granskare från andra länder kan också ange sin Lattes-länk, men den är aldrig obligatorisk för dem."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Alla granskare, från vilket land som helst"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studenter"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Vissa tidskrifter tar bara emot granskare med avslutad examen. Ange en del av en e-postadress per rad — till exempel @student. — så kan en adress som innehåller någon av dem inte anmäla sig som granskare. Stora och små bokstäver spelar ingen roll. Lämna tomt för att tillåta alla."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-postadresser för studenter"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Ange upp till 50 delar, en per rad, var och en med högst 100 tecken."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Denna tidskrift tar inte emot studenter som granskare: ett konto med en studentadress kan inte anmäla sig för att granska."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Denna tidskrift tar inte emot studenter som granskare, därför kan denna e-postadress inte anmäla sig för att granska."

@@ -14,7 +14,7 @@ msgstr "لاتس برای داوران"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "از کسانی که به‌عنوان داور ثبت‌نام می‌کنند پیوند رزومهٔ لاتس آنها (CNPq، برزیل) را می‌خواهد و آن را به‌عنوان URL حساب ذخیره می‌کند. هر مجله می‌تواند آن را برای داوران برزیلی الزامی کند."
+msgstr "از کسانی که به‌عنوان داور ثبت‌نام می‌کنند — در فرم ثبت‌نام یا در نقش‌های نمایهٔ خود — پیوند رزومهٔ لاتس آنها (CNPq، برزیل) را می‌خواهد و آن را به‌عنوان URL حساب ذخیره می‌کند. هر مجله تعیین می‌کند ارائهٔ آن برای چه کسانی الزامی است و می‌تواند مانع ثبت‌نام دانشجویان به‌عنوان داور شود."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "برای داوران برزیل الزامی است."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "برای داوران الزامی است."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "نشانی یک رزومهٔ لاتس را وارد کنید: lattes.cnpq.br/ و پس از آن ۱۶ رقم شناسهٔ لاتس شما."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "پیوند رزومهٔ لاتس برای داوران برزیل الزامی است."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "پیوند رزومهٔ لاتس برای داوران الزامی است."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "وقتی کسی ثبت‌نام می‌کند و می‌خواهد برای این مجله داوری کند، فرم ثبت‌نام پیوند رزومهٔ لاتس او را می‌خواهد و بررسی می‌کند که نشانی لاتس باشد. پیوند به‌عنوان URL حساب ذخیره می‌شود."
+msgstr "وقتی کسی برای داوری در این مجله ثبت‌نام می‌کند — در فرم ثبت‌نام یا با علامت زدن نقش داور در نمایهٔ خود — پیوند رزومهٔ لاتس او خواسته می‌شود که باید نشانی لاتس باشد. پیوند به‌عنوان URL حساب ذخیره می‌شود؛ پیوند لاتسی که از قبل وجود دارد هرگز جایگزین نمی‌شود."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "داوران برزیل"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "چه کسی باید پیوند لاتس را وارد کند"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "برای کسی است که برزیل را به‌عنوان کشور انتخاب و گزینهٔ داور را علامت می‌زند."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "برای کسی است که به‌عنوان داور ثبت‌نام می‌کند. آنچه در این فیلد نوشته می‌شود همیشه باید یک نشانی معتبر لاتس باشد."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "پیوند لاتس اختیاری است"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "هیچ‌کس: پیوند همیشه اختیاری است"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "پیوند لاتس الزامی است (در فرم به‌عنوان الزامی علامت‌گذاری می‌شود)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "داوران برزیل (برای کشورهای دیگر اختیاری)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "داوران کشورهای دیگر هم می‌توانند پیوند لاتس خود را وارد کنند، اما هرگز برای آنها الزامی نیست."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "همهٔ داوران، از هر کشوری"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "دانشجویان"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "برخی مجله‌ها فقط داورانی را می‌پذیرند که تحصیلات خود را به پایان رسانده‌اند. در هر خط بخشی از نشانی رایانامه را وارد کنید — برای نمونه @student. — و نشانی‌ای که هر یک از آنها را داشته باشد نمی‌تواند به‌عنوان داور ثبت‌نام کند. حروف بزرگ و کوچک فرقی ندارند. برای اجازه به همه خالی بگذارید."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "نشانی‌های رایانامهٔ دانشجویان"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "حداکثر ۵۰ بخش وارد کنید، هر خط یکی، هر کدام حداکثر ۱۰۰ نویسه."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "این مجله دانشجویان را به‌عنوان داور نمی‌پذیرد: حسابی با رایانامهٔ دانشجویی نمی‌تواند برای داوری ثبت‌نام کند."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "این مجله دانشجویان را به‌عنوان داور نمی‌پذیرد، بنابراین این رایانامه نمی‌تواند برای داوری ثبت‌نام کند."

@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes des évaluateurs"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Demande aux personnes qui s'inscrivent comme évaluateurs le lien vers leur CV Lattes (CNPq, Brésil), enregistré comme URL du compte. Chaque revue peut l'exiger des évaluateurs du Brésil."
+msgstr "Demande aux personnes qui s'inscrivent comme évaluateurs — sur le formulaire d'inscription ou dans les rôles de leur profil — le lien vers leur CV Lattes (CNPq, Brésil), enregistré comme URL du compte. Chaque revue décide qui doit le fournir et peut empêcher les étudiants de s'inscrire comme évaluateurs."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "CV Lattes (lien)"
@@ -26,26 +26,50 @@ msgstr "L'adresse de votre CV Lattes au CNPq, par exemple {$example}."
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obligatoire pour les évaluateurs du Brésil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obligatoire pour les évaluateurs."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Saisissez l'adresse d'un CV Lattes : lattes.cnpq.br/ suivi des 16 chiffres de votre identifiant Lattes."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Le lien vers le CV Lattes est obligatoire pour les évaluateurs du Brésil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Le lien vers le CV Lattes est obligatoire pour les évaluateurs."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Quand une personne s'inscrit et demande à évaluer pour cette revue, le formulaire d'inscription demande le lien vers son CV Lattes et vérifie qu'il s'agit d'une adresse Lattes. Le lien est enregistré comme URL du compte."
+msgstr "Quand une personne s'inscrit pour évaluer dans cette revue — sur le formulaire d'inscription ou en cochant le rôle d'évaluateur dans son profil — on lui demande le lien vers son CV Lattes, qui doit être une adresse Lattes. Le lien est enregistré comme URL du compte ; un lien Lattes déjà présent n'est jamais remplacé."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Évaluateurs du Brésil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Qui doit fournir le lien Lattes"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "S'applique à qui choisit le Brésil comme pays et coche l'option d'évaluateur."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "S'applique à qui s'inscrit comme évaluateur. Ce qui est saisi dans le champ doit toujours être une adresse Lattes valide."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Le lien Lattes est facultatif"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Personne : le lien est toujours facultatif"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Le lien Lattes est obligatoire (signalé comme obligatoire sur le formulaire)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Évaluateurs du Brésil (facultatif pour les autres pays)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Les évaluateurs d'autres pays peuvent aussi indiquer leur lien Lattes, mais il n'est jamais exigé d'eux."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Tous les évaluateurs, de n'importe quel pays"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Étudiants"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Certaines revues n'acceptent que des évaluateurs diplômés. Saisissez un fragment d'adresse électronique par ligne — par exemple @etudiant. — et une adresse qui en contient un ne pourra pas s'inscrire comme évaluateur. Majuscules et minuscules sont indifférentes. Laissez vide pour autoriser tout le monde."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Adresses électroniques d'étudiants"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Saisissez jusqu'à 50 fragments, un par ligne, de 100 caractères au plus chacun."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Cette revue n'accepte pas d'étudiants comme évaluateurs : un compte avec une adresse électronique d'étudiant ne peut pas s'inscrire pour évaluer."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Cette revue n'accepte pas d'étudiants comme évaluateurs ; cette adresse électronique ne peut donc pas s'inscrire pour évaluer."

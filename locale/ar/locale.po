@@ -14,7 +14,7 @@ msgstr "لاتس للمحكّمين"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "يطلب ممن يسجّلون كمحكّمين رابط سيرتهم الذاتية في لاتس (CNPq، البرازيل)، ويُحفظ كعنوان URL للحساب. يمكن لكل مجلة جعله إلزاميًا للمحكّمين في البرازيل."
+msgstr "يطلب ممن يسجّلون كمحكّمين — في نموذج التسجيل أو في أدوار ملفهم الشخصي — رابط سيرتهم الذاتية في لاتس (CNPq، البرازيل)، ويُحفظ كعنوان URL للحساب. تقرر كل مجلة من يلزمه تقديمه، ويمكنها منع الطلاب من التسجيل كمحكّمين."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "إلزامي للمحكّمين في البرازيل."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "إلزامي للمحكّمين."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "أدخل عنوان سيرة ذاتية في لاتس: lattes.cnpq.br/ متبوعًا بالأرقام الستة عشر لمعرّف لاتس الخاص بك."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "رابط سيرة لاتس الذاتية إلزامي للمحكّمين في البرازيل."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "رابط سيرة لاتس الذاتية إلزامي للمحكّمين."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "عندما يسجّل شخص ويطلب التحكيم في هذه المجلة، يطلب نموذج التسجيل رابط سيرته الذاتية في لاتس ويتحقق من أنه عنوان لاتس. يُحفظ الرابط كعنوان URL للحساب."
+msgstr "عندما يسجّل شخص للتحكيم في هذه المجلة — في نموذج التسجيل أو بتحديد دور المحكّم في ملفه الشخصي — يُطلب منه رابط سيرته الذاتية في لاتس، ويجب أن يكون عنوان لاتس. يُحفظ الرابط كعنوان URL للحساب، ولا يُستبدل أبدًا رابط لاتس موجود مسبقًا."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "المحكّمون في البرازيل"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "من يجب عليه تقديم رابط لاتس"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "ينطبق على من يختار البرازيل بلدًا ويحدد خيار المحكّم."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "ينطبق على من يسجّل للتحكيم. ما يُكتب في الحقل يجب أن يكون دائمًا عنوان لاتس صالحًا."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "رابط لاتس اختياري"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "لا أحد: الرابط اختياري دائمًا"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "رابط لاتس إلزامي (مُعلَّم كإلزامي في النموذج)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "المحكّمون في البرازيل (اختياري للبلدان الأخرى)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "يمكن للمحكّمين من بلدان أخرى أيضًا إدخال رابط لاتس، لكنه لا يكون إلزاميًا لهم أبدًا."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "جميع المحكّمين، من أي بلد"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "الطلاب"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "تقبل بعض المجلات فقط المحكّمين الذين أكملوا شهادتهم. أدخل جزءًا من عنوان البريد الإلكتروني في كل سطر — مثل @student. — ولن يتمكن أي عنوان يحتوي على أحدها من التسجيل كمحكّم. لا فرق بين الأحرف الكبيرة والصغيرة. اتركه فارغًا للسماح للجميع."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "عناوين البريد الإلكتروني للطلاب"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "أدخل حتى 50 جزءًا، جزءًا في كل سطر، لا يتجاوز كل منها 100 حرف."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "لا تقبل هذه المجلة الطلاب كمحكّمين: لا يمكن لحساب ببريد إلكتروني طلابي التسجيل للتحكيم."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "لا تقبل هذه المجلة الطلاب كمحكّمين، لذلك لا يمكن لهذا البريد الإلكتروني التسجيل للتحكيم."

@@ -14,7 +14,7 @@ msgstr "Lattes pentru evaluatori"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Le cere celor care se înregistrează ca evaluatori linkul către CV-ul lor Lattes (CNPq, Brazilia), salvat ca URL al contului. Fiecare revistă îl poate face obligatoriu pentru evaluatorii din Brazilia."
+msgstr "Le cere celor care se înscriu ca evaluatori — în formularul de înregistrare sau la rolurile din profil — linkul către CV-ul lor Lattes (CNPq, Brazilia), salvat ca URL al contului. Fiecare revistă decide de la cine este obligatoriu și poate împiedica studenții să se înscrie ca evaluatori."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obligatoriu pentru evaluatorii din Brazilia."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obligatoriu pentru evaluatori."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Introduceți adresa unui CV Lattes: lattes.cnpq.br/ urmat de cele 16 cifre ale ID-ului dvs. Lattes."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Linkul către CV-ul Lattes este obligatoriu pentru evaluatorii din Brazilia."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Linkul către CV-ul Lattes este obligatoriu pentru evaluatori."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Când cineva se înregistrează și cere să evalueze pentru această revistă, formularul de înregistrare cere linkul către CV-ul său Lattes și verifică dacă este o adresă Lattes. Linkul este salvat ca URL al contului."
+msgstr "Când cineva se înscrie să evalueze pentru această revistă — în formularul de înregistrare sau bifând rolul de evaluator în profil — i se cere linkul către CV-ul său Lattes, care trebuie să fie o adresă Lattes. Linkul este salvat ca URL al contului; un link Lattes deja existent nu este niciodată înlocuit."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Evaluatori din Brazilia"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Cine trebuie să indice linkul Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Se aplică celor care aleg Brazilia ca țară și bifează opțiunea de evaluator."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Se aplică celor care se înscriu ca evaluatori. Ce se scrie în câmp trebuie să fie întotdeauna o adresă Lattes validă."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Linkul Lattes este opțional"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Nimeni: linkul este întotdeauna opțional"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Linkul Lattes este obligatoriu (marcat ca obligatoriu în formular)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Evaluatori din Brazilia (opțional pentru alte țări)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Evaluatorii din alte țări își pot indica și ei linkul Lattes, dar acesta nu le este niciodată obligatoriu."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Toți evaluatorii, din orice țară"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studenți"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Unele reviste acceptă doar evaluatori cu studii încheiate. Introduceți câte un fragment de adresă de e-mail pe rând — de exemplu @student. — iar o adresă care conține oricare dintre ele nu se va putea înscrie ca evaluator. Literele mari și mici nu contează. Lăsați gol pentru a permite tuturor."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Adrese de e-mail ale studenților"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Introduceți până la 50 de fragmente, câte unul pe rând, fiecare de cel mult 100 de caractere."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Această revistă nu acceptă studenți ca evaluatori: un cont cu adresă de e-mail de student nu se poate înscrie pentru evaluare."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Această revistă nu acceptă studenți ca evaluatori, de aceea această adresă de e-mail nu se poate înscrie pentru evaluare."

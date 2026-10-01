@@ -14,7 +14,7 @@ msgstr "査読者のLattes"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "査読者として登録する人に Lattes 履歴書（CNPq、ブラジル）のリンクを求め、アカウントの URL として保存します。各ジャーナルはブラジルの査読者に必須にできます。"
+msgstr "査読者として申し込む人に（登録フォームまたはプロフィールの役割で）Lattes 履歴書（CNPq、ブラジル）のリンクを求め、アカウントの URL として保存します。各ジャーナルは誰に必須とするかを決め、学生が査読者として申し込むのを防ぐこともできます。"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "ブラジルの査読者は必須です。"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "査読者は必須です。"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Lattes 履歴書のアドレスを入力してください：lattes.cnpq.br/ に続けて Lattes ID の 16 桁。"
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "ブラジルの査読者は Lattes 履歴書のリンクが必須です。"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "査読者は Lattes 履歴書のリンクが必須です。"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "誰かが登録してこのジャーナルの査読を希望すると、登録フォームが Lattes 履歴書のリンクを求め、Lattes のアドレスであることを確認します。リンクはアカウントの URL として保存されます。"
+msgstr "このジャーナルで査読を申し込むと（登録フォーム、またはプロフィールで査読者の役割にチェックを入れたとき）、Lattes 履歴書のリンクを求められます。Lattes のアドレスである必要があります。リンクはアカウントの URL として保存され、既にある Lattes のリンクが置き換えられることはありません。"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "ブラジルの査読者"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Lattes のリンクを必須とする対象"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "国としてブラジルを選び、査読者のオプションにチェックを入れた人に適用されます。"
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "査読者として申し込む人に適用されます。欄に入力された内容は、常に有効な Lattes のアドレスでなければなりません。"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes のリンクは任意"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "なし：リンクは常に任意"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes のリンクは必須（フォームで必須と表示）"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "ブラジルの査読者（他の国は任意）"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "他の国の査読者も Lattes のリンクを入力できますが、必須になることはありません。"
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "すべての国のすべての査読者"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "学生"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "学位を取得した査読者のみを受け入れるジャーナルもあります。メールアドレスの一部を 1 行に 1 つずつ入力してください（例：@student.）。いずれかを含むアドレスは査読者として申し込めません。大文字と小文字は区別しません。全員を許可する場合は空欄にしてください。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "学生のメールアドレス"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "1 行に 1 つ、各 100 文字以内で、最大 50 個まで入力してください。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "このジャーナルは学生を査読者として受け入れていません。学生のメールアドレスのアカウントは査読に申し込めません。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "このジャーナルは学生を査読者として受け入れていないため、このメールアドレスでは査読に申し込めません。"

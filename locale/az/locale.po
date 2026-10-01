@@ -14,7 +14,7 @@ msgstr "Rəyçilər üçün Lattes"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Rəyçi kimi qeydiyyatdan keçənlərdən Lattes CV-lərinin (CNPq, Braziliya) linkini istəyir və onu hesabın URL-i kimi saxlayır. Hər jurnal onu Braziliyadakı rəyçilər üçün məcburi edə bilər."
+msgstr "Rəyçi kimi qeydiyyatdan keçənlərdən — qeydiyyat formasında və ya profilin rollarında — Lattes CV-lərinin (CNPq, Braziliya) linkini istəyir və onu hesabın URL-i kimi saxlayır. Hər jurnal kimdən tələb olunduğunu müəyyən edir və tələbələrin rəyçi kimi qeydiyyatına mane ola bilər."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Braziliyadakı rəyçilər üçün məcburidir."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Rəyçilər üçün məcburidir."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Lattes CV ünvanını daxil edin: lattes.cnpq.br/ və ardınca Lattes ID-nizin 16 rəqəmi."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lattes CV linki Braziliyadakı rəyçilər üçün məcburidir."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lattes CV linki rəyçilər üçün məcburidir."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Kimsə qeydiyyatdan keçib bu jurnal üçün rəy vermək istədikdə, qeydiyyat forması Lattes CV linkini istəyir və onun Lattes ünvanı olduğunu yoxlayır. Link hesabın URL-i kimi saxlanılır."
+msgstr "Kimsə bu jurnalda rəy vermək üçün qeydiyyatdan keçəndə — qeydiyyat formasında və ya profildə rəyçi rolunu işarələyəndə — ondan Lattes CV linki istənilir və bu, Lattes ünvanı olmalıdır. Link hesabın URL-i kimi saxlanılır; artıq mövcud olan Lattes linki heç vaxt əvəz edilmir."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Braziliyadakı rəyçilər"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Lattes linkini kim göstərməlidir"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Ölkə kimi Braziliyanı seçən və rəyçi seçimini işarələyənlərə aiddir."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Rəyçi kimi qeydiyyatdan keçənlərə aiddir. Sahəyə yazılan hər şey həmişə etibarlı Lattes ünvanı olmalıdır."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes linki könüllüdür"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Heç kim: link həmişə könüllüdür"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes linki məcburidir (formada məcburi kimi işarələnir)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Braziliyadakı rəyçilər (digər ölkələr üçün könüllü)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Digər ölkələrdən olan rəyçilər də Lattes linkini göstərə bilər, lakin onlar üçün heç vaxt məcburi deyil."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Bütün rəyçilər, istənilən ölkədən"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Tələbələr"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Bəzi jurnallar yalnız təhsilini bitirmiş rəyçiləri qəbul edir. Hər sətirdə e-poçt ünvanının bir hissəsini daxil edin — məsələn @student. — və onlardan birini ehtiva edən ünvan rəyçi kimi qeydiyyatdan keçə bilməyəcək. Böyük və kiçik hərflər fərq etmir. Hamıya icazə vermək üçün boş saxlayın."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Tələbələrin e-poçt ünvanları"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Hər sətirdə bir olmaqla, hər biri ən çox 100 simvol olan 50-yə qədər hissə daxil edin."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Bu jurnal tələbələri rəyçi kimi qəbul etmir: tələbə e-poçtu olan hesab rəy vermək üçün qeydiyyatdan keçə bilməz."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Bu jurnal tələbələri rəyçi kimi qəbul etmir, buna görə bu e-poçt rəy vermək üçün qeydiyyatdan keçə bilməz."

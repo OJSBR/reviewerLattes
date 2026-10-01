@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes for Reviewers"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Asks people who register as reviewers for the link to their Lattes CV (CNPq, Brazil), stored as the URL of their account. Each journal may require it from reviewers in Brazil."
+msgstr "Asks people who sign up as reviewers — on the registration form or in the roles of their profile — for the link to their Lattes CV (CNPq, Brazil), stored as the URL of their account. Each journal decides who must give it and may keep students from signing up to review."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "Lattes CV (link)"
@@ -26,26 +26,50 @@ msgstr "The address of your Lattes CV at CNPq, for example {$example}."
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Required for reviewers in Brazil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Required for reviewers."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Enter the address of a Lattes CV: lattes.cnpq.br/ followed by the 16 digits of your Lattes ID."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "The Lattes CV link is required for reviewers in Brazil."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "The Lattes CV link is required for reviewers."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "When someone registers and asks to review for this journal, the registration form asks for the link to their Lattes CV and checks that it is a Lattes address. The link is saved as the URL of the account."
+msgstr "When someone signs up to review for this journal — on the registration form or by ticking the reviewer role in their profile — they are asked for the link to their Lattes CV, which must be a Lattes address. The link is saved as the URL of the account; a Lattes link already there is never replaced."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Reviewers in Brazil"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Who must give the Lattes link"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Applies to whoever chooses Brazil as their country and ticks the reviewer box."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Applies to whoever signs up to review. Whatever is typed in the field must always be a valid Lattes address."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "The Lattes link is optional"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Nobody: the link is always optional"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "The Lattes link is required (marked as required on the form)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Reviewers in Brazil (optional for other countries)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Reviewers in other countries may also give their Lattes link, but it is never required from them."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Every reviewer, from any country"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Students"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Some journals accept only reviewers who have completed their degree. Enter one piece of e-mail address per line — for example @student. — and an address that contains any of them cannot sign up to review. Upper and lower case do not matter. Leave empty to let everyone review."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-mail addresses of students"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Enter up to 50 pieces, one per line, each with at most 100 characters."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "This journal does not accept students as reviewers: an account with a student e-mail address cannot sign up to review."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "This journal does not accept students as reviewers, so this e-mail address cannot sign up to review."

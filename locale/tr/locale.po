@@ -14,7 +14,7 @@ msgstr "Hakemler için Lattes"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Hakem olarak kaydolanlardan Lattes özgeçmişlerinin (CNPq, Brezilya) bağlantısını ister ve hesabın URL'si olarak kaydeder. Her dergi bunu Brezilya'daki hakemler için zorunlu yapabilir."
+msgstr "Hakem olarak başvuranlardan — kayıt formunda veya profillerindeki rollerde — Lattes özgeçmişlerinin (CNPq, Brezilya) bağlantısını ister ve hesabın URL'si olarak kaydeder. Her dergi kimden zorunlu olduğuna karar verir ve öğrencilerin hakem olarak başvurmasını engelleyebilir."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Brezilya'daki hakemler için zorunludur."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Hakemler için zorunludur."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Bir Lattes özgeçmişinin adresini girin: lattes.cnpq.br/ ve ardından Lattes kimliğinizin 16 hanesi."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lattes özgeçmişi bağlantısı Brezilya'daki hakemler için zorunludur."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lattes özgeçmişi bağlantısı hakemler için zorunludur."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Biri kaydolup bu dergi için hakemlik yapmak istediğinde, kayıt formu Lattes özgeçmişinin bağlantısını ister ve bunun bir Lattes adresi olduğunu denetler. Bağlantı hesabın URL'si olarak kaydedilir."
+msgstr "Biri bu dergide hakemlik için başvurduğunda — kayıt formunda veya profilinde hakem rolünü işaretleyerek — Lattes özgeçmişinin bağlantısı istenir ve bu bir Lattes adresi olmalıdır. Bağlantı hesabın URL'si olarak kaydedilir; mevcut bir Lattes bağlantısı asla değiştirilmez."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Brezilya'daki hakemler"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Lattes bağlantısını kimin vermesi gerektiği"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Ülke olarak Brezilya'yı seçen ve hakem seçeneğini işaretleyen herkes için geçerlidir."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Hakem olarak başvuran herkes için geçerlidir. Alana yazılan her şey her zaman geçerli bir Lattes adresi olmalıdır."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes bağlantısı isteğe bağlıdır"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Hiç kimse: bağlantı her zaman isteğe bağlıdır"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes bağlantısı zorunludur (formda zorunlu olarak işaretlenir)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Brezilya'daki hakemler (diğer ülkeler için isteğe bağlı)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Diğer ülkelerdeki hakemler de Lattes bağlantılarını verebilir, ancak onlar için asla zorunlu değildir."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Tüm hakemler, herhangi bir ülkeden"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Öğrenciler"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Bazı dergiler yalnızca öğrenimini tamamlamış hakemleri kabul eder. Her satıra bir e-posta adresi parçası girin — örneğin @student. — ve bunlardan birini içeren bir adres hakem olarak başvuramaz. Büyük ve küçük harf fark etmez. Herkese izin vermek için boş bırakın."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Öğrenci e-posta adresleri"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Her satıra bir tane olmak üzere, her biri en fazla 100 karakterlik en çok 50 parça girin."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Bu dergi öğrencileri hakem olarak kabul etmiyor: öğrenci e-posta adresine sahip bir hesap hakemlik için başvuramaz."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Bu dergi öğrencileri hakem olarak kabul etmiyor, bu yüzden bu e-posta adresi hakemlik için başvuramaz."

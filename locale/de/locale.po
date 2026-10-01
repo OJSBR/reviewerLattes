@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes für Gutachter"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Fragt Personen, die sich als Gutachter registrieren, nach dem Link zu ihrem Lattes-Lebenslauf (CNPq, Brasilien), gespeichert als URL des Kontos. Jede Zeitschrift kann ihn für Gutachter in Brasilien verpflichtend machen."
+msgstr "Fragt Personen, die sich als Gutachter melden — im Registrierungsformular oder bei den Rollen ihres Profils —, nach dem Link zu ihrem Lattes-Lebenslauf (CNPq, Brasilien), gespeichert als URL des Kontos. Jede Zeitschrift legt fest, wer ihn angeben muss, und kann Studierende von der Meldung als Gutachter ausschließen."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "Lattes-Lebenslauf (Link)"
@@ -26,26 +26,50 @@ msgstr "Die Adresse Ihres Lattes-Lebenslaufs beim CNPq, zum Beispiel {$example}.
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Pflicht für Gutachter in Brasilien."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Pflicht für Gutachter."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Geben Sie die Adresse eines Lattes-Lebenslaufs ein: lattes.cnpq.br/ gefolgt von den 16 Ziffern Ihrer Lattes-ID."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Der Link zum Lattes-Lebenslauf ist für Gutachter in Brasilien Pflicht."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Der Link zum Lattes-Lebenslauf ist für Gutachter Pflicht."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Wenn sich jemand registriert und für diese Zeitschrift begutachten möchte, fragt das Registrierungsformular nach dem Link zum Lattes-Lebenslauf und prüft, ob es eine Lattes-Adresse ist. Der Link wird als URL des Kontos gespeichert."
+msgstr "Wenn sich jemand für Gutachten in dieser Zeitschrift meldet — im Registrierungsformular oder durch Ankreuzen der Gutachterrolle im Profil —, wird nach dem Link zum Lattes-Lebenslauf gefragt, der eine Lattes-Adresse sein muss. Der Link wird als URL des Kontos gespeichert; ein bereits vorhandener Lattes-Link wird nie ersetzt."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Gutachter in Brasilien"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Wer den Lattes-Link angeben muss"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Gilt für alle, die Brasilien als Land wählen und die Gutachter-Option ankreuzen."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Gilt für alle, die sich als Gutachter melden. Was im Feld eingegeben wird, muss immer eine gültige Lattes-Adresse sein."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Der Lattes-Link ist freiwillig"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Niemand: Der Link ist immer freiwillig"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Der Lattes-Link ist Pflicht (im Formular als Pflichtfeld markiert)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Gutachter in Brasilien (für andere Länder freiwillig)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Gutachter aus anderen Ländern können ihren Lattes-Link ebenfalls angeben, er ist für sie aber nie Pflicht."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Alle Gutachter, aus jedem Land"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studierende"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Manche Zeitschriften nehmen nur Gutachter mit abgeschlossenem Studium an. Geben Sie pro Zeile ein Stück einer E-Mail-Adresse ein — zum Beispiel @student. —; eine Adresse, die eines davon enthält, kann sich nicht als Gutachter melden. Groß- und Kleinschreibung spielen keine Rolle. Leer lassen, um alle zuzulassen."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-Mail-Adressen von Studierenden"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Geben Sie bis zu 50 Stücke ein, eines pro Zeile, jedes mit höchstens 100 Zeichen."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Diese Zeitschrift nimmt keine Studierenden als Gutachter an: Ein Konto mit einer studentischen E-Mail-Adresse kann sich nicht als Gutachter melden."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Diese Zeitschrift nimmt keine Studierenden als Gutachter an, daher kann sich diese E-Mail-Adresse nicht als Gutachter melden."

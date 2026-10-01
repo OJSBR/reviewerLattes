@@ -12,7 +12,7 @@ msgid "plugins.generic.reviewerLattes.displayName"
 msgstr "Lattes voor reviewers"
 
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Vraagt wie zich als reviewer registreert om de link naar het Lattes-cv (CNPq, Brazilië), opgeslagen als URL van het account. Elk tijdschrift kan hem verplicht maken voor reviewers in Brazilië."
+msgstr "Vraagt wie zich als reviewer aanmeldt — op het registratieformulier of bij de rollen van het profiel — om de link naar het Lattes-cv (CNPq, Brazilië), opgeslagen als URL van het account. Elk tijdschrift bepaalt wie hem moet opgeven en kan studenten weren als reviewer."
 
 msgid "plugins.generic.reviewerLattes.field.label"
 msgstr "Lattes-cv (link)"
@@ -26,26 +26,50 @@ msgstr "Het adres van uw Lattes-cv bij het CNPq, bijvoorbeeld {$example}."
 msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Verplicht voor reviewers in Brazilië."
 
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Verplicht voor reviewers."
+
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Voer het adres van een Lattes-cv in: lattes.cnpq.br/ gevolgd door de 16 cijfers van uw Lattes-ID."
 
 msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "De link naar het Lattes-cv is verplicht voor reviewers in Brazilië."
 
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "De link naar het Lattes-cv is verplicht voor reviewers."
+
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Wanneer iemand zich registreert en wil reviewen voor dit tijdschrift, vraagt het registratieformulier om de link naar het Lattes-cv en controleert of het een Lattes-adres is. De link wordt opgeslagen als URL van het account."
+msgstr "Wanneer iemand zich aanmeldt om te reviewen voor dit tijdschrift — op het registratieformulier of door de reviewerrol in het profiel aan te vinken — wordt om de link naar het Lattes-cv gevraagd, die een Lattes-adres moet zijn. De link wordt opgeslagen als URL van het account; een Lattes-link die er al staat, wordt nooit vervangen."
 
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Reviewers in Brazilië"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Wie de Lattes-link moet opgeven"
 
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Geldt voor wie Brazilië als land kiest en de reviewer-optie aanvinkt."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Geldt voor wie zich als reviewer aanmeldt. Wat in het veld wordt ingevuld, moet altijd een geldig Lattes-adres zijn."
 
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "De Lattes-link is optioneel"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Niemand: de link is altijd optioneel"
 
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "De Lattes-link is verplicht (op het formulier als verplicht gemarkeerd)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Reviewers in Brazilië (optioneel voor andere landen)"
 
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Reviewers uit andere landen kunnen hun Lattes-link ook opgeven, maar hij is voor hen nooit verplicht."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Alle reviewers, uit elk land"
+
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studenten"
+
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Sommige tijdschriften accepteren alleen reviewers met een afgeronde opleiding. Voer per regel een stuk e-mailadres in — bijvoorbeeld @student. — en een adres dat er een bevat, kan zich niet als reviewer aanmelden. Hoofdletters en kleine letters maken niet uit. Laat leeg om iedereen toe te laten."
+
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "E-mailadressen van studenten"
+
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Voer maximaal 50 stukken in, één per regel, elk van ten hoogste 100 tekens."
+
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Dit tijdschrift accepteert geen studenten als reviewer: een account met een studentenadres kan zich niet aanmelden om te reviewen."
+
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Dit tijdschrift accepteert geen studenten als reviewer, daarom kan dit e-mailadres zich niet aanmelden om te reviewen."

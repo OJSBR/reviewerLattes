@@ -14,7 +14,7 @@ msgstr "审稿人 Lattes"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "向注册为审稿人的用户索取其 Lattes 简历（CNPq，巴西）的链接，并保存为账户的 URL。每个期刊都可以要求巴西的审稿人必须填写。"
+msgstr "向申请成为审稿人的用户（在注册表单中或个人资料的角色中）索取其 Lattes 简历（CNPq，巴西）的链接，并保存为账户的 URL。每个期刊可决定谁必须填写，也可阻止学生申请成为审稿人。"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "巴西的审稿人必须填写。"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "审稿人必须填写。"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "请输入 Lattes 简历的地址：lattes.cnpq.br/ 后接您的 Lattes ID 的 16 位数字。"
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "巴西的审稿人必须填写 Lattes 简历链接。"
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "审稿人必须填写 Lattes 简历链接。"
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "当有人注册并申请为本刊审稿时，注册表单会索取其 Lattes 简历的链接，并检查它是否为 Lattes 地址。该链接会保存为账户的 URL。"
+msgstr "当有人申请为本刊审稿时（在注册表单中，或在个人资料中勾选审稿人角色），会被要求提供其 Lattes 简历的链接，且必须是 Lattes 地址。该链接保存为账户的 URL；已有的 Lattes 链接永远不会被替换。"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "巴西的审稿人"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "谁必须填写 Lattes 链接"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "适用于选择巴西作为国家并勾选审稿人选项的人。"
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "适用于申请成为审稿人的人。字段中输入的内容必须始终是有效的 Lattes 地址。"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes 链接为选填"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "无：链接始终为选填"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes 链接为必填（在表单上标记为必填）"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "巴西的审稿人（其他国家为选填）"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "其他国家的审稿人也可以填写其 Lattes 链接，但对他们永远不是必填。"
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "所有审稿人，来自任何国家"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "学生"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "有些期刊只接受已完成学业的审稿人。每行输入一个电子邮件地址片段（例如 @student.），包含其中任意片段的地址将无法申请成为审稿人。不区分大小写。留空则允许所有人。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "学生的电子邮件地址"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "最多输入 50 个片段，每行一个，每个不超过 100 个字符。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "本刊不接受学生作为审稿人：使用学生电子邮件地址的账户无法申请审稿。"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "本刊不接受学生作为审稿人，因此该电子邮件地址无法申请审稿。"

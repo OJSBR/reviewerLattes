@@ -8,8 +8,8 @@
  *
  * @class LattesUrlTest
  *
- * @brief What counts as a Lattes CV, the form it is stored in, and who is
- *        required to give one.
+ * @brief What counts as a Lattes CV, the form it is stored in, who is required
+ *        to give one, and who counts as a student.
  */
 
 namespace APP\plugins\generic\reviewerLattes\tests;
@@ -97,21 +97,84 @@ class LattesUrlTest extends PKPTestCase
         $reviewer = [16 => '1'];
 
         return [
-            'required, Brazil, reviewer' => [true, 'BR', $reviewer, true],
-            'required, Brazil in lower case' => [true, 'br', $reviewer, true],
-            'required, Brazil, two reviewer groups' => [true, 'BR', [16 => '1', 17 => '1'], true],
-            'required, another country' => [true, 'PT', $reviewer, false],
-            'required, no country' => [true, '', $reviewer, false],
-            'required, Brazil, not a reviewer' => [true, 'BR', [], false],
-            'required, Brazil, nothing posted for the boxes' => [true, 'BR', null, false],
-            'required, Brazil, box posted unticked' => [true, 'BR', [16 => '0'], false],
-            'optional, Brazil, reviewer' => [false, 'BR', $reviewer, false],
+            'brazil scope, Brazil, reviewer' => ['brazil', 'BR', $reviewer, true],
+            'brazil scope, Brazil in lower case' => ['brazil', 'br', $reviewer, true],
+            'brazil scope, Brazil, two reviewer groups' => ['brazil', 'BR', [16 => '1', 17 => '1'], true],
+            'brazil scope, another country' => ['brazil', 'PT', $reviewer, false],
+            'brazil scope, no country' => ['brazil', '', $reviewer, false],
+            'brazil scope, Brazil, not a reviewer' => ['brazil', 'BR', [], false],
+            'brazil scope, Brazil, nothing posted for the boxes' => ['brazil', 'BR', null, false],
+            'brazil scope, Brazil, box posted unticked' => ['brazil', 'BR', [16 => '0'], false],
+            'all scope, another country' => ['all', 'PT', $reviewer, true],
+            'all scope, no country' => ['all', '', $reviewer, true],
+            'all scope, Brazil' => ['all', 'BR', $reviewer, true],
+            'all scope, not a reviewer' => ['all', 'PT', [], false],
+            'none scope, Brazil, reviewer' => ['none', 'BR', $reviewer, false],
+            'none scope, another country' => ['none', 'PT', $reviewer, false],
+            'an unknown scope is none' => ['everybody', 'BR', $reviewer, false],
         ];
     }
 
     #[DataProvider('requirementCases')]
-    public function testTheLinkIsRequiredOnlyFromReviewersInBrazilWhereTheJournalSaysSo(bool $setting, $country, $groups, bool $required): void
+    public function testTheLinkIsRequiredFromReviewersTheScopeCovers(string $scope, $country, $groups, bool $required): void
     {
-        $this->assertSame($required, ReviewerLattesPlugin::isRequiredFor($setting, $country, $groups));
+        $this->assertSame($required, ReviewerLattesPlugin::isRequiredFor($scope, $country, $groups));
+    }
+
+    public static function savedScopes(): array
+    {
+        return [
+            'a saved scope wins' => ['all', true, 'all'],
+            'a saved none wins over an old yes' => ['none', true, 'none'],
+            'a saved brazil' => ['brazil', null, 'brazil'],
+            '1.0: requiredForBrazil on' => [null, true, 'brazil'],
+            '1.0: requiredForBrazil off' => [null, false, 'none'],
+            '1.0: requiredForBrazil stored as text' => [null, '1', 'brazil'],
+            '1.0: requiredForBrazil stored as empty text' => [null, '', 'none'],
+            'nothing saved' => [null, null, 'none'],
+            'a saved value that is not a scope' => ['sometimes', true, 'brazil'],
+        ];
+    }
+
+    #[DataProvider('savedScopes')]
+    public function testTheScopeOfAJournalAndTheSettingOf10(?string $saved, $legacy, string $scope): void
+    {
+        $this->assertSame($scope, ReviewerLattesPlugin::scopeFrom($saved, $legacy));
+    }
+
+    public function testThePiecesOfAddressComeOnePerLine(): void
+    {
+        $this->assertSame(['@aluno.', '@alunos.', '@discente.'], ReviewerLattesPlugin::parsePatterns("@aluno.\r\n  @alunos.  \n\n@ALUNO.\n@discente.\n"));
+        $this->assertSame([], ReviewerLattesPlugin::parsePatterns(''));
+        $this->assertSame([], ReviewerLattesPlugin::parsePatterns(null));
+        $this->assertSame([], ReviewerLattesPlugin::parsePatterns("  \n \n"));
+    }
+
+    public static function studentCases(): array
+    {
+        $interface = ['@aluno.', '@alunos.', '@estudante.', '@estudantes.', '@discente.', '@discentes.'];
+
+        return [
+            'a student address' => ['fulano@aluno.cps.sp.gov.br', $interface, true],
+            'the plural' => ['fulana@alunos.ufxx.br', $interface, true],
+            'upper case address' => ['FULANO@ALUNO.CPS.SP.GOV.BR', $interface, true],
+            'upper case piece' => ['fulano@discente.ufxx.br', ['@DISCENTE.'], true],
+            'a staff address' => ['fulano@cps.sp.gov.br', $interface, false],
+            'the piece without its dot' => ['fulano@alunoxpto.br', $interface, false],
+            'the word elsewhere in the address' => ['aluno.fulano@gmail.com', $interface, false],
+            'no pieces: nobody is a student' => ['fulano@aluno.cps.sp.gov.br', [], false],
+            'no address' => ['', $interface, false],
+            'the dot is a dot, not any character' => ['fulano@alunoX.br', ['@aluno.'], false],
+            'characters of regular expressions are taken as written' => ['a+b@x(y).br', ['+b@x(y)'], true],
+            'a slash in the piece' => ['x@a/b.br', ['a/b'], true],
+            'a piece that would be a broken expression' => ['x@[aluno.br', ['[aluno'], true],
+            'and does not match by accident' => ['x@aluno.br', ['[aluno'], false],
+        ];
+    }
+
+    #[DataProvider('studentCases')]
+    public function testAStudentIsKnownByThePiecesOfTheJournal(string $email, array $patterns, bool $student): void
+    {
+        $this->assertSame($student, ReviewerLattesPlugin::isStudentEmail($email, $patterns));
     }
 }

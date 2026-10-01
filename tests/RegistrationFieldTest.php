@@ -10,7 +10,8 @@
  *
  * @brief The field on registration pages written by different themes: the
  *        page of the core, a theme with its own form (no id, no fieldsets,
- *        a textarea for the interests), and a page with no interests field.
+ *        a textarea for the interests), and a page with no interests field;
+ *        and in the Roles tab of the profile.
  */
 
 namespace APP\plugins\generic\reviewerLattes\tests;
@@ -73,10 +74,14 @@ HTML;
             'description' => 'The address of your Lattes CV, for example https://lattes.cnpq.br/1234567890123456. Required for reviewers in Brazil.',
             'example' => 'https://lattes.cnpq.br/1234567890123456',
             'value' => '',
-            'requiredForBrazil' => true,
+            'scope' => 'brazil',
             'required' => false,
             'error' => null,
             'requiredLabel' => 'Required',
+            'studentPatterns' => [],
+            'studentNotice' => 'Students cannot sign up to review.',
+            'userCountry' => '',
+            'currentReviewerGroups' => [],
         ], $overrides);
     }
 
@@ -106,7 +111,8 @@ HTML;
         $label = $x->query('//label[.//input[@name="lattesUrl"]]')->item(0);
         $this->assertStringContainsString('Lattes CV (link)', $x->query('.//span[@class="label"]', $label)->item(0)->textContent);
         $this->assertSame('1', $label->getAttribute('data-reviewer-lattes'));
-        $this->assertSame('1', $label->getAttribute('data-required-for-brazil'));
+        $this->assertSame('brazil', $label->getAttribute('data-required-scope'));
+        $this->assertFalse($label->hasAttribute('data-student-patterns'), 'No student rule where the journal has none.');
         $this->assertSame('url', $input->getAttribute('inputmode'));
         $this->assertSame('https://lattes.cnpq.br/1234567890123456', $input->getAttribute('placeholder'));
         $this->assertFalse($input->hasAttribute('required'), 'Not required before the person picks Brazil and asks to review.');
@@ -159,10 +165,20 @@ HTML;
         $this->assertStringContainsString('display:none', $marker->getAttribute('style'));
     }
 
-    public function testAJournalThatDoesNotRequireItSaysSoToTheScript(): void
+    public function testTheScopeAndTheStudentRuleGoToTheScript(): void
     {
-        $x = $this->xpath(ReviewerLattesPlugin::insertRegistrationField(self::THEME_PAGE, $this->parts(['requiredForBrazil' => false])));
-        $this->assertSame('0', $x->query('//*[@data-reviewer-lattes]')->item(0)->getAttribute('data-required-for-brazil'));
+        foreach (['none', 'brazil', 'all'] as $scope) {
+            foreach ([self::CORE_PAGE, self::THEME_PAGE, self::BARE_PAGE] as $page) {
+                $x = $this->xpath(ReviewerLattesPlugin::insertRegistrationField($page, $this->parts(['scope' => $scope])));
+                $this->assertSame($scope, $x->query('//*[@data-reviewer-lattes]')->item(0)->getAttribute('data-required-scope'));
+            }
+        }
+
+        $patterns = ['@aluno.', '"><b>'];
+        $x = $this->xpath(ReviewerLattesPlugin::insertRegistrationField(self::CORE_PAGE, $this->parts(['studentPatterns' => $patterns])));
+        $field = $x->query('//*[@data-reviewer-lattes]')->item(0);
+        $this->assertSame($patterns, json_decode($field->getAttribute('data-student-patterns'), true), 'The pieces reach the script as written, escaped in the attribute.');
+        $this->assertSame('Students cannot sign up to review.', $field->getAttribute('data-student-notice'));
     }
 
     public function testTheTypedValueAndTheErrorComeBackEscaped(): void
@@ -212,6 +228,141 @@ HTML;
                 $this->assertGreaterThan(strpos($html, 'name="interests"'), strpos($html, 'name="lattesUrl"'));
             }
         }
+    }
+
+    /** The Roles tab of the profile, as the core renders it (3.5). */
+    private const ROLES_TAB = <<<'HTML'
+<form class="pkp_form" id="rolesForm" method="post" action="https://example.org/index.php/j/$$$call$$$/tab/user/profile-tab/save-roles" enctype="multipart/form-data">
+<fieldset id="userGroups" class="pkp_formArea border"><legend>Roles</legend>
+<div class="section"><ul class="checkbox_and_radiobutton">
+<li><label><input type="checkbox" id="readerGroup-17" name="readerGroup[17]" class="field checkbox"/> Reader</label></li>
+<li><label><input type="checkbox" id="reviewerGroup-16" name="reviewerGroup[16]" class="field checkbox"/> Reviewer</label></li>
+<li><label><input type="checkbox" id="reviewerGroup-99" name="reviewerGroup[99]" class="field checkbox"/> Reviewer of another journal</label></li>
+</ul></div>
+<div class="section"><div id="interests"><ul class="interests"></ul><span><label class="sub_label" for="interests">Reviewing interests</label></span></div></div>
+</fieldset>
+<p><span class="formRequired">Required fields are marked with an asterisk</span></p>
+<div class="section formButtons form_buttons"><button class="pkp_button submitFormButton" type="submit">Save</button></div>
+</form>
+HTML;
+
+    public function testInTheRolesTabTheFieldEndsTheRolesBlockWithItsScript(): void
+    {
+        $html = ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, $this->parts(['scope' => 'all', 'userCountry' => 'PT']), 'https://example.org/plugins/generic/reviewerLattes/js/reviewerLattes.js?v=1.1.0.0', null, [16]);
+        $x = $this->xpath($html);
+
+        $this->assertSame(1, $x->query('//input[@name="lattesUrl"]')->length);
+        // Inside the roles block, after the interests: the same place as on the core page.
+        $this->assertSame(1, $x->query('//fieldset[@id="userGroups"]/div[contains(@class,"section")][.//*[@id="interests"]]/following-sibling::div[contains(@class,"reviewerLattes")][.//input[@name="lattesUrl"]]')->length);
+        $field = $x->query('//*[@data-reviewer-lattes]')->item(0);
+        $this->assertSame('all', $field->getAttribute('data-required-scope'));
+        $this->assertSame('PT', $field->getAttribute('data-user-country'), 'The country of the account, for the script.');
+        // The script comes with the tab: the tab arrives in an AJAX response.
+        $this->assertSame(1, $x->query('//script[@data-reviewer-lattes-roles][contains(@src,"js/reviewerLattes.js?v=1.1.0.0")]')->length);
+        // Nothing disabled for someone who is not a student.
+        $this->assertSame(0, $x->query('//input[@disabled]')->length);
+        $this->assertSame($html, ReviewerLattesPlugin::insertRolesField($html, $this->parts(), 'x.js', null), 'Added once.');
+    }
+
+    public function testInRolesTheScriptKnowsTheGroupsTheAccountIsAlreadyIn(): void
+    {
+        $x = $this->xpath(ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, $this->parts(['currentReviewerGroups' => [16]]), 'x.js', null, [16]));
+        $this->assertSame('[16]', $x->query('//*[@data-reviewer-lattes]')->item(0)->getAttribute('data-current-reviewer-groups'));
+        $x = $this->xpath(ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, $this->parts(), 'x.js', null, [16]));
+        $this->assertFalse($x->query('//*[@data-reviewer-lattes]')->item(0)->hasAttribute('data-current-reviewer-groups'));
+    }
+
+    public function testAnAccountWithALattesLinkGetsNoFieldInRoles(): void
+    {
+        $html = ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, null, 'x.js', null, [16]);
+        $this->assertStringNotContainsString('name="lattesUrl"', $html);
+        $this->assertStringContainsString('data-reviewer-lattes-roles', $html);
+    }
+
+    public function testAStudentCannotTickTheReviewerBoxesOfTheJournalInRoles(): void
+    {
+        $html = ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, $this->parts(), 'x.js', 'Students cannot sign up to review.', [16]);
+        $x = $this->xpath($html);
+
+        $this->assertTrue($x->query('//input[@name="reviewerGroup[16]"]')->item(0)->hasAttribute('disabled'));
+        // Other boxes, and reviewer boxes of other journals, are left alone.
+        $this->assertFalse($x->query('//input[@name="readerGroup[17]"]')->item(0)->hasAttribute('disabled'));
+        $this->assertFalse($x->query('//input[@name="reviewerGroup[99]"]')->item(0)->hasAttribute('disabled'));
+        $this->assertSame(1, $x->query('//li[contains(@class,"reviewerLattes__studentNotice")]')->length);
+        $this->assertSame('Students cannot sign up to review.', trim($x->query('//li[contains(@class,"reviewerLattes__studentNotice")]')->item(0)->textContent));
+    }
+
+    public function testAStudentAlreadyReviewingKeepsTheBoxTicked(): void
+    {
+        // A disabled box is not sent, and the core ends a role whose box is not
+        // sent: a ticked box must stay as it is.
+        $ticked = str_replace('name="reviewerGroup[16]" class="field checkbox"/>', 'name="reviewerGroup[16]" class="field checkbox" checked="checked"/>', self::ROLES_TAB);
+        $this->assertNotSame($ticked, self::ROLES_TAB);
+        $x = $this->xpath(ReviewerLattesPlugin::insertRolesField($ticked, $this->parts(), 'x.js', 'Students cannot sign up to review.', [16]));
+        $box = $x->query('//input[@name="reviewerGroup[16]"]')->item(0);
+        $this->assertFalse($box->hasAttribute('disabled'));
+        $this->assertTrue($box->hasAttribute('checked'));
+    }
+
+    public function testInRolesWithoutTheRolesBlockTheFieldFallsBackInOrder(): void
+    {
+        $noFieldset = preg_replace('~<fieldset\b.*?</fieldset>~s', '<ul><li><input type="checkbox" name="reviewerGroup[16]"></li></ul>', self::ROLES_TAB);
+        $html = ReviewerLattesPlugin::insertRolesField($noFieldset, $this->parts(), 'x.js', null);
+        $this->assertLessThan(strpos($html, 'class="formRequired"'), strpos($html, 'name="lattesUrl"'), 'before the required-fields note');
+
+        $noNote = preg_replace('~<p><span class="formRequired">.*?</p>~s', '', $noFieldset);
+        $html = ReviewerLattesPlugin::insertRolesField($noNote, $this->parts(), 'x.js', null);
+        $this->assertLessThan(strpos($html, 'formButtons'), strpos($html, 'name="lattesUrl"'), 'then before the buttons');
+
+        $this->assertSame('<form id="other"></form>', ReviewerLattesPlugin::insertRolesField('<form id="other"></form>', $this->parts(), 'x.js', null), 'not on another form');
+    }
+
+    public function testTheRolesFieldIsEscaped(): void
+    {
+        $html = ReviewerLattesPlugin::insertRolesField(self::ROLES_TAB, $this->parts(['value' => '"><script>alert(1)</script>', 'error' => '<b>bad</b>']), 'x.js?a=1&b="2"', '<i>notice</i>', [16]);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $html);
+        $this->assertStringNotContainsString('<b>bad</b>', $html);
+        $this->assertStringNotContainsString('<i>notice</i>', $html);
+        $this->assertStringContainsString('src="x.js?a=1&amp;b=&quot;2&quot;"', $html);
+    }
+
+    /** The second step of the OpenID plugin 5.x (registration through ORCID), as rendered. */
+    private const OPENID_PAGE = <<<'HTML'
+<form class="cmp_form cmp_form oauth" id="oauth" method="post" action="https://example.org/index.php/j/openid/registerOrConnect">
+<fieldset class="register"><div class="fields"><div class="email"><label><span class="label">Email</span><input type="email" name="email" id="email" value=""></label></div>
+<div class="country"><label><select name="country" id="country"><option value="BR">Brazil</option></select></label></div></div></fieldset>
+<fieldset class="reviewer"><div class="fields">
+<div id="reviewerOptinGroup" class="optin"><label><input type="checkbox" name="reviewerGroup[16]" class="reviewerGroupInput" value="1"> Yes, review</label></div>
+<div id="reviewerInterests" class="reviewer_interests"><label><span class="label">Reviewing interests</span><input type="text" name="interests" id="interests" value="" class="reviewerGroupInput"></label></div>
+</div></fieldset>
+<div class="buttons"><button class="submit" type="submit" name="register">Register</button></div>
+<fieldset class="login"><input type="text" name="usernameLogin"><input type="password" name="passwordLogin"></fieldset>
+<div class="buttons"><button class="submit" type="submit" name="connect">Connect</button></div>
+</form>
+HTML;
+
+    public function testOnTheOpenIdStepTheFieldStandsWithTheInterests(): void
+    {
+        $html = ReviewerLattesPlugin::insertRegistrationField(self::OPENID_PAGE, $this->parts(), ReviewerLattesPlugin::OPENID_ACTION);
+        $x = $this->xpath($html);
+        $this->assertSame(1, $x->query('//input[@name="lattesUrl"]')->length);
+        $this->assertSame(1, $x->query('//div[@id="reviewerInterests"]//input[@name="lattesUrl"]')->length);
+        // The class that hooks the inputs of the reviewer block in the OpenID page is kept.
+        $this->assertSame('reviewerGroupInput', $x->query('//input[@name="lattesUrl"]')->item(0)->getAttribute('class'));
+
+        // The registration form of the core is not the OpenID step, and the other way round.
+        $this->assertSame(self::OPENID_PAGE, ReviewerLattesPlugin::insertRegistrationField(self::OPENID_PAGE, $this->parts()));
+        $this->assertSame(self::CORE_PAGE, ReviewerLattesPlugin::insertRegistrationField(self::CORE_PAGE, $this->parts(), ReviewerLattesPlugin::OPENID_ACTION));
+    }
+
+    public function testOnTheOpenIdStepWithoutInterestsTheFieldGoesBeforeRegisterNotConnect(): void
+    {
+        $page = preg_replace('~<div id="reviewerInterests".*?</div>~s', '', self::OPENID_PAGE);
+        $html = ReviewerLattesPlugin::insertRegistrationField($page, $this->parts(), ReviewerLattesPlugin::OPENID_ACTION);
+        $this->assertSame(1, substr_count($html, 'name="lattesUrl"'));
+        $this->assertLessThan(strpos($html, 'name="register"'), strpos($html, 'name="lattesUrl"'));
+        $this->assertLessThan(strpos($html, 'name="connect"'), strpos($html, 'name="lattesUrl"'));
+        $this->assertLessThan(strpos($html, 'name="usernameLogin"'), strpos($html, 'name="lattesUrl"'), 'with the registration, not with the login of connect');
     }
 
     public function testALabelBesideTheFieldIsNotTakenForItsBlock(): void

@@ -14,7 +14,7 @@ msgstr "Lattes dla recenzentów"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Prosi osoby rejestrujące się jako recenzenci o link do ich CV w Lattes (CNPq, Brazylia), zapisywany jako adres URL konta. Każde czasopismo może uczynić go obowiązkowym dla recenzentów z Brazylii."
+msgstr "Prosi osoby zgłaszające się jako recenzenci — w formularzu rejestracji lub w rolach swojego profilu — o link do ich CV w Lattes (CNPq, Brazylia), zapisywany jako adres URL konta. Każde czasopismo decyduje, od kogo jest wymagany, i może nie dopuszczać studentów jako recenzentów."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Obowiązkowe dla recenzentów z Brazylii."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Obowiązkowe dla recenzentów."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Wpisz adres CV w Lattes: lattes.cnpq.br/, a po nim 16 cyfr Twojego identyfikatora Lattes."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Link do CV w Lattes jest obowiązkowy dla recenzentów z Brazylii."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Link do CV w Lattes jest obowiązkowy dla recenzentów."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Gdy ktoś się rejestruje i prosi o recenzowanie dla tego czasopisma, formularz rejestracji prosi o link do jego CV w Lattes i sprawdza, czy jest to adres Lattes. Link jest zapisywany jako adres URL konta."
+msgstr "Gdy ktoś zgłasza się do recenzowania w tym czasopiśmie — w formularzu rejestracji lub zaznaczając rolę recenzenta w profilu — jest proszony o link do swojego CV w Lattes, który musi być adresem Lattes. Link jest zapisywany jako adres URL konta; istniejący już link do Lattes nigdy nie jest zastępowany."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Recenzenci z Brazylii"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Kto musi podać link do Lattes"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Dotyczy każdego, kto wybierze Brazylię jako kraj i zaznaczy opcję recenzenta."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Dotyczy każdego, kto zgłasza się jako recenzent. To, co wpisano w pole, zawsze musi być poprawnym adresem Lattes."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Link do Lattes jest opcjonalny"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Nikt: link jest zawsze opcjonalny"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Link do Lattes jest obowiązkowy (oznaczony w formularzu jako obowiązkowy)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Recenzenci z Brazylii (opcjonalny dla innych krajów)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Recenzenci z innych krajów również mogą podać swój link do Lattes, ale nigdy nie jest od nich wymagany."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Wszyscy recenzenci, z dowolnego kraju"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Studenci"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Niektóre czasopisma przyjmują tylko recenzentów z ukończonymi studiami. Wpisz jeden fragment adresu e-mail w każdym wierszu — na przykład @student. — a adres zawierający którykolwiek z nich nie będzie mógł zgłosić się jako recenzent. Wielkość liter nie ma znaczenia. Pozostaw puste, aby dopuścić wszystkich."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Adresy e-mail studentów"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Wpisz do 50 fragmentów, po jednym w wierszu, każdy o długości najwyżej 100 znaków."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "To czasopismo nie przyjmuje studentów jako recenzentów: konto ze studenckim adresem e-mail nie może zgłosić się do recenzowania."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "To czasopismo nie przyjmuje studentów jako recenzentów, dlatego ten adres e-mail nie może zgłosić się do recenzowania."

@@ -4,9 +4,11 @@
  * Copyright (c) 2026 OJSBR (https://ojsbr.com)
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * Functional tests: the setting saved and read back, the field on the real
- * registration page (shown to reviewers, marked required for Brazil), and a
- * registration sent through the page with the link read back from the account.
+ * Functional tests: the settings saved and read back; the field on the real
+ * registration page (shown to reviewers, marked required by the scope of the
+ * journal), the student rule on that page, and the field in the Roles tab of
+ * the profile; and a registration sent through the page with the link read
+ * back from the account.
  *
  * Parameters (--env): contextPath, adminUser, adminPassword (captcha on login
  * must be off for the run). The defaults match the data set of PKP's continuous
@@ -115,21 +117,22 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 	// ---- end of helpers ----
 
 	// Saves the setting through the modal of the page already open.
-	const saveSetting = (value) => {
+	const saveSetting = (scope, patterns = '') => {
 		openSettings();
-		cy.get(settingsForm + ' input[name="lattesForBrazil"][value="' + value + '"]').check({force: true});
+		cy.get(settingsForm + ' input[name="requiredScope"][value="' + scope + '"]').check({force: true});
+		cy.get(settingsForm + ' textarea[name="studentEmailPatterns"]').invoke('val', patterns).trigger('input', {force: true});
 		waitFormHandler();
 		cy.get(settingsForm + ' button[id^="submitFormButton-"]').click({force: true});
 		waitJQuery();
 		cy.get(settingsForm).should('not.exist');
 	};
 
-	// Saves the setting without the modal (used to put it back), as the modal posts it.
-	const postSetting = (value) => cy.window({log: false}).then((win) => request({
+	// Saves the settings without the modal, as the modal posts them.
+	const postSetting = (scope, patterns = '') => cy.window({log: false}).then((win) => request({
 		method: 'POST',
 		url: pageUrl('$$$call$$$/grid/settings/plugins/settings-plugin-grid/manage') + '?verb=settings&plugin=' + rowName + '&category=generic&save=1',
 		form: true,
-		body: {csrfToken: win.pkp.currentUser.csrfToken, lattesForBrazil: value},
+		body: {csrfToken: win.pkp.currentUser.csrfToken, requiredScope: scope, studentEmailPatterns: patterns},
 	}));
 
 	// The registration page as a visitor sees it.
@@ -154,7 +157,7 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 			return;
 		}
 		login(adminUser, adminPassword);
-		postSetting(original);
+		postSetting(original.scope, original.patterns);
 		createdUsernames.forEach((username) => {
 			api(pageUrl('api/v1/users?searchPhrase=' + username + '&count=10')).then((users) => {
 				const user = users.items.find((item) => item.userName === username);
@@ -173,30 +176,36 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 		});
 	});
 
-	it('Saves the requirement for Brazil and reads it back', function() {
-		// The setting as found, put back in after(). Read in the modal, on the page
+	it('Saves the scope and the student addresses and reads them back', function() {
+		// The settings as found, put back in after(). Read in the modal, on the page
 		// already open: PKP's CI serves one request at a time, and a request of the
 		// suite would wait behind the plugin gallery the Plugins tab is still loading.
 		openSettings();
-		cy.get(settingsForm + ' input[name="lattesForBrazil"]:checked').invoke('val').then((value) => {
-			if (original === null) {
-				original = value;
-			}
+		cy.get(settingsForm + ' input[name="requiredScope"]:checked').invoke('val').then((scope) => {
+			cy.get(settingsForm + ' textarea[name="studentEmailPatterns"]').invoke('val').then((patterns) => {
+				if (original === null) {
+					original = {scope, patterns};
+				}
+			});
 		});
 		cy.get(settingsForm + ' button[id^="submitFormButton-"]').click({force: true});
 		waitJQuery();
 		cy.get(settingsForm).should('not.exist');
 
-		saveSetting('required');
-		openSettings();
-		cy.get(settingsForm + ' input[name="lattesForBrazil"][value="required"]').should('be.checked');
-		saveSetting('optional');
-		openSettings();
-		cy.get(settingsForm + ' input[name="lattesForBrazil"][value="optional"]').should('be.checked');
-		saveSetting('required');
+		for (const scope of ['all', 'none', 'brazil']) {
+			saveSetting(scope, scope === 'all' ? '@aluno.\n  @Discente. \n\n' : '');
+			openSettings();
+			cy.get(settingsForm + ' input[name="requiredScope"][value="' + scope + '"]').should('be.checked');
+			// Saved one per line, trimmed, without the empty lines.
+			cy.get(settingsForm + ' textarea[name="studentEmailPatterns"]').should('have.value', scope === 'all' ? '@aluno.\n@Discente.' : '');
+			cy.get(settingsForm + ' button[id^="submitFormButton-"]').click({force: true});
+			waitJQuery();
+			cy.get(settingsForm).should('not.exist');
+		}
 	});
 
 	it('Shows the field to reviewers only, and marks it required for Brazil', function() {
+		// The scope saved by the previous test: brazil.
 		registrationForm();
 		// Looked for by what it is: the theme decides the markup around it.
 		cy.get(form + ' input[name="lattesUrl"]').should('exist').and('have.attr', 'inputmode', 'url');
@@ -224,22 +233,84 @@ describe('Reviewer Lattes plugin', {testIsolation: false}, function() {
 		cy.get(form + ' input[name="lattesUrl"]').should('not.have.attr', 'required');
 	});
 
-	it('Leaves the field optional for Brazil when the journal does not require it', function() {
+	it('Leaves the field optional for Brazil when the scope is none', function() {
 		login(adminUser, adminPassword);
-		postSetting('optional');
+		postSetting('none');
 		registrationForm();
 		reviewerBox().check({force: true});
 		cy.get(form + ' select[name="country"]').select('BR');
 		field().should('be.visible');
 		cy.get(form + ' input[name="lattesUrl"]').should('not.have.attr', 'required');
 		cy.get(form + ' .reviewerLattes__required').should('not.be.visible');
+	});
+
+	it('Marks it required for every country when the scope is all', function() {
 		login(adminUser, adminPassword);
-		postSetting('required');
+		postSetting('all');
+		registrationForm();
+		reviewerBox().check({force: true});
+		for (const country of ['PT', 'BR', 'US']) {
+			cy.get(form + ' select[name="country"]').select(country);
+			cy.get(form + ' input[name="lattesUrl"]').should('have.attr', 'required');
+			cy.get(form + ' .reviewerLattes__required').should('be.visible');
+		}
+		reviewerBox().uncheck({force: true});
+		cy.get(form + ' input[name="lattesUrl"]').should('not.have.attr', 'required');
+	});
+
+	it('Takes the reviewer option away from a student e-mail address on the registration page', function() {
+		login(adminUser, adminPassword);
+		postSetting('all', '@aluno.\n@discente.');
+		registrationForm();
+		reviewerBox().check({force: true});
+		cy.get(form + ' input[name="email"]').type('fulano@ALUNO.cps.sp.gov.br', {delay: 0});
+		// Unticked, disabled and hidden, with the notice; and the field goes with it.
+		reviewerBox().should('not.be.checked').and('be.disabled').and('not.be.visible');
+		cy.get(form + ' .reviewerLattes__studentNotice').should('be.visible').invoke('text').should('match', /\S/).and('not.contain', '##');
+		field().should('not.be.visible');
+		// Another address gives it back.
+		cy.get(form + ' input[name="email"]').clear().type('fulano@cps.sp.gov.br', {delay: 0});
+		reviewerBox().should('be.enabled');
+		cy.get(form + ' .reviewerLattes__studentNotice').should('not.be.visible');
+		reviewerBox().check({force: true});
+		field().should('be.visible');
+	});
+
+	it('Offers the field in the Roles tab of the profile', function() {
+		login(adminUser, adminPassword);
+		postSetting('all');
+		cy.visit(pageUrl('user/profile/roles') + '?reload=' + Date.now());
+		cy.get('form#rolesForm', {timeout: 30000}).should('exist');
+		// The script comes with the tab, which arrives by AJAX.
+		cy.get('form#rolesForm script[data-reviewer-lattes-roles]').should('exist');
+		cy.get('body').then(($body) => {
+			// An account that already has a Lattes link is not asked again.
+			if (!$body.find('form#rolesForm input[name="lattesUrl"]').length) {
+				return;
+			}
+			cy.get('form#rolesForm [data-reviewer-lattes]').invoke('attr', 'data-current-reviewer-groups').then((current) => {
+				const groups = JSON.parse(current || '[]').map(String);
+				cy.get('form#rolesForm input[type="checkbox"][name^="reviewerGroup["]').then(($boxes) => {
+					const joining = [...$boxes].find((box) => !box.checked && !groups.includes((/\[(\d+)\]/.exec(box.name) || [])[1]));
+					if (!joining) {
+						return;
+					}
+					// Ticking a reviewer box of the journal shows the field, required for all; unticking hides it.
+					cy.wrap(joining).check({force: true});
+					cy.get('form#rolesForm [data-reviewer-lattes]').should('be.visible');
+					cy.get('form#rolesForm input[name="lattesUrl"]').should('have.attr', 'required');
+					cy.wrap(joining).uncheck({force: true});
+					cy.get('form#rolesForm input[name="lattesUrl"]').should('not.have.attr', 'required');
+				});
+			});
+		});
 	});
 
 	// The point of the field: the link typed on the registration page ends up on
 	// the account. Sent through the page and read back where an editor reads it.
 	(captchaOnRegister ? it.skip : it)('Saves the link typed on the registration page as the URL of the account', function() {
+		login(adminUser, adminPassword);
+		postSetting('brazil');
 		const username = 'lattes' + Date.now().toString().slice(-8);
 		createdUsernames.push(username);
 		registrationForm();

@@ -14,7 +14,7 @@ msgstr "Ebaluatzaileentzako Lattes"
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.description"
-msgstr "Ebaluatzaile gisa erregistratzen direnei beren Lattes CVaren esteka eskatzen die (CNPq, Brasil), kontuaren URL gisa gordeta. Aldizkari bakoitzak Brasilgo ebaluatzaileentzat derrigorrezko egin dezake."
+msgstr "Ebaluatzaile gisa izena ematen dutenei — erregistro-inprimakian edo profileko roletan — beren Lattes CVaren esteka eskatzen die (CNPq, Brasil), kontuaren URL gisa gordeta. Aldizkari bakoitzak erabakitzen du nork eman behar duen, eta ikasleei ebaluatzaile gisa izena ematea galarazi diezaieke."
 
 #, fuzzy
 msgid "plugins.generic.reviewerLattes.field.label"
@@ -33,6 +33,10 @@ msgid "plugins.generic.reviewerLattes.field.requiredForBrazil"
 msgstr "Derrigorrezkoa Brasilgo ebaluatzaileentzat."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredForAll"
+msgstr "Derrigorrezkoa ebaluatzaileentzat."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.field.invalid"
 msgstr "Idatzi Lattes CV baten helbidea: lattes.cnpq.br/ eta ondoren zure Lattes IDaren 16 digituak."
 
@@ -41,25 +45,53 @@ msgid "plugins.generic.reviewerLattes.field.required"
 msgstr "Lattes CVaren esteka derrigorrezkoa da Brasilgo ebaluatzaileentzat."
 
 #, fuzzy
+msgid "plugins.generic.reviewerLattes.field.requiredAll"
+msgstr "Lattes CVaren esteka derrigorrezkoa da ebaluatzaileentzat."
+
+#, fuzzy
 msgid "plugins.generic.reviewerLattes.settings.intro"
-msgstr "Norbait erregistratu eta aldizkari honetan ebaluatu nahi duenean, erregistro-inprimakiak bere Lattes CVaren esteka eskatzen du eta Lattes helbide bat dela egiaztatzen du. Esteka kontuaren URL gisa gordetzen da."
+msgstr "Norbaitek aldizkari honetan ebaluatzeko izena ematen duenean — erregistro-inprimakian edo profilean ebaluatzaile rola markatuta — bere Lattes CVaren esteka eskatzen zaio, eta Lattes helbide bat izan behar du. Esteka kontuaren URL gisa gordetzen da; lehendik dagoen Lattes esteka ez da inoiz ordezten."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil"
-msgstr "Brasilgo ebaluatzaileak"
+msgid "plugins.generic.reviewerLattes.settings.scope"
+msgstr "Nork eman behar duen Lattes esteka"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.brazil.description"
-msgstr "Herrialde gisa Brasil aukeratu eta ebaluatzaile aukera markatzen duenari aplikatzen zaio."
+msgid "plugins.generic.reviewerLattes.settings.scope.description"
+msgstr "Ebaluatzaile gisa izena ematen duenari aplikatzen zaio. Eremuan idazten dena beti izan behar da Lattes helbide baliodun bat."
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.optional"
-msgstr "Lattes esteka aukerakoa da"
+msgid "plugins.generic.reviewerLattes.settings.scope.none"
+msgstr "Inork ez: esteka beti da aukerakoa"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.required"
-msgstr "Lattes esteka derrigorrezkoa da (inprimakian derrigorrezko gisa markatuta)"
+msgid "plugins.generic.reviewerLattes.settings.scope.brazil"
+msgstr "Brasilgo ebaluatzaileak (aukerakoa beste herrialdeentzat)"
 
 #, fuzzy
-msgid "plugins.generic.reviewerLattes.settings.otherCountries"
-msgstr "Beste herrialdeetako ebaluatzaileek ere eman dezakete beren Lattes esteka, baina ez zaie inoiz eskatzen."
+msgid "plugins.generic.reviewerLattes.settings.scope.all"
+msgstr "Ebaluatzaile guztiak, edozein herrialdetakoak"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student"
+msgstr "Ikasleak"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.description"
+msgstr "Aldizkari batzuek ikasketak amaitu dituzten ebaluatzaileak soilik onartzen dituzte. Idatzi helbide elektroniko zati bat lerro bakoitzeko — adibidez @student. — eta horietako bat duen helbideak ezin izango du ebaluatzaile gisa izena eman. Maiuskulek eta minuskulek ez dute axola. Utzi hutsik denei baimentzeko."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.studentEmailPatterns"
+msgstr "Ikasleen helbide elektronikoak"
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.settings.student.invalid"
+msgstr "Idatzi gehienez 50 zati, bat lerro bakoitzeko, bakoitza gehienez 100 karakterekoa."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.error"
+msgstr "Aldizkari honek ez du ikaslerik onartzen ebaluatzaile gisa: ikasle-helbide elektronikoa duen kontu batek ezin du ebaluatzeko izena eman."
+
+#, fuzzy
+msgid "plugins.generic.reviewerLattes.student.notice"
+msgstr "Aldizkari honek ez du ikaslerik onartzen ebaluatzaile gisa; beraz, helbide elektroniko honek ezin du ebaluatzeko izena eman."
