@@ -1,10 +1,10 @@
 # Lattes for Reviewers — OJS plugin
 
 [![OJS](https://img.shields.io/badge/OJS-3.5-brightgreen)](https://pkp.sfu.ca/ojs/)
-[![Version](https://img.shields.io/badge/version-1.1.0.0-blue)](version.xml)
+[![Version](https://img.shields.io/badge/version-5.0.0.0-blue)](version.xml)
 [![License](https://img.shields.io/badge/license-GPL--3.0-lightgrey)](LICENSE)
 
-**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.1.0.0/reviewerLattes-1.1.0.0.tar.gz) — or browse all [Releases](../../releases).
+**⬇️ Install package:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/5.0.0.0/reviewerLattes-5.0.0.0.tar.gz) — or browse all [Releases](../../releases).
 
 A generic plugin for **Open Journal Systems (OJS)** that asks people who sign up as
 **reviewers** for the link to their **Lattes CV** — the CV platform of CNPq, used by every
@@ -21,7 +21,7 @@ review.
 
 | OJS version | Branch | Plugin release |
 |-------------|--------|----------------|
-| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 1.1.0.0 |
+| OJS 3.5.x   | [`stable-3_5_0`](../../tree/stable-3_5_0) *(default)* | 5.0.0.0 |
 
 38 languages, in the locale codes of OJS 3.5. The registration through ORCID needs the
 [OpenID plugin](https://github.com/pkp/openid) 5.x of OJS 3.5; without it the rest works as usual.
@@ -222,13 +222,13 @@ onde quer que alguém vire avaliador: no **formulário de cadastro**, no **cadas
 obrigatório** — ninguém, avaliadores do Brasil ou todos os avaliadores — e pode impedir
 **estudantes** de se inscreverem como avaliadores.
 
-**⬇️ Pacote de instalação:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/1.1.0.0/reviewerLattes-1.1.0.0.tar.gz)
+**⬇️ Pacote de instalação:** [OJS 3.5](https://github.com/OJSBR/reviewerLattes/releases/download/5.0.0.0/reviewerLattes-5.0.0.0.tar.gz)
 
 ### Compatibilidade e branches
 
 | Versão do OJS | Branch | Release do plugin |
 |---------------|--------|-------------------|
-| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 1.1.0.0 |
+| OJS 3.5.x     | [`stable-3_5_0`](../../tree/stable-3_5_0) *(padrão)* | 5.0.0.0 |
 
 O cadastro via ORCID depende do [plugin OpenID](https://github.com/pkp/openid) 5.x do OJS 3.5;
 sem ele, o resto funciona normalmente.
